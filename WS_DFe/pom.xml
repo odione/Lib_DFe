@@ -1,76 +1,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com</groupId>
+  <groupId>br.com.dfe</groupId>
   <artifactId>WS_DFe</artifactId>
   <version>1.00</version>
   
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <pasta.destino>D:/Desenvolvimento/Java/LibCustom</pasta.destino>
-    <versao.axis>1.7.4</versao.axis>
+    <versao.axis>1.7.5</versao.axis>
   </properties>
-  
-  <build>
-    <finalName>${project.artifactId}-${project.version}</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <descriptorRefs>
-                <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
-              <outputDirectory>${pasta.destino}</outputDirectory>
-              <appendAssemblyId>false</appendAssemblyId>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-	      <groupId>org.apache.axis2</groupId>
-	      <artifactId>axis2-wsdl2code-maven-plugin</artifactId>
-	      <version>${versao.axis}</version>
-	      <executions>
-          <execution>
-            <id>status2</id>
-            <goals>
-              <goal>wsdl2code</goal>
-            </goals>
-			      <configuration>
-			        <outputDirectory>${sourceDirectory}</outputDirectory>
-			        <wsdlFile>${basedir}\WSDL\NfeStatusServico2.wsdl</wsdlFile>
-			        <overWrite>true</overWrite>
-			        <suppressPrefixes>true</suppressPrefixes>
-			      </configuration>
-          </execution>
-          <execution>
-            <id>status</id>
-            <goals>
-              <goal>wsdl2code</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}\WSDL\NfeStatusServico.wsdl</wsdlFile>
-              <overWrite>true</overWrite>
-              <suppressPrefixes>true</suppressPrefixes>
-            </configuration>
-          </execution>
-          <execution>
+
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.axis2</groupId>
+				<artifactId>axis2-wsdl2code-maven-plugin</artifactId>
+				<version>${versao.axis}</version>
+				<executions>
+				  <execution>
+				    <id>status2</id>
+				    <goals>
+				      <goal>wsdl2code</goal>
+				    </goals>
+				    <configuration>
+				      <wsdlFile>${basedir}/WSDL/NfeStatusServico2.wsdl</wsdlFile>
+				      <outputDirectory>${sourceDirectory}</outputDirectory>
+				      <overWrite>true</overWrite>
+				      <suppressPrefixes>true</suppressPrefixes>
+				    </configuration>
+				  </execution>
+				  <execution>
             <id>consulta2</id>
             <goals>
               <goal>wsdl2code</goal>
             </goals>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}\WSDL\NfeConsulta2.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/NfeConsulta2.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
@@ -82,7 +49,7 @@
             </goals>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}\WSDL\NfeConsulta.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/NfeConsulta.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
@@ -94,7 +61,7 @@
             </goals>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}\WSDL\NfeInutilizacao2.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/nfeinutilizacao2.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
@@ -106,7 +73,7 @@
             </goals>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}\WSDL\NfeInutilizacao.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/NfeInutilizacao.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
@@ -118,7 +85,7 @@
             </goals>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}\WSDL\NfeRetAutorizacao.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/NFeRetAutorizacao.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
@@ -130,7 +97,7 @@
             </goals>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}\WSDL\recepcaoevento.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/recepcaoevento.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
@@ -142,16 +109,16 @@
             </goals>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}\WSDL\NFeAutorizacao.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/NFeAutorizacao.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
           </execution>
-	      </executions>
-	    </plugin>
-    </plugins>
-  </build>
-
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+  
   <dependencies>
     <dependency>
       <groupId>org.apache.axis2</groupId>
