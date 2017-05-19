@@ -1,4 +1,4 @@
-package br.com.dfe.leitor;
+package br.com.dfe.util;
 
 import java.io.StringReader;
 import java.io.StringWriter;
