@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>br.com.dfe</groupId>
   <artifactId>WS_DFe</artifactId>
-  <version>1.00</version>
+  <version>1.01</version>
   
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -20,78 +20,39 @@
 				<version>${versao.axis}</version>
 				<executions>
 				  <execution>
-				    <id>status2</id>
+				    <id>status4</id>
 				    <phase>generate-sources</phase>
 				    <goals>
 				      <goal>wsdl2code</goal>
 				    </goals>
 				    <configuration>
-				      <wsdlFile>${basedir}/WSDL/NfeStatusServico2.wsdl</wsdlFile>
+				      <wsdlFile>${basedir}/WSDL/NfeStatusServico4.wsdl</wsdlFile>
 				      <outputDirectory>${sourceDirectory}</outputDirectory>
 				      <overWrite>true</overWrite>
 				      <suppressPrefixes>true</suppressPrefixes>
 				    </configuration>
 				  </execution>
 				  <execution>
-            <id>consulta2</id>
+            <id>consulta4</id>
             <goals>
               <goal>wsdl2code</goal>
             </goals>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}/WSDL/NfeConsulta2.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/NfeConsulta4.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
           </execution>
           <execution>
-            <id>consulta</id>
+            <id>inutilizacao4</id>
             <goals>
               <goal>wsdl2code</goal>
             </goals>
             <phase>generate-sources</phase>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}/WSDL/NfeConsulta.wsdl</wsdlFile>
-              <overWrite>true</overWrite>
-              <suppressPrefixes>true</suppressPrefixes>
-            </configuration>
-          </execution>
-          <execution>
-            <id>inutilizacao2</id>
-            <goals>
-              <goal>wsdl2code</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}/WSDL/nfeinutilizacao2.wsdl</wsdlFile>
-              <overWrite>true</overWrite>
-              <suppressPrefixes>true</suppressPrefixes>
-            </configuration>
-          </execution>
-          <execution>
-            <id>inutilizacao</id>
-            <goals>
-              <goal>wsdl2code</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}/WSDL/NfeInutilizacao.wsdl</wsdlFile>
-              <overWrite>true</overWrite>
-              <suppressPrefixes>true</suppressPrefixes>
-            </configuration>
-          </execution>
-          <execution>
-            <id>retAutorizacao</id>
-            <goals>
-              <goal>wsdl2code</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}/WSDL/NFeRetAutorizacao.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/NfeInutilizacao4.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
@@ -104,20 +65,20 @@
             <phase>generate-sources</phase>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}/WSDL/recepcaoevento.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/RecepcaoEvento4.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
           </execution>
           <execution>
-            <id>autorizacao</id>
+            <id>autorizacao4</id>
             <goals>
               <goal>wsdl2code</goal>
             </goals>
             <phase>generate-sources</phase>
             <configuration>
               <outputDirectory>${sourceDirectory}</outputDirectory>
-              <wsdlFile>${basedir}/WSDL/NFeAutorizacao.wsdl</wsdlFile>
+              <wsdlFile>${basedir}/WSDL/NFeAutorizacao4.wsdl</wsdlFile>
               <overWrite>true</overWrite>
               <suppressPrefixes>true</suppressPrefixes>
             </configuration>
@@ -182,4 +143,6 @@
 			<version>1.2.20</version>
 		</dependency>
   </dependencies>
+  <name>WS_DFe</name>
+  <description>Irá gerar os stubs da versao 4.00 da NF-e</description>
 </project>
