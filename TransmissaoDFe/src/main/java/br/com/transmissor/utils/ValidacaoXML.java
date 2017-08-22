@@ -41,11 +41,11 @@ public class ValidacaoXML {
 	 */
 	public static boolean validaSchema(String strXML, int opcao) throws ParserConfigurationException, SAXException, IOException  {
 		String pathXSD = "";
-		if (opcao == 0) {
-			pathXSD = UtilsXML.getPathXSD()+"nfe_v3.10.xsd";
-		} else if (opcao == 1) {
-			pathXSD = UtilsXML.getPathXSD()+"enviNFe_v3.10.xsd";
-		}
+//		if (opcao == 0) {
+//			pathXSD = UtilsXML.getPathXSD()+"nfe_v3.10.xsd";
+//		} else if (opcao == 1) {
+//			pathXSD = UtilsXML.getPathXSD()+"enviNFe_v3.10.xsd";
+//		}
 		strXML = normalizeXML(strXML);
 		
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
