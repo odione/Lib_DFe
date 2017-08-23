@@ -20,11 +20,11 @@ public class Principal {
 //		}
 		
 		TransmissorDFe transmissor = new TransmissorDFe();
-		transmissor.getConfiguracao().setCertificado(UtilsXML.getCertificadoFromAlias("BS"));
-		transmissor.getConfiguracao().setPrivateKey(UtilsXML.getPrivateKeyFromAlias("BS", "123456"));
+		transmissor.getConfiguracao().setCertificado(UtilsXML.getCertificadoFromAlias("A1_Erro"));
+		transmissor.getConfiguracao().setPrivateKey(UtilsXML.getPrivateKeyFromAlias("A1_Erro", "gasilha"));
 //		transmissor.getConfiguracao().setCertificado(UtilsXML.getCertificadoFromAlias("MATHIUSSI E RODRIGUES LTDA ME:11518847000189"));
 //		transmissor.getConfiguracao().setPrivateKey(UtilsXML.getPrivateKeyFromAlias("MATHIUSSI E RODRIGUES LTDA ME:11518847000189", "30414466"));
-		transmissor.getConfiguracao().setUf(Estado.RIO_GRANDE_DO_SUL);
+		transmissor.getConfiguracao().setUf(Estado.SANTA_CATARINA);
 		//transmissor.configuracao().setAmbiente(Ambiente.PRODUCAO);
 		
 		transmissor.getConfiguracao().setModelo_df(ModeloDF.MODELO_NFE);

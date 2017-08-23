@@ -71,7 +71,7 @@ public class BuildCacerts {
     }  
   
     public static void get(String host, int port, KeyStore ks) throws Exception {  
-        SSLContext context = SSLContext.getInstance("TLSv1");  
+        SSLContext context = SSLContext.getInstance("TLSv1.2");  
         TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());  
         tmf.init(ks);  
         X509TrustManager defaultTrustManager = (X509TrustManager) tmf.getTrustManagers()[0];  

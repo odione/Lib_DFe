@@ -329,8 +329,8 @@ public class UtilsXML {
 	
 	public static X509Certificate getCertificadoFromAlias(String alias) {
 		try {
-			KeyStore ks = KeyStore.getInstance("Windows-MY", "SunMSCAPI");
-			ks.load(null,null);
+			KeyStore ks = getKS();
+			
 			Enumeration<String> apelidos = ks.aliases();
 			
 			while (apelidos.hasMoreElements()) {
@@ -346,8 +346,7 @@ public class UtilsXML {
 	
 	public static PrivateKey getPrivateKeyFromAlias(String alias, String senha){
 		try {
-			KeyStore ks = KeyStore.getInstance("Windows-MY", "SunMSCAPI");
-			ks.load(null,null);
+			KeyStore ks = getKS();
 			Enumeration<String> apelidos = ks.aliases();
 			
 			while (apelidos.hasMoreElements()) {
@@ -359,6 +358,12 @@ public class UtilsXML {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	private static KeyStore getKS() throws Exception {
+		KeyStore ks = KeyStore.getInstance("Windows-MY", "SunMSCAPI");
+		ks.load(null,null);
+		return ks;
 	}
 	
 	public static String addXMLEncoding(String strXML) {
