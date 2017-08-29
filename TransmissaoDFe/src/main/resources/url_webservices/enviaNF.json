@@ -1,0 +1,12 @@
+[
+{ "uf": "AM", "homologacao": "https://homnfe.sefaz.am.gov.br/services2/services/NfeAutorizacao4", "producao": "" },
+{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "https://nfe-homologacao.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx", "producao": "" },
+{ "uf": "CE", "homologacao": "https://nfeh.sefaz.ce.gov.br/nfe4/services/NFeAutorizacao4?WSDL", "producao": "" },
+{ "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfe/services/NFeAutorizacao4?wsdl", "producao": "" },
+{ "uf": "MG", "homologacao": "https://hnfe.fazenda.mg.gov.br/nfe2/services/NFeAutorizacao4", "producao": "" },
+{ "uf": "MS", "homologacao": "https://homologacao.nfe.ms.gov.br/ws/NFeAutorizacao4", "producao": "" },
+{ "uf": "MT", "homologacao": "", "producao": "https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeAutorizacao4?wsdl" },
+{ "uf": "PR", "homologacao": "https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeAutorizacao4", "producao": "" },
+{ "uf": "RS", "homologacao": "https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx", "producao": "" },
+{ "uf": "SP", "homologacao": "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx", "producao": "" }
+]

@@ -6,12 +6,12 @@ import java.security.KeyStoreException;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.util.ResourceUtils;
 
-@SpringBootConfiguration
+@Configuration
 public class Configuracao {
 	
 	private String PATH_CERT_TEST;

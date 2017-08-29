@@ -1,11 +1,11 @@
-package br.com.transmissor.configuracao;
+package br.com.transmissor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.transmissor.MainTest;
+import br.com.transmissor.configuracao.DadosEmissor;
 
 public class DadosEmissorTest extends MainTest {
 

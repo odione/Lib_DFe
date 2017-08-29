@@ -5,12 +5,14 @@ import java.net.URL;
 
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.transmissor.api.PreparaConexaoSegura;
 import br.com.transmissor.configuracao.DadosEmissor;
 import br.com.transmissor.utils.BuildCacerts;
 import br.com.transmissor.utils.SocketFactoryDinamico;
 
+@Component
 public class PreparaConexaoSeguraImpl implements PreparaConexaoSegura {
 	
 	private String pathCacerts;

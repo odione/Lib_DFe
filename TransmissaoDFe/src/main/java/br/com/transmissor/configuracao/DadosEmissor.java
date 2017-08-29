@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Component;
+
+import br.com.utils.StringUtils;
+
+@Component
 public class DadosEmissor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,13 +36,21 @@ public class DadosEmissor implements Serializable {
 
 	public DadosEmissor() {
 		super();
+		postConstruct();
+	}
+	
+	@PostConstruct
+	public void postConstruct() {
+		this.modelo = "55";
+		this.versao = "4.00";
+		this.ambiente = 2;
 	}
 	
 	public String getUf() {
 		return uf;
 	}
 	public void setUf(String uf) {
-		this.uf = uf;
+		this.uf = StringUtils.strUpper(uf);
 	}
 	public String getUfCodigo() {
 		return ufCodigo;
