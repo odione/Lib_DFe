@@ -63,4 +63,7 @@ public class CertificadoUtils {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public KeyStore getKeyStore() {
+		return ks;
+	}
 }
