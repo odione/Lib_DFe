@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.dfe.MainTest;
 import br.com.dfe.api.TransmissorDFe;
+import br.com.dfe.schema.TRetConsSitNFe;
 import br.com.dfe.schema.TRetConsStatServ;
 import br.com.dfe.schema.TRetEnviNFe;
 import br.com.dfe.schema.TRetInutNFe;
 import br.com.dfe.schema.cce.TRetEnvEvento;
-import br.com.dfe.schema.situacao.TRetConsSitNFe;
 import br.com.dfe.util.ConfiguraTeste;
 
 public class TransmissorDFeTest extends MainTest {
@@ -54,7 +54,7 @@ public class TransmissorDFeTest extends MainTest {
 		TRetEnviNFe ret = transmissor.enviarNF(xml);
 		assertThat(ret).isNotNull();
 		
-		assertThat(ret.getCStat()).isEqualTo("204");
+		assertThat(ret.getCStat()).isEqualTo("228");
 		assertThat(ret.getProtNFe()).isNull();
 	}
 	

@@ -2,7 +2,7 @@ package br.com.dfe.builder;
 
 import br.com.dfe.api.DadosBuilder;
 import br.com.dfe.configuracao.DadosEmissor;
-import br.com.dfe.schema.situacao.TConsSitNFe;
+import br.com.dfe.schema.TConsSitNFe;
 
 public class ConsultaNFBuilder implements DadosBuilder {
 	

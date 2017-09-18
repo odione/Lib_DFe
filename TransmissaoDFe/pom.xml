@@ -8,24 +8,38 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <spring.version>1.5.7.RELEASE</spring.version>
   </properties>
   
   <build>
     <finalName>${project.artifactId}-${project.version}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.0.4</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
   
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
-      <version>1.5.6.RELEASE</version>
-      <scope>provided</scope>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-log4j2</artifactId>
-      <version>1.5.6.RELEASE</version>
-      <scope>provided</scope>
+      <version>${spring.version}</version>
     </dependency>
   	<dependency>
   		<groupId>br.com.dfe</groupId>
@@ -42,11 +56,26 @@
   		<artifactId>StringUtils</artifactId>
   		<version>1.00</version>
   	</dependency>
+  	<dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.18</version>
+    </dependency>
+    <dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-core</artifactId>
+	    <version>2.9.1</version>
+		</dependency>
+		<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.9.1</version>
+		</dependency>
 		<!-- Test -->
 		<dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <version>1.5.6.RELEASE</version>
+      <version>${spring.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

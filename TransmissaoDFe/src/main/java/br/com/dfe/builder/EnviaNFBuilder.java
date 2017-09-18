@@ -1,7 +1,7 @@
 package br.com.dfe.builder;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import br.com.dfe.api.AssinaDocumento;
 import br.com.dfe.api.DadosBuilder;
@@ -33,6 +33,7 @@ public class EnviaNFBuilder implements DadosBuilder {
 	
 	public EnviaNFBuilder comNFe(TNFe nfe) {
 		envNfe.getNFe().add(nfe);
+		dadosEmissor.setModelo(nfe.getInfNFe().getIde().getMod());
 		return this;
 	}
 	

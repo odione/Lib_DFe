@@ -1,0 +1,6 @@
+[
+{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "", "producao": "" },
+{ "uf": "MS", "homologacao": "https://homologacao.nfce.fazenda.ms.gov.br/ws/NFeAutorizacao4", "producao": "" },
+{ "uf": "PR", "homologacao": "https://homologacao.nfce.sefa.pr.gov.br/nfce/NFeAutorizacao4", "producao": "" },
+{ "uf": "SP", "homologacao": "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx", "producao": "" }
+]

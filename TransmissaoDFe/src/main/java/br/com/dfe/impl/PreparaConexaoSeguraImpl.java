@@ -56,7 +56,6 @@ public class PreparaConexaoSeguraImpl implements PreparaConexaoSegura {
 	@Override
 	public void setUrl(String url) throws MalformedURLException {
 		this.url = new URL(url);
-		
 	}
 
 	@Override

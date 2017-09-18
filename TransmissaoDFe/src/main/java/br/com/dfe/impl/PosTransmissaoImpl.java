@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.dfe.api.NaoAutorizadoException;
 import br.com.dfe.api.PosTransmissao;
+import br.com.dfe.schema.TRetConsSitNFe;
 import br.com.dfe.schema.TRetEnviNFe;
 import br.com.dfe.schema.TRetInutNFe;
 import br.com.dfe.schema.cce.TRetEnvEvento;
@@ -11,11 +12,6 @@ import br.com.dfe.schema.cce.TRetEnvEvento;
 @Component
 public class PosTransmissaoImpl implements PosTransmissao {
 	
-	public static final String STAT_AUTORIZADA = "100|150|110|301|302|303";
-	public static final String STAT_INUTILIZADA = "102";
-	public static final String STAT_EVENTO = "135|136";
-	public static final String STAT_CANCELADA = "101|151|155";
-
 	@Override
 	public void validaRetEnvNFe(TRetEnviNFe retorno) throws NaoAutorizadoException {
 		String stat = retorno.getProtNFe() != null ? retorno.getProtNFe().getInfProt().getCStat() : retorno.getCStat();
@@ -54,6 +50,15 @@ public class PosTransmissaoImpl implements PosTransmissao {
 		String stat = retorno.getInfInut().getCStat();
 		if (!STAT_INUTILIZADA.contains(stat)) {
 			throw new NaoAutorizadoException(stat, retorno.getInfInut().getXMotivo());
+		}
+	}
+
+	@Override
+	public void validaRetConsSitNFe(TRetConsSitNFe retorno) throws NaoAutorizadoException {
+		String stat = retorno.getCStat();
+		
+		if ((!STAT_AUTORIZADA.contains(stat)) && (!STAT_DENEGADA.contains(stat)) && (!STAT_CANCELADA.contains(stat)))  {
+			throw new NaoAutorizadoException(stat, retorno.getXMotivo());
 		}
 	}
 }

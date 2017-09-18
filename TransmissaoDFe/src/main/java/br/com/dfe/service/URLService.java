@@ -1,11 +1,12 @@
 package br.com.dfe.service;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ import br.com.dfe.ws.UrlWS;
 
 @Service
 public class URLService {
+	
+	public static final Logger log = LogManager.getLogger(URLService.class);
 
 	@Autowired
 	private DadosEmissor dados;
@@ -60,13 +63,15 @@ public class URLService {
 	
 	public void carregaUrlFromFile(String fileName) {
 		try {
-			InputStream json = getClass().getClassLoader().getResourceAsStream("url_webservices/"+fileName+".json");
+			InputStream json = getClass().getClassLoader().getResourceAsStream("url_webservices_"+dados.getModelo()+"/"+fileName+".json");
 			List<UrlWS> urls = mapper.readValue(json, new TypeReference<List<UrlWS>>() {});
 			url = urls.stream()
 				.filter(url -> url.getUf().contains(dados.getUf()))
 				.findFirst()
-				.get();
-		} catch (IOException e) {
+				.orElseThrow(() -> new Exception("URL do WebService não encontrado!"));
+			log.info("Url encontrada: "+url.toString());
+		} catch (Exception e) {
+			log.catching(e);
 			e.printStackTrace();
 		}
 	}

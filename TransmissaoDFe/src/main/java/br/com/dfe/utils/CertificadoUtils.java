@@ -7,6 +7,9 @@ import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 
+import javax.naming.InvalidNameException;
+import javax.naming.ldap.LdapName;
+
 public class CertificadoUtils {
 
 	private KeyStore ks;
@@ -23,6 +26,12 @@ public class CertificadoUtils {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param pathFile
+	 * @param password
+	 * @return true se conseguiu carregar KeyStore
+	 */
 	public boolean loadPFX(String pathFile, String password) {
 		try {
 			return loadPFX(new FileInputStream(pathFile), password);
@@ -32,6 +41,12 @@ public class CertificadoUtils {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param inputStream do arquivo PFX
+	 * @param password
+	 * @return true se conseguiu carregar KeyStore
+	 */
 	public boolean loadPFX(InputStream in, String password) {
 		this.password = password;
 		try {
@@ -47,17 +62,28 @@ public class CertificadoUtils {
 	public X509Certificate getCertificado(String alias) throws Exception {
 		return (X509Certificate) ks.getCertificate(alias);
 	}
-	
 	public PrivateKey getPrivateKey(String alias, String password) throws Exception {
 		return (PrivateKey) ks.getKey(alias, password.toCharArray());
 	}
-	
 	public X509Certificate getCertificado() throws Exception {
 		return (X509Certificate) ks.getCertificate(ks.aliases().nextElement());
 	}
-	
 	public PrivateKey getPrivateKey() throws Exception {
 		return (PrivateKey) ks.getKey(ks.aliases().nextElement(), password.toCharArray());
+	}
+	
+	public String getCNFromx509(X509Certificate certificado) {
+		try {
+			LdapName name = new LdapName(certificado.getSubjectX500Principal().getName());
+			
+			return name.getRdns().stream()
+				.filter(rdn -> rdn.getType().toUpperCase().equals("CN"))
+				.findFirst()
+				.get().getValue().toString();
+		} catch (InvalidNameException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 	
 	public void setPassword(String password) {

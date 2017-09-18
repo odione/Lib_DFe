@@ -27,7 +27,7 @@ public class LeitorXML {
 	/**
 	 * @param entidade
 	 * @param formatado
-	 * @return
+	 * @return XML em string
 	 * @throws JAXBException 
 	 */
 	@SuppressWarnings("unchecked")

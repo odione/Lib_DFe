@@ -3,6 +3,8 @@
   <groupId>br.com.dfe</groupId>
   <artifactId>WS_DFe</artifactId>
   <version>1.01</version>
+  <name>WS_DFe</name>
+  <description>Irá gerar os stubs da versao 4.00 da NF-e</description>
   
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -103,6 +105,19 @@
           </execution>
         </executions>
 			</plugin>
+			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.0.4</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 		</plugins>
 	</build>
   
@@ -143,6 +158,4 @@
 			<version>1.2.20</version>
 		</dependency>
   </dependencies>
-  <name>WS_DFe</name>
-  <description>Irá gerar os stubs da versao 4.00 da NF-e</description>
 </project>

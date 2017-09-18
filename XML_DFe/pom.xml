@@ -21,12 +21,28 @@
 		    <version>2.3.1</version>
 		    <executions>
 		      <execution>
+            <id>sitNfe</id>
+            <goals>
+              <goal>xjc</goal>
+            </goals>
+            <configuration>
+              <clearOutputDir>false</clearOutputDir>
+              <quiet>true</quiet>
+              <packageName>br.com.dfe.schema</packageName>
+              <sources>
+                <source>${resourcesDir}/xsd/nfe/leiauteConsSitNFe_v4.00.xsd</source>
+              </sources>
+            </configuration>
+          </execution>
+		      <execution>
 		        <id>nfe</id>
 		        <goals>
 		          <goal>xjc</goal>
 		        </goals>
 				    <configuration>
 				      <packageName>br.com.dfe.schema</packageName>
+				      <quiet>true</quiet>
+				      <clearOutputDir>false</clearOutputDir>
 				      <sources>
 				        <source>${resourcesDir}/xsd/nfe/procNFe_v4.00.xsd</source>
 				        <source>${resourcesDir}/xsd/nfe/leiauteConsStatServ_v4.00.xsd</source>
@@ -35,19 +51,6 @@
 				      </sources>
 				    </configuration>
 		      </execution>
-		      <execution>
-            <id>sitNfe</id>
-            <goals>
-              <goal>xjc</goal>
-            </goals>
-            <configuration>
-              <clearOutputDir>false</clearOutputDir>
-              <packageName>br.com.dfe.schema.situacao</packageName>
-              <sources>
-                <source>${resourcesDir}/xsd/nfe/leiauteConsSitNFe_v4.00.xsd</source>
-              </sources>
-            </configuration>
-          </execution>
           <execution>
             <id>cce</id>
             <goals>
@@ -55,6 +58,7 @@
             </goals>
             <configuration>
               <clearOutputDir>false</clearOutputDir>
+              <quiet>true</quiet>
               <packageName>br.com.dfe.schema.cce</packageName>
               <sources>
                 <source>${resourcesDir}/xsd/eventoCCe</source>
@@ -67,6 +71,7 @@
               <goal>xjc</goal>
             </goals>
             <configuration>
+              <quiet>true</quiet>
               <clearOutputDir>false</clearOutputDir>
               <packageName>br.com.dfe.schema.canc</packageName>
               <sources>
@@ -76,6 +81,19 @@
           </execution>
 		    </executions>
 		  </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.0.4</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
