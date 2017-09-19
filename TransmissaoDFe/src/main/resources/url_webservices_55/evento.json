@@ -1,6 +1,7 @@
 [
 { "uf": "AM", "homologacao": "https://homnfe.sefaz.am.gov.br/services2/services/RecepcaoEvento4", "producao": "" },
 { "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "https://nfe-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx", "producao": "" },
+{ "uf": "BA", "homologacao": "https://hnfe.sefaz.ba.gov.br/webservices/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx", "producao": "" },
 { "uf": "CE", "homologacao": "https://nfeh.sefaz.ce.gov.br/nfe4/services/NFeRecepcaoEvento4?WSDL", "producao": "" },
 { "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfe/services/NFeRecepcaoEvento4?wsdl", "producao": "" },
 { "uf": "MG", "homologacao": "", "producao": "" },
@@ -8,5 +9,6 @@
 { "uf": "MT", "homologacao": "", "producao": "https://nfe.sefaz.mt.gov.br/nfews/v2/services/RecepcaoEvento4?wsdl" },
 { "uf": "PR", "homologacao": "https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeRecepcaoEvento4", "producao": "" },
 { "uf": "RS", "homologacao": "https://nfe-homologacao.sefazrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx", "producao": "" },
-{ "uf": "SP", "homologacao": "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferecepcaoevento4.asmx", "producao": "" }
+{ "uf": "SP", "homologacao": "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferecepcaoevento4.asmx", "producao": "" },
+{ "uf": "MA|PA", "homologacao": "https://hom.sefazvirtual.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx", "producao": "" }
 ]

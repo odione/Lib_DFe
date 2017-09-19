@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
+import br.com.dfe.api.TipoEmissao;
 import br.com.dfe.utils.ConverterUtils;
 import br.com.utils.StringUtils;
 import lombok.Data;
@@ -25,12 +26,14 @@ public class DadosEmissor implements Serializable {
 	private X509Certificate certificado;
 	private PrivateKey privateKey;
 	private String pathCacerts;
+	private TipoEmissao tipoEmissao;
 	
 	@PostConstruct
 	public void postConstruct() {
 		this.modelo = "55";
 		this.versao = "4.00";
 		this.ambiente = 2;
+		this.tipoEmissao = TipoEmissao.NORMAL;
 	}
 	
 	public void setUf(String uf) {
@@ -39,5 +42,8 @@ public class DadosEmissor implements Serializable {
 	}
 	public String getAmbienteStr() {
 		return String.valueOf(ambiente);
+	}
+	public void setTipoEmissao(int tipo) {
+		this.tipoEmissao = TipoEmissao.getFromInt(tipo);
 	}
 }

@@ -1,0 +1,4 @@
+[
+{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "https://hom.svc.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx", "producao": "" },
+{ "uf": "AM|BA|CE|GO|MA|MS|MT|PA|PE|PI|PR", "homologacao": "", "producao": "" }
+]

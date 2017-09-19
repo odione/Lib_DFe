@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.dfe.api.TipoEmissao;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.ws.UrlWS;
 
@@ -63,7 +64,11 @@ public class URLService {
 	
 	public void carregaUrlFromFile(String fileName) {
 		try {
-			InputStream json = getClass().getClassLoader().getResourceAsStream("url_webservices_"+dados.getModelo()+"/"+fileName+".json");
+			String caminhoResource = "url_webservices_"+dados.getModelo()+"/"
+					+ (TipoEmissao.isContingenciaOnLine(dados.getTipoEmissao()) ? "contingencia/":"")
+					+fileName+".json";
+			
+			InputStream json = getClass().getClassLoader().getResourceAsStream(caminhoResource);
 			List<UrlWS> urls = mapper.readValue(json, new TypeReference<List<UrlWS>>() {});
 			url = urls.stream()
 				.filter(url -> url.getUf().contains(dados.getUf()))
@@ -72,7 +77,6 @@ public class URLService {
 			log.info("Url encontrada: "+url.toString());
 		} catch (Exception e) {
 			log.catching(e);
-			e.printStackTrace();
 		}
 	}
 }
