@@ -27,7 +27,7 @@ public class PosTransmissaoImpl implements PosTransmissao {
 	public void validaRetEnvEvento(TRetEnvEvento retorno) throws NaoAutorizadoException {
 		String stat = retorno.getRetEvento().isEmpty() ? retorno.getCStat() : retorno.getRetEvento().get(0).getInfEvento().getCStat();
 		
-		if (!STAT_INUTILIZADA.contains(stat)) {
+		if (!STAT_EVENTO.contains(stat)) {
 			String msg = retorno.getRetEvento().isEmpty() ? retorno.getXMotivo() : retorno.getRetEvento().get(0).getInfEvento().getXMotivo();
 			
 			throw new NaoAutorizadoException(stat, msg);

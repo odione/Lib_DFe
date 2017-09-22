@@ -11,7 +11,7 @@ public interface PosTransmissao {
 	public static final String STAT_AUTORIZADA = "100|150|"+STAT_DENEGADA;
 	public static final String STAT_INUTILIZADA = "102";
 	public static final String STAT_EVENTO = "135|136";
-	public static final String STAT_CANCELADA = "101|151|155";
+	public static final String STAT_CANCELADA = "101|151|155"+STAT_EVENTO;
 
 	void validaRetEnvNFe(TRetEnviNFe retorno) throws NaoAutorizadoException;
 	void validaRetEnvEvento(TRetEnvEvento retorno) throws NaoAutorizadoException;
