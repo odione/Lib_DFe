@@ -1,27 +1,32 @@
 package br.com.dfe.builder;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import br.com.dfe.api.DadosBuilder;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TConsSitNFe;
+import lombok.Setter;
 
-public class ConsultaNFBuilder implements DadosBuilder {
+@Component
+public class ConsultaNFBuilder implements DadosBuilder<TConsSitNFe> {
 	
 	private TConsSitNFe consulta;
+	@Setter	private String chave;
 	
-	public ConsultaNFBuilder(DadosEmissor dadosEmissor) {
+	@Autowired private DadosEmissor dadosEmissor;
+	
+	private void consultaBuild() {
 		consulta = new TConsSitNFe();
 		consulta.setTpAmb(dadosEmissor.getAmbienteStr());
 		consulta.setVersao(dadosEmissor.getVersao());
+		consulta.setChNFe(chave);
 		consulta.setXServ("CONSULTAR");
 	}
 	
-	public ConsultaNFBuilder comChave(String chave) {
-		consulta.setChNFe(chave);
-		return this;
-	}
-
 	@Override
-	public Object build() {
+	public TConsSitNFe build() {
+		consultaBuild();
 		return consulta;
 	}
 }

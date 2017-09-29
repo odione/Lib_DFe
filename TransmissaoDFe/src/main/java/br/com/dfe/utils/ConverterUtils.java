@@ -23,7 +23,7 @@ public class ConverterUtils {
 			new InputSource(new StringReader(xml))).getDocumentElement();
 		
 	    Iterator<?> children = element.getChildrenWithLocalName("NFe");  
-	    while (children.hasNext()) {  
+	    while (children.hasNext()) {
 	        OMElement omElement = (OMElement) children.next();  
 	        if (omElement != null && "NFe".equals(omElement.getLocalName())) {  
 	            omElement.addAttribute("xmlns", "http://www.portalfiscal.inf.br/nfe", null);  

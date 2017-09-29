@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.dfe.api.EventoDFe;
 import br.com.dfe.api.PreparaConexaoSegura;
 import br.com.dfe.api.Servico;
 import br.com.dfe.api.TransmissorDFe;
@@ -17,12 +16,7 @@ import br.com.dfe.schema.TRetConsStatServ;
 import br.com.dfe.schema.TRetEnviNFe;
 import br.com.dfe.schema.TRetInutNFe;
 import br.com.dfe.schema.canc.TRetEnvEvento;
-import br.com.dfe.service.ConsultaNFService;
-import br.com.dfe.service.EnviaNFService;
-import br.com.dfe.service.EventoService;
-import br.com.dfe.service.InutilizacaoService;
-import br.com.dfe.service.StatusServidorService;
-import br.com.dfe.service.URLService;
+import br.com.dfe.service.HubServicos;
 import br.com.dfe.utils.ConverterUtils;
 
 @Component
@@ -30,91 +24,69 @@ public class TransmissorDFeImpl implements TransmissorDFe {
 	
 	private static final Logger log = LogManager.getLogger(TransmissorDFeImpl.class);
 	
+	@Autowired private PreparaConexaoSegura prepara;
+	@Autowired private XMLConverter xmlConverter;
+	@Autowired private DadosEmissor dadosEmissor;
+	@Autowired private HubServicos hub;
+	
 	private Servico servico;
-	
-	@Autowired
-	private PreparaConexaoSegura prepara;
-	
-	@Autowired
-	private URLService urlService;
-	
-	@Autowired
-	private XMLConverter xmlConverter;
-	
-	@Autowired
-	private DadosEmissor dadosEmissor;
 	
 	@Override
 	public TRetConsStatServ statusServico() throws Exception {
-		this.servico = new StatusServidorService(dadosEmissor);
-		
-		String xml = executaComando(urlService.getUrlStatusServico());
-		return xmlConverter.toObj(xml, TRetConsStatServ.class);
+		this.servico = hub.getStatus();
+		return executaComando(TRetConsStatServ.class);
 	}
 
 	@Override
 	public TRetConsSitNFe consultarNF(String chave) throws Exception {
-		this.servico = new ConsultaNFService(dadosEmissor).comChave(chave);
-		
-		String xml = executaComando(urlService.getUrlConsultaNF());
-		return xmlConverter.toObj(xml, TRetConsSitNFe.class);
+		this.servico = hub.getConsulta().setChave(chave);
+		return executaComando(TRetConsSitNFe.class);
 	}
 
 	@Override
 	public TRetEnviNFe enviarNF(String xmlTNFe) throws Exception {
-		this.servico = new EnviaNFService(dadosEmissor, xmlConverter).comNFe(xmlTNFe);
-		
-		String xml = executaComando(urlService.getUrlEnviaNF());
-		return xmlConverter.toObj(xml, TRetEnviNFe.class);
+		this.servico = hub.getEnviaNF().setNFe(xmlTNFe);
+		return executaComando(TRetEnviNFe.class);
 	}
 
 	@Override
 	public TRetEnvEvento cancelarNF(String xmlTEnvEvento) throws Exception {
-		this.servico = new EventoService(dadosEmissor, EventoDFe.CANCELAMENTO, xmlConverter).assina(xmlTEnvEvento);
-		
-		String retorno = executaComando(urlService.getUrlEvento());
-		return xmlConverter.toObj(retorno, TRetEnvEvento.class);
+		this.servico = hub.getEvento().assina(xmlTEnvEvento);
+		return executaComando(TRetEnvEvento.class);
 	}
 
 	@Override
 	public br.com.dfe.schema.cce.TRetEnvEvento enviarCCe(String xmlTEnvEvento) throws Exception {
-		this.servico = new EventoService(dadosEmissor, EventoDFe.CCE, xmlConverter).assina(xmlTEnvEvento);
-		
-		String retorno = executaComando(urlService.getUrlEvento());
-		return xmlConverter.toObj(retorno, br.com.dfe.schema.cce.TRetEnvEvento.class);
+		this.servico = hub.getEvento().assina(xmlTEnvEvento);
+		return executaComando(br.com.dfe.schema.cce.TRetEnvEvento.class);
 	}
 
 	@Override
 	public TRetInutNFe inutilizar(String xmlInutNFe) throws Exception {
-		this.servico = new InutilizacaoService(dadosEmissor, xmlConverter).assina(xmlInutNFe);
-		
-		String retorno = executaComando(urlService.getUrlInutilizacao());
-		return xmlConverter.toObj(retorno, TRetInutNFe.class);
+		this.servico = hub.getInutilizacao().assina(xmlInutNFe);
+		return executaComando(TRetInutNFe.class);
 	}
 	
 	@Override
 	public br.com.dfe.schema.generico.TRetEnvEvento enviarEPEC(String envEvento) throws Exception {
-		this.servico = new EventoService(dadosEmissor, EventoDFe.EPEC, xmlConverter).assina(envEvento);
-		
-		String retorno = executaComando(urlService.getUrlEvento());
-		return xmlConverter.toObj(retorno, br.com.dfe.schema.generico.TRetEnvEvento.class);
+		this.servico = hub.getEvento().assina(envEvento);
+		return executaComando(br.com.dfe.schema.generico.TRetEnvEvento.class);
 	}
 	
-	@Override
-	public Servico getServico() {
-		return this.servico;
-	}
-	
-	public String executaComando(String url) throws Exception {
-		prepara.setUrl(url);
-		prepara.setPathCacerts(dadosEmissor.getPathCacerts());
-		prepara.preparaConexaoSegura();
+	private <T> T executaComando(Class<T> clazz) throws Exception {
+		preparaConexao();
 		
-		String dadosXML = xmlConverter.toString(servico.getDados(), false);
+		String dadosXML = servico.getDados();
 		OMElement elemento = ConverterUtils.toOMElement(dadosXML);
 		log.debug("OMElement: "+elemento.toString());
-		String retorno = servico.getMetodo().call(elemento, url);
+		String retorno = servico.getMetodo().call(elemento);
 		log.info("Retorno WS: "+retorno);
-		return retorno;
+		return xmlConverter.toObj(retorno, clazz);
+	}
+	
+	private void preparaConexao() throws Exception {
+		prepara.setUrl(servico.getMetodo().getUrl());
+		prepara.setPathCacerts(dadosEmissor.getPathCacerts());
+		prepara.preparaConexaoSegura();
 	}
 }

@@ -22,8 +22,7 @@ public class URLService {
 	
 	public static final Logger log = LogManager.getLogger(URLService.class);
 
-	@Autowired
-	private DadosEmissor dados;
+	@Autowired private DadosEmissor dados;
 	
 	private ObjectMapper mapper;
 	private UrlWS url;
@@ -59,7 +58,12 @@ public class URLService {
 		return getUrl();
 	}
 	
-	public String getUrl() {
+	public String getUrlConsultaNFCe() {
+		carregaUrlFromFile("consultaNFCe");
+		return getUrl();
+	}
+	
+	private String getUrl() {
 		return dados.getAmbiente() == 2 ? url.getHomologacao() : url.getProducao();
 	}
 	

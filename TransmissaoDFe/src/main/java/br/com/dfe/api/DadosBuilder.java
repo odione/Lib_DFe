@@ -1,6 +1,6 @@
 package br.com.dfe.api;
 
-public interface DadosBuilder {
+public interface DadosBuilder<T> {
 
-	Object build();
+	T build();
 }

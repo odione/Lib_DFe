@@ -2,25 +2,29 @@ package br.com.dfe.service;
 
 import static br.com.dfe.utils.NFUtils.getModeloFromChave;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import br.com.dfe.api.MetodoWS;
 import br.com.dfe.api.Servico;
+import br.com.dfe.api.XMLConverter;
 import br.com.dfe.builder.ConsultaNFBuilder;
 import br.com.dfe.configuracao.DadosEmissor;
-import br.com.dfe.ws.ConsultaNFWS;
 
+@Service("consultaNFService")
 public class ConsultaNFService implements Servico {
 	
-	private DadosEmissor dadosEmissor;
+	@Autowired private DadosEmissor dadosEmissor;
+	@Autowired private ConsultaNFBuilder builder;
+	@Autowired private XMLConverter xmlConverter;
+	
+	@Autowired
+	@Qualifier("consultaWS")
 	private MetodoWS metodoWS;
-	private String chave;
 	
-	public ConsultaNFService(DadosEmissor dadosEmissor) {
-		this.dadosEmissor = dadosEmissor;
-		this.metodoWS = new ConsultaNFWS();
-	}
-	
-	public ConsultaNFService comChave(String chave) {
-		this.chave = chave;
+	public ConsultaNFService setChave(String chave) {
+		builder.setChave(chave);
 		this.dadosEmissor.setModelo(getModeloFromChave(chave));
 		return this;
 	}
@@ -31,7 +35,7 @@ public class ConsultaNFService implements Servico {
 	}
 
 	@Override
-	public Object getDados() {
-		return new ConsultaNFBuilder(dadosEmissor).comChave(chave).build();
+	public String getDados() throws Exception {
+		return xmlConverter.toString(builder.build(), false);
 	}
 }
