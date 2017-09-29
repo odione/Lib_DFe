@@ -1,5 +1,7 @@
 package br.com.dfe.service;
 
+import static br.com.dfe.utils.NFUtils.getModeloFromChave;
+
 import br.com.dfe.api.MetodoWS;
 import br.com.dfe.api.Servico;
 import br.com.dfe.builder.ConsultaNFBuilder;
@@ -19,6 +21,7 @@ public class ConsultaNFService implements Servico {
 	
 	public ConsultaNFService comChave(String chave) {
 		this.chave = chave;
+		this.dadosEmissor.setModelo(getModeloFromChave(chave));
 		return this;
 	}
 	

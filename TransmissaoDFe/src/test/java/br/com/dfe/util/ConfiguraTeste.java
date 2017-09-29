@@ -1,6 +1,7 @@
 package br.com.dfe.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -8,6 +9,7 @@ import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.utils.CertificadoUtils;
 
 @Component
+@Profile("dev")
 public class ConfiguraTeste {
 	
 	@Autowired
@@ -29,7 +31,7 @@ public class ConfiguraTeste {
 	}
 	
 	public void configuraConexaoSegura() {
-		String pathCacerts = System.getProperty("user.dir")+"/Resources/NFeCacerts";
+		String pathCacerts = System.getProperty("user.dir")+"/NFeCacerts";
 		dados.setPathCacerts(pathCacerts);
 	}
 }

@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.dfe.api.EventoDFe;
 import br.com.dfe.api.PreparaConexaoSegura;
 import br.com.dfe.api.Servico;
 import br.com.dfe.api.TransmissorDFe;
@@ -69,7 +70,7 @@ public class TransmissorDFeImpl implements TransmissorDFe {
 
 	@Override
 	public TRetEnvEvento cancelarNF(String xmlTEnvEvento) throws Exception {
-		this.servico = new EventoService(dadosEmissor, true, xmlConverter).assina(xmlTEnvEvento);
+		this.servico = new EventoService(dadosEmissor, EventoDFe.CANCELAMENTO, xmlConverter).assina(xmlTEnvEvento);
 		
 		String retorno = executaComando(urlService.getUrlEvento());
 		return xmlConverter.toObj(retorno, TRetEnvEvento.class);
@@ -77,7 +78,7 @@ public class TransmissorDFeImpl implements TransmissorDFe {
 
 	@Override
 	public br.com.dfe.schema.cce.TRetEnvEvento enviarCCe(String xmlTEnvEvento) throws Exception {
-		this.servico = new EventoService(dadosEmissor, false, xmlConverter).assina(xmlTEnvEvento);
+		this.servico = new EventoService(dadosEmissor, EventoDFe.CCE, xmlConverter).assina(xmlTEnvEvento);
 		
 		String retorno = executaComando(urlService.getUrlEvento());
 		return xmlConverter.toObj(retorno, br.com.dfe.schema.cce.TRetEnvEvento.class);
@@ -89,6 +90,14 @@ public class TransmissorDFeImpl implements TransmissorDFe {
 		
 		String retorno = executaComando(urlService.getUrlInutilizacao());
 		return xmlConverter.toObj(retorno, TRetInutNFe.class);
+	}
+	
+	@Override
+	public br.com.dfe.schema.generico.TRetEnvEvento enviarEPEC(String envEvento) throws Exception {
+		this.servico = new EventoService(dadosEmissor, EventoDFe.EPEC, xmlConverter).assina(envEvento);
+		
+		String retorno = executaComando(urlService.getUrlEvento());
+		return xmlConverter.toObj(retorno, br.com.dfe.schema.generico.TRetEnvEvento.class);
 	}
 	
 	@Override

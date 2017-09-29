@@ -79,6 +79,20 @@
               </sources>
             </configuration>
           </execution>
+          <execution>
+            <id>generico</id>
+            <goals>
+              <goal>xjc</goal>
+            </goals>
+            <configuration>
+              <quiet>true</quiet>
+              <clearOutputDir>false</clearOutputDir>
+              <packageName>br.com.dfe.schema.generico</packageName>
+              <sources>
+                <source>${resourcesDir}/xsd/eventoGen</source>
+              </sources>
+            </configuration>
+          </execution>
 		    </executions>
 		  </plugin>
 			<plugin>

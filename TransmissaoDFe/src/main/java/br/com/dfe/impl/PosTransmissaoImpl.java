@@ -18,7 +18,6 @@ public class PosTransmissaoImpl implements PosTransmissao {
 		
 		if (!STAT_AUTORIZADA.contains(stat)) {
 			String msg = retorno.getProtNFe() == null ? retorno.getXMotivo() : retorno.getProtNFe().getInfProt().getXMotivo();
-			
 			throw new NaoAutorizadoException(stat, msg);
 		}
 	}
@@ -29,7 +28,6 @@ public class PosTransmissaoImpl implements PosTransmissao {
 		
 		if (!STAT_EVENTO.contains(stat)) {
 			String msg = retorno.getRetEvento().isEmpty() ? retorno.getXMotivo() : retorno.getRetEvento().get(0).getInfEvento().getXMotivo();
-			
 			throw new NaoAutorizadoException(stat, msg);
 		}
 	}
@@ -40,7 +38,6 @@ public class PosTransmissaoImpl implements PosTransmissao {
 		
 		if (!STAT_CANCELADA.contains(stat)) {
 			String msg = retorno.getRetEvento().isEmpty() ? retorno.getXMotivo() : retorno.getRetEvento().get(0).getInfEvento().getXMotivo();
-			
 			throw new NaoAutorizadoException(stat, msg);
 		}
 	}
@@ -59,6 +56,16 @@ public class PosTransmissaoImpl implements PosTransmissao {
 		
 		if ((!STAT_AUTORIZADA.contains(stat)) && (!STAT_DENEGADA.contains(stat)) && (!STAT_CANCELADA.contains(stat)))  {
 			throw new NaoAutorizadoException(stat, retorno.getXMotivo());
+		}
+	}
+
+	@Override
+	public void validaRetEnvEvento(br.com.dfe.schema.generico.TRetEnvEvento retorno) throws NaoAutorizadoException {
+		String stat = retorno.getRetEvento().isEmpty() ? retorno.getCStat() : retorno.getRetEvento().get(0).getInfEvento().getCStat();
+		
+		if (!STAT_EPEC.contains(stat)) {
+			String msg = retorno.getRetEvento().isEmpty() ? retorno.getXMotivo() : retorno.getRetEvento().get(0).getInfEvento().getXMotivo();
+			throw new NaoAutorizadoException(stat, msg);
 		}
 	}
 }

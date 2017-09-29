@@ -10,6 +10,7 @@ import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.impl.AssinaXML;
 import br.com.dfe.schema.TEnviNFe;
 import br.com.dfe.schema.TNFe;
+import br.com.dfe.service.QrCodeService;
 
 public class EnviaNFBuilder implements DadosBuilder {
 	
@@ -52,6 +53,19 @@ public class EnviaNFBuilder implements DadosBuilder {
 
 	@Override
 	public Object build() {
+		colocaQrCode();
 		return envNfe;
+	}
+	
+	public void colocaQrCode() {
+		if (dadosEmissor.getModelo().equals("55")) {
+			return;
+		}
+		
+		QrCodeService.builder()
+				.dadosEmissor(dadosEmissor)
+				.nfe(envNfe.getNFe().get(0))
+				.build()
+				.colocaQrCode();
 	}
 }

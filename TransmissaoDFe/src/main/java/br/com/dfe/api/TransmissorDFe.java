@@ -44,5 +44,12 @@ public interface TransmissorDFe {
 	 * @throws Exception
 	 */
 	TRetInutNFe inutilizar(String xmlInutNFe) throws Exception;
+	
+	/**
+	 * @param envEvento
+	 * @return br.com.dfe.schema.generico.TRetEnvEvento
+	 * @throws Exception
+	 */
+	br.com.dfe.schema.generico.TRetEnvEvento enviarEPEC(String envEvento) throws Exception;
 	Servico getServico();
 }

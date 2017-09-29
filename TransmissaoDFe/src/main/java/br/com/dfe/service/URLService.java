@@ -49,7 +49,8 @@ public class URLService {
 	}
 	
 	public String getUrlEvento() {
-		carregaUrlFromFile("evento");
+		String evento = dados.getTipoEmissao().equals(TipoEmissao.EPEC) ? "epec" : "evento";
+		carregaUrlFromFile(evento);
 		return getUrl();
 	}
 	

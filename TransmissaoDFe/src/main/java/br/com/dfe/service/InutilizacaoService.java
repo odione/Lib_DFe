@@ -16,6 +16,7 @@ public class InutilizacaoService implements Servico {
 	private AssinaDocumento assinador;
 	private XMLConverter xmlConverter;
 	private String xmlAssinado;
+	private TInutNFe inutNFe;
 	
 	public InutilizacaoService(DadosEmissor dadosEmissor, XMLConverter xmlConverter) {
 		this.metodo = new InutilizacaoWS();
@@ -26,6 +27,8 @@ public class InutilizacaoService implements Servico {
 	
 	public InutilizacaoService assina(String xml) throws Exception {
 		xmlAssinado = assinador.assinarInutilizada(xml, dadosEmissor.getCertificado(), dadosEmissor.getPrivateKey());
+		inutNFe = xmlConverter.toObj(xmlAssinado, TInutNFe.class);
+		dadosEmissor.setModelo(inutNFe.getInfInut().getMod());
 		return this;
 	}
 
@@ -36,11 +39,6 @@ public class InutilizacaoService implements Servico {
 
 	@Override
 	public Object getDados() {
-		try {
-			return xmlConverter.toObj(xmlAssinado, TInutNFe.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		return inutNFe;
 	}
 }

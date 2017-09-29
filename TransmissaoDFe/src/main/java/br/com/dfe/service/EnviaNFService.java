@@ -23,6 +23,8 @@ public class EnviaNFService implements Servico {
 	
 	public EnviaNFService comNFe(String tNfe) throws Exception {
 		this.nfe = xmlConverter.toObj(tNfe, TNFe.class);
+		
+		this.dadosEmissor.setModelo(this.nfe.getInfNFe().getIde().getMod());
 		return this;
 	}
 

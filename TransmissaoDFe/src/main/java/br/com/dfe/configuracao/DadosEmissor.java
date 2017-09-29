@@ -27,6 +27,8 @@ public class DadosEmissor implements Serializable {
 	private PrivateKey privateKey;
 	private String pathCacerts;
 	private TipoEmissao tipoEmissao;
+	private String idCSC;
+	private String CSC;
 	
 	@PostConstruct
 	public void postConstruct() {

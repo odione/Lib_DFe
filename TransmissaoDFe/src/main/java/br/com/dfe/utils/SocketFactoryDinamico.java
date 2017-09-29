@@ -36,7 +36,7 @@ public class SocketFactoryDinamico implements ProtocolSocketFactory {
     private PrivateKey privateKey;  
     private String fileCacerts;  
     
-    private final String TLSv1_2 = "TLSv1.2";
+    public static final String TLSv1_2 = "TLSv1.2";
     
     private static final Logger log = LogManager.getLogger(SocketFactoryDinamico.class.getSimpleName());
   
@@ -61,7 +61,7 @@ public class SocketFactoryDinamico implements ProtocolSocketFactory {
     	int timeout = params.getConnectionTimeout();  
     	if (timeout == 0) {  
     		return socketfactory.createSocket(host, port, localAddress,localPort);  
-    	}  
+    	}
 
     	Socket socket = socketfactory.createSocket();
     	((SSLSocket) socket).setEnabledProtocols(new String[] {TLSv1_2});
