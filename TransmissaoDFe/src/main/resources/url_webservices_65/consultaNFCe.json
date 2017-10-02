@@ -1,6 +1,6 @@
 [
 { "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "", "producao": "" },
 { "uf": "MS", "homologacao": "https://homologacao.nfce.fazenda.ms.gov.br/ws/NFeConsultaProtocolo4", "producao": "" },
-{ "uf": "PR", "homologacao": "www.fazenda.pr.gov.br/nfce/qrcode", "producao": "www.fazenda.pr.gov.br/nfce/qrcode" },
+{ "uf": "PR", "homologacao": "http://www.fazenda.pr.gov.br/nfce/qrcode/", "producao": "http://www.fazenda.pr.gov.br/nfce/qrcode/" },
 { "uf": "SP", "homologacao": "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeConsultaProtocolo4.asmx", "producao": "" }
 ]

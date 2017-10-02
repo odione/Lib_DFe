@@ -24,6 +24,7 @@ public class EnviaNFBuilder implements DadosBuilder<TEnviNFe> {
 	@Autowired private QrCodeService qrCodeService;
 	
 	private TEnviNFe envNfe;
+	private String xml;
 	
 	public EnviaNFBuilder comNFe(TNFe nfe) {
 		envNfe = new TEnviNFe();
@@ -35,7 +36,7 @@ public class EnviaNFBuilder implements DadosBuilder<TEnviNFe> {
 	}
 	
 	public EnviaNFBuilder assina() throws Exception {
-		String xml = xmlConverter.toString(envNfe, false);
+		xml = xmlConverter.toString(envNfe, false);
 		xml = assinador.assinarEnvNFe(xml, dadosEmissor.getCertificado(), dadosEmissor.getPrivateKey());
 		log.debug("Assinado: "+xml);
 		envNfe = xmlConverter.toObj(xml, TEnviNFe.class);
@@ -50,7 +51,12 @@ public class EnviaNFBuilder implements DadosBuilder<TEnviNFe> {
 	public EnviaNFBuilder colocaQrCodeSeNFCe() throws Exception {
 		if (dadosEmissor.getModelo().equals("65")) {
 			qrCodeService.setNfe(envNfe.getNFe().get(0));
-			qrCodeService.colocaQrCode();
+			String tag = qrCodeService.getTagInfNFeSupl();
+			StringBuilder sb = new StringBuilder(xml);
+			sb.insert(sb.lastIndexOf("</infNFe>")+9, tag);
+			xml = sb.toString();
+			envNfe = xmlConverter.toObj(xml, TEnviNFe.class);
+//			qrCodeService.colocaQrCode();
 		}
 		return this;
 	}

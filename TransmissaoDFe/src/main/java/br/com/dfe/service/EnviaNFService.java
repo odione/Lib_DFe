@@ -1,5 +1,7 @@
 package br.com.dfe.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import br.com.dfe.schema.TNFe;
 
 @Service("enviaNF")
 public class EnviaNFService implements Servico {
+	
+	private final Logger log = LogManager.getLogger(EnviaNFService.class);
 	
 	@Autowired
 	@Qualifier("enviaNFWS")
@@ -44,6 +48,8 @@ public class EnviaNFService implements Servico {
 				.colocaQrCodeSeNFCe()
 				.build();
 		
-		return xmlConverter.toString(envio, false);
+		String xml = xmlConverter.toString(envio, false);
+		log.debug("XML Assinado com QrCode: "+xml);
+		return xml;
 	}
 }

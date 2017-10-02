@@ -25,6 +25,8 @@ public class ConfiguraTeste {
 			dados.setPrivateKey(utils.getPrivateKey());
 			dados.setUf("PR");
 			dados.setUfCodigo("41");
+			dados.setIdCSC("000009");
+			dados.setCSC("5fsd1f561ad56f1a6d5f1a56f1a561f56a1");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
