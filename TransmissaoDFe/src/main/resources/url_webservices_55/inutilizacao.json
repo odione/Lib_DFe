@@ -1,5 +1,5 @@
 [
-{ "uf": "AM", "homologacao": "https://homnfe.sefaz.am.gov.br/services2/services/NfeInutilizacao4", "producao": "" },
+{ "uf": "AM", "homologacao": "https://homnfe.sefaz.am.gov.br/services2/services/NfeInutilizacao4", "producao": "https://nfe.sefaz.am.gov.br/services2/services/NfeInutilizacao4" },
 { "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "https://nfe-homologacao.svrs.rs.gov.br/ws/nfeinutilizacao/nfeinutilizacao4.asmx", "producao": "" },
 { "uf": "BA", "homologacao": "https://hnfe.sefaz.ba.gov.br/webservices/NFeInutilizacao4/NFeInutilizacao4.asmx", "producao": "" },
 { "uf": "CE", "homologacao": "https://nfeh.sefaz.ce.gov.br/nfe4/services/NFeInutilizacao4?WSDL", "producao": "" },
