@@ -1,6 +1,10 @@
 [
-{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "", "producao": "" },
-{ "uf": "MS", "homologacao": "https://homologacao.nfce.fazenda.ms.gov.br/ws/NFeRecepcaoEvento4", "producao": "" },
-{ "uf": "PR", "homologacao": "https://homologacao.nfce.sefa.pr.gov.br/nfce/NFeRecepcaoEvento4", "producao": "" },
-{ "uf": "SP", "homologacao": "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeRecepcaoEvento4.asmx", "producao": "" }
+{ "uf": "AM", "homologacao": "https://homnfce.sefaz.am.gov.br/nfce-services/services/RecepcaoEvento4", "producao": "https://nfce.sefaz.am.gov.br/nfce-services/services/RecepcaoEvento4" },
+{ "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfe/services/NFeRecepcaoEvento4?wsdl", "producao": "https://nfe.sefaz.go.gov.br/nfe/services/NFeRecepcaoEvento4?wsdl" },
+{ "uf": "MT", "homologacao": "https://homologacao.sefaz.mt.gov.br/nfcews/v2/services/RecepcaoEvento4", "producao": "https://nfce.sefaz.mt.gov.br/nfcews/v2/services/RecepcaoEvento4" },
+{ "uf": "RS", "homologacao": "https://nfce-homologacao.sefazrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx", "producao": "https://nfce.sefazrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx" },
+{ "uf": "MS", "homologacao": "https://homologacao.nfce.fazenda.ms.gov.br/ws/NFeRecepcaoEvento4", "producao": "https://nfce.fazenda.ms.gov.br/ws/NFeRecepcaoEvento4" },
+{ "uf": "PR", "homologacao": "https://homologacao.nfce.sefa.pr.gov.br/nfce/NFeRecepcaoEvento4", "producao": "https://nfce.sefa.pr.gov.br/nfce/NFeRecepcaoEvento4" },
+{ "uf": "SP", "homologacao": "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeRecepcaoEvento4.asmx", "producao": "https://nfce.fazenda.sp.gov.br/ws/NFeRecepcaoEvento4.asmx" },
+{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SE|TO", "homologacao": "https://nfce-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx", "producao": "https://nfce.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx" }
 ]

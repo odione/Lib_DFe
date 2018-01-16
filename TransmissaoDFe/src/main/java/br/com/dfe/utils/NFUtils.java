@@ -1,11 +1,11 @@
 package br.com.dfe.utils;
 
-import br.com.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class NFUtils {
 
 	public static String formatNumeroNF(String numero) {
-		return StringUtils.rightStr("000000"+numero, 6);
+		return StringUtils.leftPad(numero, 6, "0");
 	}
 	public static String getNumeroFromChave(String chave) {
 		return chave.substring(28,34);
