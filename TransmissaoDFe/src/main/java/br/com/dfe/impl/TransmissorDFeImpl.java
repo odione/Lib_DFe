@@ -1,8 +1,6 @@
 package br.com.dfe.impl;
 
 import org.apache.axiom.om.OMElement;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,11 +16,11 @@ import br.com.dfe.schema.TRetInutNFe;
 import br.com.dfe.schema.canc.TRetEnvEvento;
 import br.com.dfe.service.HubServicos;
 import br.com.dfe.utils.ConverterUtils;
+import lombok.extern.log4j.Log4j2;
 
 @Component
+@Log4j2
 public class TransmissorDFeImpl implements TransmissorDFe {
-	
-	private static final Logger log = LogManager.getLogger(TransmissorDFeImpl.class);
 	
 	@Autowired private PreparaConexaoSegura prepara;
 	@Autowired private XMLConverter xmlConverter;

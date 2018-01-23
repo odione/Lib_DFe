@@ -11,11 +11,14 @@ import br.com.dfe.api.PreparaConexaoSegura;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.utils.BuildCacerts;
 import br.com.dfe.utils.SocketFactoryDinamico;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Component
+@NoArgsConstructor
 public class PreparaConexaoSeguraImpl implements PreparaConexaoSegura {
 	
-	private String pathCacerts;
+	@Setter private String pathCacerts;
 	private BuildCacerts buildCacerts;
 	private SocketFactoryDinamico socketDinamico;
 	private URL url;
@@ -23,10 +26,6 @@ public class PreparaConexaoSeguraImpl implements PreparaConexaoSegura {
 	@Autowired
 	private DadosEmissor dados;
 	
-	public PreparaConexaoSeguraImpl() {
-		super();
-	}
-
 	@Override
 	public void preparaConexaoSegura() throws Exception {
 		gerarCacerts();
@@ -56,10 +55,5 @@ public class PreparaConexaoSeguraImpl implements PreparaConexaoSegura {
 	@Override
 	public void setUrl(String url) throws MalformedURLException {
 		this.url = new URL(url);
-	}
-
-	@Override
-	public void setPathCacerts(String pathCacerts) {
-		this.pathCacerts = pathCacerts;
 	}
 }

@@ -43,7 +43,8 @@ public class BuildCacerts {
             log.info("Gerando Arquivo Cacerts...");
             
             if (Files.notExists(pathCacerts)) {
-            	pathCacerts.toFile().createNewFile();
+            	Files.createDirectories(pathCacerts.getParent());
+            	Files.createFile(pathCacerts);
             }
             
             Path cacertJRE = Paths.get(System.getProperty("java.home"),"lib","security","cacerts");
