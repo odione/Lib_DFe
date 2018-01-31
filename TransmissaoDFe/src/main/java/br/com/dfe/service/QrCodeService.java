@@ -1,11 +1,11 @@
 package br.com.dfe.service;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +14,12 @@ import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TNFe;
 import br.com.dfe.schema.TNFe.InfNFeSupl;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 
 @Service
+@Log4j2
 public class QrCodeService {
-	private final Logger log = LogManager.getLogger(QrCodeService.class);
-
+	
 	@Autowired private DadosEmissor dadosEmissor;
 	@Autowired private XMLConverter xmlConverter;
 	@Autowired private URLService urlService;
@@ -54,7 +55,7 @@ public class QrCodeService {
 			.append("&cIdToken=").append(dadosEmissor.getIdCSC());
 			
 		qrCode.append(getHashQrCode(qrCode.toString()));
-		String urlCompleta = urlService.getUrlConsultaNFCe().concat("?").concat(qrCode.toString());
+		String urlCompleta = urlService.getUrlQrCode().concat("?").concat(qrCode.toString());
 		log.debug("QrCode: "+urlCompleta);
 		return urlCompleta;
 	}
@@ -65,9 +66,10 @@ public class QrCodeService {
 
 	private String getDest() {
 		if (nfe.getInfNFe().getDest() != null) {
-			return "&cDest="+nfe.getInfNFe().getDest().getCPF() != null ? 
-				nfe.getInfNFe().getDest().getCPF() : 
-				nfe.getInfNFe().getDest().getCNPJ();
+			String cpfCnpj = isNotBlank(nfe.getInfNFe().getDest().getCPF()) ? 
+					nfe.getInfNFe().getDest().getCPF() : 
+					nfe.getInfNFe().getDest().getCNPJ();
+			return "&cDest=".concat(cpfCnpj);
 		}
 		return "";
 	}

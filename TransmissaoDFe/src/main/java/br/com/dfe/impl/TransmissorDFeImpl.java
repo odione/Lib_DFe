@@ -16,6 +16,7 @@ import br.com.dfe.schema.TRetInutNFe;
 import br.com.dfe.schema.canc.TRetEnvEvento;
 import br.com.dfe.service.HubServicos;
 import br.com.dfe.utils.ConverterUtils;
+import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
 @Component
@@ -27,7 +28,7 @@ public class TransmissorDFeImpl implements TransmissorDFe {
 	@Autowired private DadosEmissor dadosEmissor;
 	@Autowired private HubServicos hub;
 	
-	private Servico servico;
+	@Getter private Servico servico;
 	
 	@Override
 	public TRetConsStatServ statusServico() throws Exception {

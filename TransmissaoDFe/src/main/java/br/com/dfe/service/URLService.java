@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +14,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.com.dfe.api.TipoEmissao;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.ws.UrlWS;
+import lombok.extern.log4j.Log4j2;
 
 @Service
+@Log4j2
 public class URLService {
-	
-	public static final Logger log = LogManager.getLogger(URLService.class);
 
 	@Autowired private DadosEmissor dados;
 	
@@ -60,6 +58,11 @@ public class URLService {
 	
 	public String getUrlConsultaNFCe() {
 		carregaUrlFromFile("consultaNFCe");
+		return getUrl();
+	}
+	
+	public String getUrlQrCode() {
+		carregaUrlFromFile("qrCode");
 		return getUrl();
 	}
 	

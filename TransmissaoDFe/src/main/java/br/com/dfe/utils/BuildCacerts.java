@@ -22,15 +22,13 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class BuildCacerts {
     
     private Path pathCacerts;
     private final int TIMEOUT_WS = 30;  
-    
-    private static final Logger log = LogManager.getLogger(BuildCacerts.class.getSimpleName());
     
     public BuildCacerts(String pathCacerts) {
 		this.pathCacerts = Paths.get(pathCacerts);
@@ -139,12 +137,10 @@ public class BuildCacerts {
     }  
       
     private void info(String logStr) {  
-        System.out.println("INFO: " + logStr);
         log.debug(logStr);
     }  
   
     private void error(String logStr) {  
-        System.out.println("ERROR: " + logStr);
         log.error(logStr);
     } 
 }

@@ -1,7 +1,5 @@
 package br.com.dfe.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,11 +11,11 @@ import br.com.dfe.builder.EnviaNFBuilder;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TEnviNFe;
 import br.com.dfe.schema.TNFe;
+import lombok.extern.log4j.Log4j2;
 
 @Service("enviaNF")
+@Log4j2
 public class EnviaNFService implements Servico {
-	
-	private final Logger log = LogManager.getLogger(EnviaNFService.class);
 	
 	@Autowired
 	@Qualifier("enviaNFWS")
@@ -26,10 +24,13 @@ public class EnviaNFService implements Servico {
 	@Autowired private DadosEmissor dadosEmissor;
 	@Autowired private XMLConverter xmlConverter;
 	@Autowired private EnviaNFBuilder builder;
+	@Autowired private QrCodeService qrCodeService;
+	private String dados;
 	
 	private TNFe nfe;
 	
 	public EnviaNFService setNFe(String tNfe) throws Exception {
+		dados = "";
 		this.nfe = xmlConverter.toObj(tNfe, TNFe.class);
 		this.dadosEmissor.setModelo(this.nfe.getInfNFe().getIde().getMod());
 		return this;
@@ -42,14 +43,22 @@ public class EnviaNFService implements Servico {
 
 	@Override
 	public String getDados() throws Exception {
+		montaDados();
+		return dados;
+	}
+
+	private void montaDados() throws Exception {
+		if (!dados.equals("")) return;
+		
 		TEnviNFe envio = builder
 				.comNFe(nfe)
 				.assina()
-				.colocaQrCodeSeNFCe()
 				.build();
 		
-		String xml = xmlConverter.toString(envio, false);
-		log.debug("XML Assinado com QrCode: "+xml);
-		return xml;
+		qrCodeService.setNfe(envio.getNFe().get(0));
+		
+		dados = xmlConverter.toString(envio, false);
+		dados = builder.colocaQrCodeSeNFCe(dados);
+		log.debug("XML Assinado com QrCode: "+dados);
 	}
 }

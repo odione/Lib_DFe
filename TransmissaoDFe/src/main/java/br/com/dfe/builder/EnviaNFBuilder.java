@@ -1,7 +1,5 @@
 package br.com.dfe.builder;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,11 +10,11 @@ import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TEnviNFe;
 import br.com.dfe.schema.TNFe;
 import br.com.dfe.service.QrCodeService;
+import lombok.extern.log4j.Log4j2;
 
 @Component
+@Log4j2
 public class EnviaNFBuilder implements DadosBuilder<TEnviNFe> {
-	
-	private final Logger log = LogManager.getLogger(EnviaNFBuilder.class);
 	
 	@Autowired private XMLConverter xmlConverter;
 	@Autowired private AssinaDocumento assinador;
@@ -48,16 +46,15 @@ public class EnviaNFBuilder implements DadosBuilder<TEnviNFe> {
 		return envNfe;
 	}
 	
-	public EnviaNFBuilder colocaQrCodeSeNFCe() throws Exception {
+	public String colocaQrCodeSeNFCe(String xmlAssinado) throws Exception {
 		if (dadosEmissor.getModelo().equals("65")) {
 			qrCodeService.setNfe(envNfe.getNFe().get(0));
 			String tag = qrCodeService.getTagInfNFeSupl();
-			StringBuilder sb = new StringBuilder(xml);
+			log.debug("TAG QrCode: "+tag);
+			StringBuilder sb = new StringBuilder(xmlAssinado);
 			sb.insert(sb.lastIndexOf("</infNFe>")+9, tag);
-			xml = sb.toString();
-			envNfe = xmlConverter.toObj(xml, TEnviNFe.class);
-//			qrCodeService.colocaQrCode();
+			return sb.toString();
 		}
-		return this;
+		return xmlAssinado;
 	}
 }

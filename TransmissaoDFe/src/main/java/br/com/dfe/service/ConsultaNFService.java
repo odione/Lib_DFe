@@ -28,14 +28,14 @@ public class ConsultaNFService implements Servico {
 		this.dadosEmissor.setModelo(getModeloFromChave(chave));
 		return this;
 	}
-	
-	@Override
-	public MetodoWS getMetodo() {
-		return this.metodoWS;
-	}
 
 	@Override
 	public String getDados() throws Exception {
 		return xmlConverter.toString(builder.build(), false);
+	}
+
+	@Override
+	public MetodoWS getMetodo() {
+		return this.metodoWS;
 	}
 }

@@ -35,8 +35,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -46,8 +44,12 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import br.com.dfe.api.AssinaDocumento;
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Component
+@Log4j2
+@NoArgsConstructor
 public class AssinaXML implements AssinaDocumento {
 
 	private static final String INFINUT = "infInut";
@@ -58,12 +60,6 @@ public class AssinaXML implements AssinaDocumento {
     private PrivateKey privateKey;
     private KeyInfo keyInfo;
     private XMLSignatureFactory signFactory;
-    
-    private static final Logger log = LogManager.getLogger(AssinaXML.class);
-    
-    public AssinaXML() {
-    	super();
-    }
     
 	@Override
 	public String assinarEnvNFe(String strXML, X509Certificate cert, PrivateKey key)

@@ -10,10 +10,13 @@ import java.security.cert.X509Certificate;
 import javax.naming.InvalidNameException;
 import javax.naming.ldap.LdapName;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class CertificadoUtils {
 
-	private KeyStore ks;
-	private String password;
+	@Getter private KeyStore ks;
+	@Setter private String password;
 	
 	public boolean loadRepositorioWindows() {
 		try {
@@ -84,12 +87,5 @@ public class CertificadoUtils {
 			e.printStackTrace();
 		}
 		return "";
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public KeyStore getKeyStore() {
-		return ks;
 	}
 }

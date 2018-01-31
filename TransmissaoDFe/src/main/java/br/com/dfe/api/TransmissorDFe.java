@@ -51,5 +51,6 @@ public interface TransmissorDFe {
 	 * @throws Exception
 	 */
 	br.com.dfe.schema.generico.TRetEnvEvento enviarEPEC(String envEvento) throws Exception;
-//	Servico getServico();
+	
+	Servico getServico();
 }
