@@ -13,6 +13,7 @@ import javax.xml.transform.TransformerException;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.AxisFault;
+import static org.apache.commons.lang3.StringUtils.*;
 import org.xml.sax.SAXException;
 
 import br.com.dfe.schema.TInutNFe;
@@ -24,7 +25,6 @@ import br.com.transmissor.utils.AssinaturaDocumento;
 import br.com.transmissor.utils.UtilsWebService;
 import br.com.transmissor.utils.UtilsXML;
 import br.com.transmissor.utils.enumarator.ModeloDF;
-import br.com.utils.StringUtils;
 import br.inf.portalfiscal.www.nfe.wsdl.nfeinutilizacao.NfeInutilizacaoStub;
 import br.inf.portalfiscal.www.nfe.wsdl.nfeinutilizacao2.NfeInutilizacao2Stub;
 
@@ -43,15 +43,15 @@ public class EnvioInutilizacao extends ServicoWeb {
 			verificaWSEstado();
 			UtilsWebService.preparaAmbiente(getWs_url(),getConfiguracao());
 			
-			String strAno = StringUtils.rightStr(ano, 2);
+			String strAno = right(ano, 2);
 			
 			String ID = "ID".concat(String.valueOf(getConfiguracao().getUf().getCodigoUF())).
 				concat(strAno).
 				concat(cnpj).
 				concat(modelo).
-				concat(StringUtils.rightStr("000"+serie, 3)).
-				concat(StringUtils.rightStr("000000000"+nfIni, 9)).
-				concat(StringUtils.rightStr("000000000"+nfFim, 9));
+				concat(right("000"+serie, 3)).
+				concat(right("000000000"+nfIni, 9)).
+				concat(right("000000000"+nfFim, 9));
 			
 			nfIni = String.valueOf(Integer.valueOf(nfIni));
 			nfFim = String.valueOf(Integer.valueOf(nfFim));
@@ -81,7 +81,7 @@ public class EnvioInutilizacao extends ServicoWeb {
 			salvarInut(inut);
 			log.info("Envio Inut Finalizado! Ret: "+retInutNFe.getInfInut().getCStat());
 		} else {
-			setMsgErro("Configuração Nula!");
+			setMsgErro("Configuraï¿½ï¿½o Nula!");
 			log.error(getMsgErro());
 		}
 	}

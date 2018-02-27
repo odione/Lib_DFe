@@ -14,6 +14,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.util.StAXParserConfiguration;
 import org.apache.commons.codec.binary.Hex;
+import static org.apache.commons.lang3.StringUtils.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.InputSource;
@@ -29,8 +30,7 @@ import br.com.transmissor.utils.enumarator.Ambiente;
 import br.com.transmissor.utils.enumarator.Estado;
 import br.com.transmissor.utils.enumarator.ModeloDF;
 import br.com.transmissor.utils.enumarator.StatProc;
-import br.com.transmissor.utils.enumarator.TipoEvento;
-import br.com.utils.StringUtils;;
+import br.com.transmissor.utils.enumarator.TipoEvento;;
 
 public class UtilsXML {
 	
@@ -65,7 +65,7 @@ public class UtilsXML {
 	}
 	
 	/**
-	 * Salva TNfeProc quando ocorrer rejeiçao, no diretorio de Erros
+	 * Salva TNfeProc quando ocorrer rejeiï¿½ao, no diretorio de Erros
 	 * @param procNfe
 	 */
 	public static void gravarXMLErro(TNfeProc procNfe) {
@@ -79,12 +79,12 @@ public class UtilsXML {
 	}
 	
 	/**
-	 * Salva TProcEvento CCe no diretorio de Carta de Correçao
+	 * Salva TProcEvento CCe no diretorio de Carta de Correï¿½ao
 	 * @param procEvento
 	 */
 	public static void gravarEventoCCe(br.com.dfe.schema.eventoCCe.TProcEvento procEvento) {
 		if (StatProc.isEventoAut(procEvento.getRetEvento().getInfEvento().getCStat())) {
-			String seq = StringUtils.rightStr("00"+procEvento.getRetEvento().getInfEvento().getNSeqEvento(), 2);
+			String seq = right("00"+procEvento.getRetEvento().getInfEvento().getNSeqEvento(), 2);
 			String chave = procEvento.getRetEvento().getInfEvento().getChNFe();
 			String pathFile = getPathXMLEventoCCe(chave, getCNPJFromChave(chave), getModeloFromChave(chave), seq);
 			
@@ -112,7 +112,7 @@ public class UtilsXML {
 	 * @param modelo
 	 */
 	public static String getPathXMLAutorizada(String chaveNF, String cnpj, String modelo){
-		return getPathAutorizada(StringUtils.onlyNumber(cnpj),ModeloDF.valorDe(modelo))+chaveNF+sufixProcNfe;
+		return getPathAutorizada(getDigits(cnpj),ModeloDF.valorDe(modelo))+chaveNF+sufixProcNfe;
 	}
 	
 	/**
@@ -177,7 +177,7 @@ public class UtilsXML {
 				} else {
 					String pathFile = getPathEventoCCe(procEvento.getEvento().getInfEvento().getCNPJ(),
 						ModeloDF.valorDe(getModeloFromChave(procEvento.getRetEvento().getInfEvento().getChNFe())));
-					String seq = StringUtils.rightStr("00"+procEvento.getRetEvento().getInfEvento().getNSeqEvento(), 2);
+					String seq = right("00"+procEvento.getRetEvento().getInfEvento().getNSeqEvento(), 2);
 					pathFile += procEvento.getRetEvento().getInfEvento().getChNFe()+"_"+seq+sufixProcEventoCCe;
 					
 					gravarXML(new LeitorXML().criaStrXML(procEvento, false), pathFile);
@@ -191,7 +191,7 @@ public class UtilsXML {
 			if (StatProc.isInutilizada(procInut.getRetInutNFe().getInfInut().getCStat())) {
 				String pathFile = getPathInutilizada(procInut.getInutNFe().getInfInut().getCNPJ(),
 					ModeloDF.valorDe(procInut.getInutNFe().getInfInut().getMod()));
-				pathFile += StringUtils.rightStr(procInut.getInutNFe().getInfInut().getId(), 41)+sufixInut;
+				pathFile += right(procInut.getInutNFe().getInfInut().getId(), 41)+sufixInut;
 				
 				gravarXML(new LeitorXML().criaStrXML(procInut, false), pathFile);
 			}
@@ -222,7 +222,7 @@ public class UtilsXML {
 				return "";
 			}
 			
-			qrCode.append("chNFe=").append(StringUtils.rightStr(nfe.getInfNFe().getId(), 44));
+			qrCode.append("chNFe=").append(right(nfe.getInfNFe().getId(), 44));
 			
 			qrCode.append("&nVersao=").append("100");
 			qrCode.append("&tpAmb=").append(nfe.getInfNFe().getIde().getTpAmb());
@@ -304,23 +304,23 @@ public class UtilsXML {
 	}
 	
 	public static String getPathAutorizada(String cnpj, ModeloDF modeloDF) {
-		return getDirApp() + "/Autorizada/" + StringUtils.onlyNumber(cnpj) + "/"+ String.valueOf(modeloDF.getModelo())+"/";
+		return getDirApp() + "/Autorizada/" + getDigits(cnpj) + "/"+ String.valueOf(modeloDF.getModelo())+"/";
 	}
 
 	public static String getPathInutilizada(String cnpj, ModeloDF modeloDF) {
-		return getDirApp() + "/Inutilizada/" + StringUtils.onlyNumber(cnpj) + "/"+ String.valueOf(modeloDF.getModelo())+"/";
+		return getDirApp() + "/Inutilizada/" + getDigits(cnpj) + "/"+ String.valueOf(modeloDF.getModelo())+"/";
 	}
 
 	public static String getPathEventoCanc(String cnpj, ModeloDF modeloDF) {
-		return getDirApp()+ "/Evento/" + StringUtils.onlyNumber(cnpj)+"/"+String.valueOf(modeloDF.getModelo())+"/Cancelada/";
+		return getDirApp()+ "/Evento/" + getDigits(cnpj)+"/"+String.valueOf(modeloDF.getModelo())+"/Cancelada/";
 	}
 
 	public static String getPathEventoCCe(String cnpj, ModeloDF modeloDF) {
-		return getDirApp() + "/Evento/" + StringUtils.onlyNumber(cnpj) + "/"+ String.valueOf(modeloDF.getModelo())+"/CCe/";
+		return getDirApp() + "/Evento/" + getDigits(cnpj) + "/"+ String.valueOf(modeloDF.getModelo())+"/CCe/";
 	}
 
 	public static String getPathErro(String cnpj, ModeloDF modeloDF) {
-		return getDirApp()+ "/Erro/" + StringUtils.onlyNumber(cnpj) + "/"+String.valueOf(modeloDF.getModelo())+"/";
+		return getDirApp()+ "/Erro/" + getDigits(cnpj) + "/"+String.valueOf(modeloDF.getModelo())+"/";
 	}
 
 	public static String getPathXSD() {

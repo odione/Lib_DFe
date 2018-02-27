@@ -3,9 +3,9 @@ package br.com.transmissor.utils.enumarator;
 public enum WS_URL_StatusServico {
 	
 	//55 - NF-e
-	SVRS_HOMOLOGACAO("https://nfe-homologacao.svrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico2.asmx","AC|AL|AP|DF|PB|RJ|RN|RO|RR|SC|SE|TO|ES",
+	SVRS_HOMOLOGACAO("https://nfe-homologacao.svrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico2.asmx","AC|AL|AP|DF|PB|RJ|RN|RO|RR|SC|SE|TO|ES|PI",
 		Ambiente.HOMOLOGACAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
-	SVRS_PRODUCAO("https://nfe.svrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico2.asmx","AC|AL|AP|DF|PB|RJ|RN|RO|RR|SC|SE|TO|ES",
+	SVRS_PRODUCAO("https://nfe.svrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico2.asmx","AC|AL|AP|DF|PB|RJ|RN|RO|RR|SC|SE|TO|ES|PI",
 		Ambiente.PRODUCAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
 	AM_HOMOLOGACAO("https://homnfe.sefaz.am.gov.br/services2/services/NfeStatusServico2","AM",Ambiente.HOMOLOGACAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
 	AM_PRODUCAO("https://nfe.sefaz.am.gov.br/services2/services/NfeStatusServico2","AM",Ambiente.PRODUCAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
@@ -29,8 +29,8 @@ public enum WS_URL_StatusServico {
 	RS_PRODUCAO("https://nfe.sefazrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico2.asmx","RS",Ambiente.PRODUCAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
 	SP_HOMOLOGACAO("https://homologacao.nfe.fazenda.sp.gov.br/ws/nfestatusservico2.asmx","SP",Ambiente.HOMOLOGACAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
 	SP_PRODUCAO("https://nfe.fazenda.sp.gov.br/ws/nfestatusservico2.asmx","SP",Ambiente.PRODUCAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
-	SVAN_HOMOLOGACAO("https://hom.sefazvirtual.fazenda.gov.br/NfeStatusServico2/NfeStatusServico2.asmx","MA|PA|PI",Ambiente.HOMOLOGACAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
-	SVAN_PRODUCAO("https://www.sefazvirtual.fazenda.gov.br/NfeStatusServico2/NfeStatusServico2.asmx","MA|PA|PI",Ambiente.PRODUCAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
+	SVAN_HOMOLOGACAO("https://hom.sefazvirtual.fazenda.gov.br/NfeStatusServico2/NfeStatusServico2.asmx","MA|PA",Ambiente.HOMOLOGACAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
+	SVAN_PRODUCAO("https://www.sefazvirtual.fazenda.gov.br/NfeStatusServico2/NfeStatusServico2.asmx","MA|PA",Ambiente.PRODUCAO,TipoEmissao.NORMAL,ModeloDF.MODELO_NFE),
 	SVC_AN_HOMOLOGACAO("https://hom.sefazvirtual.fazenda.gov.br/NfeStatusServico2/NfeStatusServico2.asmx","AC|AL|AP|DF|ES|MG|PB|RJ|RN|RO|RR|RS|SC|SE|SP|TO",
 		Ambiente.HOMOLOGACAO,TipoEmissao.CONTINGENCIA_SVCAN,ModeloDF.MODELO_NFE),
 	SVC_AN_PRODUCAO("https://hom.svc.fazenda.gov.br/NfeStatusServico2/NfeStatusServico2.asmx","AC|AL|AP|DF|ES|MG|PB|RJ|RN|RO|RR|RS|SC|SE|SP|TO",

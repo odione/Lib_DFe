@@ -17,6 +17,7 @@ import javax.xml.transform.TransformerException;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.AxisFault;
+import static org.apache.commons.lang3.StringUtils.*;
 import org.xml.sax.SAXException;
 
 import br.com.dfe.schema.eventoCCe.TEnvEvento;
@@ -32,7 +33,6 @@ import br.com.transmissor.utils.UtilsXML;
 import br.com.transmissor.utils.enumarator.ModeloDF;
 import br.com.transmissor.utils.enumarator.TipoEvento;
 import br.com.transmissor.utils.enumarator.VersaoEvento;
-import br.com.utils.StringUtils;
 import br.inf.portalfiscal.www.nfe.wsdl.recepcaoevento.RecepcaoEventoStub;
 
 public class EnvioCCe extends ServicoWeb {
@@ -63,7 +63,7 @@ public class EnvioCCe extends ServicoWeb {
 				
 				LocalDateTime hoje = LocalDateTime.now();
 				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-				String seq = StringUtils.rightStr("00"+String.valueOf(sequencial), 2);
+				String seq = right("00"+String.valueOf(sequencial), 2);
 				
 				TEvento evento = new TEvento();
 				evento.setVersao(VersaoEvento.VERSAO_100.getVersao());
@@ -94,7 +94,7 @@ public class EnvioCCe extends ServicoWeb {
 				salvarEvento(evento);
 				log.info("Envio CCe Finalizado! Ret: "+retEnvEvento.getCStat());
 		} else {
-			setMsgErro("Configuração Nula!");
+			setMsgErro("Configuraï¿½ï¿½o Nula!");
 			log.error(getMsgErro());
 		}
 	}
