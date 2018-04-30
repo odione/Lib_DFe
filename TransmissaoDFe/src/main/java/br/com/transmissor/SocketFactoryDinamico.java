@@ -39,7 +39,7 @@ public class SocketFactoryDinamico implements ProtocolSocketFactory {
     private String fileCacerts;  
     private Estado uf;
     
-//    private final String TLSv1 = "TLSv1";
+    private final String TLSv1 = "TLSv1";
     private final String TLSv1_2 = "TLSv1.2";
     
     private static final Logger log = LogManager.getLogger(SocketFactoryDinamico.class.getSimpleName());
@@ -106,7 +106,7 @@ public class SocketFactoryDinamico implements ProtocolSocketFactory {
             socket.connect(remoteaddr, timeout);  
         } catch (Exception e) {  
             error(e.toString());  
-            throw new ConnectTimeoutException("PossÌvel timeout de conex„o", e);  
+            throw new ConnectTimeoutException("Poss√≠vel timeout de conex√£o", e);  
         }  
   
         return socket;  
@@ -143,14 +143,13 @@ public class SocketFactoryDinamico implements ProtocolSocketFactory {
     }
     
     private String getProtocolo(){
-//    	String uf_tls1_2 = "MT|MS|SP|PR|MA|PA|PI";
-//    	
-//    	if (uf != null) {
-//    		if (uf_tls1_2.contains(uf.getUF())){
-//    			return TLSv1_2;
-//    		}
-//    	}
-//    	return TLSv1;
+    	String uf_tls1 = "BA";
+    	
+    	if (uf != null) {
+    		if (uf_tls1.contains(uf.getUF())){
+    			return TLSv1;
+    		}
+    	}
     	return TLSv1_2;
     }
   

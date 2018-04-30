@@ -49,7 +49,7 @@ public abstract class ServicoWeb {
 	
 	public void verificaWSEstado() {
 		if ((getWs_url() == null) || (getWs_url().equals(""))) {
-			throw new IllegalArgumentException("Estado n„o possui WebService para este ServiÁo!");
+			throw new IllegalArgumentException("Estado n√£o possui WebService para este Servi√ßo!");
 		}
 	}
 	
@@ -83,7 +83,7 @@ public abstract class ServicoWeb {
 	}
 	public void setConfiguracao(ConfigDFe configuracao) {
 		this.configuracao = configuracao;
-		setAssincrono(("SP".contains(this.configuracao.getUf().getUF()) && (this.configuracao.getModelo_df() == ModeloDF.MODELO_NFE)));
+		setAssincrono(("SP|BA".contains(this.configuracao.getUf().getUF()) && (this.configuracao.getModelo_df() == ModeloDF.MODELO_NFE)));
 	}
 	public boolean isAssincrono() {
 		return assincrono;
