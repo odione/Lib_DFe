@@ -48,4 +48,7 @@ public class DadosEmissor implements Serializable {
 	public void setTipoEmissao(int tipo) {
 		this.tipoEmissao = TipoEmissao.getFromInt(tipo);
 	}
+	public boolean isAsync() {
+		return "BA|SP".contains(uf.toUpperCase());
+	}
 }

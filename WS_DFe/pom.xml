@@ -88,6 +88,19 @@
 							<suppressPrefixes>true</suppressPrefixes>
 						</configuration>
 					</execution>
+					<execution>
+						<id>retAutorizacao4</id>
+						<goals>
+							<goal>wsdl2code</goal>
+						</goals>
+						<phase>generate-sources</phase>
+						<configuration>
+							<outputDirectory>${sourceDirectory}</outputDirectory>
+							<wsdlFile>${resourcesDir}/WSDL/NFeRetAutorizacao4.wsdl</wsdlFile>
+							<overWrite>true</overWrite>
+							<suppressPrefixes>true</suppressPrefixes>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>

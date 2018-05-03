@@ -1,0 +1,15 @@
+[
+{ "uf": "AM", "homologacao": "https://homnfe.sefaz.am.gov.br/services2/services/NfeRetAutorizacao4", "producao": "https://nfe.sefaz.am.gov.br/services2/services/NfeRetAutorizacao4" },
+{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "https://nfe-homologacao.svrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx", "producao": "https://nfe.svrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx" },
+{ "uf": "BA", "homologacao": "https://hnfe.sefaz.ba.gov.br/webservices/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx", "producao": "https://nfe.sefaz.ba.gov.br/webservices/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx" },
+{ "uf": "PE", "homologacao": "https://nfehomolog.sefaz.pe.gov.br/nfe-service/services/NFeRetAutorizacao4", "producao": "https://nfe.sefaz.pe.gov.br/nfe-service/services/NFeRetAutorizacao4" },
+{ "uf": "CE", "homologacao": "https://nfeh.sefaz.ce.gov.br/nfe4/services/NFeRetAutorizacao4?WSDL", "producao": "https://nfe.sefaz.ce.gov.br/nfe4/services/NFeRetAutorizacao4?wsdl" },
+{ "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfe/services/NFeRetAutorizacao4?wsdl", "producao": "https://nfe.sefaz.go.gov.br/nfe/services/NFeRetAutorizacao4?wsdl" },
+{ "uf": "MG", "homologacao": "https://hnfe.fazenda.mg.gov.br/nfe2/services/NFeRetAutorizacao4", "producao": "https://nfe.fazenda.mg.gov.br/nfe2/services/NFeRetAutorizacao4" },
+{ "uf": "MS", "homologacao": "https://hom.nfe.sefaz.ms.gov.br/ws/NFeRetAutorizacao4", "producao": "https://nfe.fazenda.ms.gov.br/ws/NFeRetAutorizacao4" },
+{ "uf": "MT", "homologacao": "https://homologacao.sefaz.mt.gov.br/nfews/v2/services/NfeRetAutorizacao4?wsdl", "producao": "https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeRetAutorizacao4?wsdl" },
+{ "uf": "PR", "homologacao": "https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeRetAutorizacao4?wsdl", "producao": "https://nfe.sefa.pr.gov.br/nfe/NFeRetAutorizacao4?wsdl" },
+{ "uf": "RS", "homologacao": "https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx", "producao": "https://nfe.sefazrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx" },
+{ "uf": "SP", "homologacao": "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx", "producao": "https://nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx" },
+{ "uf": "MA|PA", "homologacao": "https://hom.sefazvirtual.fazenda.gov.br/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx", "producao": "https://www.sefazvirtual.fazenda.gov.br/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx" }
+]

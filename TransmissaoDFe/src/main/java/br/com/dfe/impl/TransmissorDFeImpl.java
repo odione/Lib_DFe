@@ -3,12 +3,14 @@ package br.com.dfe.impl;
 import org.apache.axiom.om.OMElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import br.com.dfe.api.PreparaConexaoSegura;
 import br.com.dfe.api.Servico;
 import br.com.dfe.api.TransmissorDFe;
 import br.com.dfe.api.XMLConverter;
 import br.com.dfe.configuracao.DadosEmissor;
+import br.com.dfe.schema.TRetConsReciNFe;
 import br.com.dfe.schema.TRetConsSitNFe;
 import br.com.dfe.schema.TRetConsStatServ;
 import br.com.dfe.schema.TRetEnviNFe;
@@ -17,6 +19,7 @@ import br.com.dfe.schema.canc.TRetEnvEvento;
 import br.com.dfe.service.HubServicos;
 import br.com.dfe.utils.ConverterUtils;
 import lombok.Getter;
+import lombok.val;
 import lombok.extern.log4j.Log4j2;
 
 @Component
@@ -45,7 +48,14 @@ public class TransmissorDFeImpl implements TransmissorDFe {
 	@Override
 	public TRetEnviNFe enviarNF(String xmlTNFe) throws Exception {
 		this.servico = hub.getEnviaNF().setNFe(xmlTNFe);
-		return executaComando(TRetEnviNFe.class);
+		val retEnviNF = executaComando(TRetEnviNFe.class);
+		
+		if (dadosEmissor.isAsync() && retEnviNF.getCStat().equals("103")) {
+			consultaRetornoAutorizacao(retEnviNF);
+			this.servico = hub.getEnviaNF().setNFe(xmlTNFe);
+		}
+		
+		return retEnviNF;
 	}
 
 	@Override
@@ -70,6 +80,28 @@ public class TransmissorDFeImpl implements TransmissorDFe {
 	public br.com.dfe.schema.generico.TRetEnvEvento enviarEPEC(String envEvento) throws Exception {
 		this.servico = hub.getEvento().assina(envEvento);
 		return executaComando(br.com.dfe.schema.generico.TRetEnvEvento.class);
+	}
+	
+	private void consultaRetornoAutorizacao(final br.com.dfe.schema.TRetEnviNFe retEnviNF) throws Exception {
+		this.servico = hub.getRetornoAutorizacao().setRetEnviNF(retEnviNF);
+		
+		int vezes = 0;
+		while (vezes < 10) {
+			vezes++;
+			Thread.sleep(600);
+			val retConsulta = executaComando(TRetConsReciNFe.class);
+			
+			if (!retConsulta.getCStat().equals("105")) {
+				retEnviNF.setCStat(retConsulta.getCStat());
+				retEnviNF.setXMotivo(retConsulta.getXMotivo());
+				if (!CollectionUtils.isEmpty(retConsulta.getProtNFe())) {
+					retEnviNF.setCStat(retConsulta.getProtNFe().get(0).getInfProt().getCStat());
+					retEnviNF.setXMotivo(retConsulta.getProtNFe().get(0).getInfProt().getXMotivo());
+					retEnviNF.setProtNFe(retConsulta.getProtNFe().get(0));
+					vezes = 10;
+				}
+			}
+		}
 	}
 	
 	private <T> T executaComando(Class<T> clazz) throws Exception {

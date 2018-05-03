@@ -45,6 +45,11 @@ public class URLService {
 		return getUrl();
 	}
 	
+	public String getUrlRetEnviaNF() {
+		carregaUrlFromFile("retEnviaNF");
+		return getUrl();
+	}
+	
 	public String getUrlEvento() {
 		String evento = dados.getTipoEmissao().equals(TipoEmissao.EPEC) ? "epec" : "evento";
 		carregaUrlFromFile(evento);

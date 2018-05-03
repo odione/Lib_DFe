@@ -19,4 +19,5 @@ public class HubServicos {
 	@Autowired private EventoService evento;
 	@Autowired private InutilizacaoService inutilizacao;
 	@Autowired private EnviaNFService enviaNF;
+	@Autowired private RetornoAutorizacaoService retornoAutorizacao;
 }

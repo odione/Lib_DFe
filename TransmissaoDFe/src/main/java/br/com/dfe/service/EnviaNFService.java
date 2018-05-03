@@ -9,8 +9,8 @@ import br.com.dfe.api.Servico;
 import br.com.dfe.api.XMLConverter;
 import br.com.dfe.builder.EnviaNFBuilder;
 import br.com.dfe.configuracao.DadosEmissor;
-import br.com.dfe.schema.TEnviNFe;
 import br.com.dfe.schema.TNFe;
+import lombok.val;
 import lombok.extern.log4j.Log4j2;
 
 @Service("enviaNF")
@@ -50,7 +50,7 @@ public class EnviaNFService implements Servico {
 	private void montaDados() throws Exception {
 		if (!dados.equals("")) return;
 		
-		TEnviNFe envio = builder
+		val envio = builder
 				.comNFe(nfe)
 				.assina()
 				.build();

@@ -27,7 +27,7 @@ public class EnviaNFBuilder implements DadosBuilder<TEnviNFe> {
 	public EnviaNFBuilder comNFe(TNFe nfe) {
 		envNfe = new TEnviNFe();
 		envNfe.setIdLote("1");
-		envNfe.setIndSinc("1");
+		envNfe.setIndSinc(dadosEmissor.isAsync() ? "0" :  "1");
 		envNfe.setVersao(dadosEmissor.getVersao());
 		envNfe.getNFe().add(nfe);
 		return this;

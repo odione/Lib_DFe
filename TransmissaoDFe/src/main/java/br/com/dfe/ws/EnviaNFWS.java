@@ -18,8 +18,8 @@ public class EnviaNFWS implements MetodoWS {
 		NfeAutorizacao4Stub.NfeDadosMsg dados = new NfeAutorizacao4Stub.NfeDadosMsg();
 		dados.setExtraElement(elemento);
 		
-		NfeAutorizacao4Stub stup = new NfeAutorizacao4Stub(getUrl());
-		return stup.nfeAutorizacaoLote(dados).getExtraElement().toString();
+		NfeAutorizacao4Stub stub = new NfeAutorizacao4Stub(getUrl());
+		return stub.nfeAutorizacaoLote(dados).getExtraElement().toString();
 	}
 
 	@Override
