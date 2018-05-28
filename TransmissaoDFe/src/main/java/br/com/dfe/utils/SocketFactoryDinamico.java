@@ -27,11 +27,11 @@ import javax.net.ssl.X509KeyManager;
 import org.apache.commons.httpclient.ConnectTimeoutException;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import lombok.Setter; 
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2; 
 
+@Log4j2
 public class SocketFactoryDinamico implements ProtocolSocketFactory {
 	private SSLContext ssl = null;  
     private X509Certificate certificate;  
@@ -40,8 +40,6 @@ public class SocketFactoryDinamico implements ProtocolSocketFactory {
     
     public static final String TLSv1_2 = "TLSv1.2";
     
-    private static final Logger log = LogManager.getLogger(SocketFactoryDinamico.class.getSimpleName());
-  
     public SocketFactoryDinamico(X509Certificate certificate, PrivateKey privateKey) {  
         this.certificate = certificate;
         this.privateKey = privateKey;
