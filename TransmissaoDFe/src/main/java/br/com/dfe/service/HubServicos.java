@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import br.com.dfe.api.Servico;
 import lombok.Getter;
+import br.com.dfe.api.Servico;
 
 @Service
 @Getter

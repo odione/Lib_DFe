@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.dfe.api.TipoEmissao;
 import br.com.dfe.configuracao.DadosEmissor;
-import br.com.dfe.ws.UrlWS;
 import lombok.extern.log4j.Log4j2;
+import br.com.dfe.api.TipoEmissao;
+import br.com.dfe.ws.UrlWS;
 
 @Service
 @Log4j2

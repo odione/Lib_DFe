@@ -7,12 +7,12 @@ import org.apache.commons.httpclient.protocol.Protocol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.dfe.api.PreparaConexaoSegura;
 import br.com.dfe.configuracao.DadosEmissor;
-import br.com.dfe.utils.BuildCacerts;
-import br.com.dfe.utils.SocketFactoryDinamico;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import br.com.dfe.api.PreparaConexaoSegura;
+import br.com.dfe.utils.BuildCacerts;
+import br.com.dfe.utils.SocketFactoryDinamico;
 
 @Component
 @NoArgsConstructor
@@ -43,13 +43,12 @@ public class PreparaConexaoSeguraImpl implements PreparaConexaoSegura {
 	}
 	
 	public void registraSocketDinamico() {
-		if (socketDinamico == null) {
-			socketDinamico = new SocketFactoryDinamico(dados.getCertificado(), dados.getPrivateKey());
-			socketDinamico.setFileCacerts(pathCacerts);
-			
-			Protocol protocol = new Protocol("https", socketDinamico, 443);
-			Protocol.registerProtocol("https", protocol);
-		}
+		socketDinamico = new SocketFactoryDinamico(dados.getCertificado(), dados.getPrivateKey());
+		socketDinamico.setFileCacerts(pathCacerts);
+		
+		Protocol.unregisterProtocol("https");
+		Protocol protocol = new Protocol("https", socketDinamico, 443);
+		Protocol.registerProtocol("https", protocol);
 	}
 
 	@Override

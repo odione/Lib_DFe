@@ -3,14 +3,14 @@ package br.com.dfe.builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.dfe.api.AssinaDocumento;
-import br.com.dfe.api.DadosBuilder;
-import br.com.dfe.api.XMLConverter;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TEnviNFe;
 import br.com.dfe.schema.TNFe;
 import br.com.dfe.service.QrCodeService;
 import lombok.extern.log4j.Log4j2;
+import br.com.dfe.api.AssinaDocumento;
+import br.com.dfe.api.DadosBuilder;
+import br.com.dfe.api.XMLConverter;
 
 @Component
 @Log4j2

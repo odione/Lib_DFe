@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import br.com.dfe.api.MetodoWS;
-import br.com.dfe.api.Servico;
-import br.com.dfe.api.XMLConverter;
 import br.com.dfe.schema.TConsReciNFe;
 import br.com.dfe.schema.TRetEnviNFe;
 import lombok.val;
+import br.com.dfe.api.MetodoWS;
+import br.com.dfe.api.Servico;
+import br.com.dfe.api.XMLConverter;
 
 @Service("retornoAutorizacao")
 public class RetornoAutorizacaoService implements Servico {

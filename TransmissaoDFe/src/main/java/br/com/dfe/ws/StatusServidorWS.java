@@ -4,9 +4,9 @@ import org.apache.axiom.om.OMElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.dfe.api.MetodoWS;
 import br.com.dfe.service.URLService;
 import br.inf.portalfiscal.www.nfe.wsdl.nfestatusservico4.NfeStatusServico4Stub;
+import br.com.dfe.api.MetodoWS;
 
 @Component("statusWS")
 public class StatusServidorWS implements MetodoWS {

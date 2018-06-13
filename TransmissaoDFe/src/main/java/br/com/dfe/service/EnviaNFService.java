@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import br.com.dfe.api.MetodoWS;
-import br.com.dfe.api.Servico;
-import br.com.dfe.api.XMLConverter;
 import br.com.dfe.builder.EnviaNFBuilder;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TNFe;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;
+import br.com.dfe.api.MetodoWS;
+import br.com.dfe.api.Servico;
+import br.com.dfe.api.XMLConverter;
 
 @Service("enviaNF")
 @Log4j2

@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import br.com.dfe.configuracao.DadosEmissor;
+import br.com.dfe.schema.TInutNFe;
 import br.com.dfe.api.AssinaDocumento;
 import br.com.dfe.api.MetodoWS;
 import br.com.dfe.api.Servico;
 import br.com.dfe.api.XMLConverter;
-import br.com.dfe.configuracao.DadosEmissor;
-import br.com.dfe.schema.TInutNFe;
 
 @Service("inutilizacao")
 public class InutilizacaoService implements Servico {

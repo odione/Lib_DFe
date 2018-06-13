@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import br.com.dfe.api.PreparaConexaoSegura;
-import br.com.dfe.api.Servico;
 import br.com.dfe.api.TransmissorDFe;
-import br.com.dfe.api.XMLConverter;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TRetConsReciNFe;
 import br.com.dfe.schema.TRetConsSitNFe;
@@ -17,10 +14,13 @@ import br.com.dfe.schema.TRetEnviNFe;
 import br.com.dfe.schema.TRetInutNFe;
 import br.com.dfe.schema.canc.TRetEnvEvento;
 import br.com.dfe.service.HubServicos;
-import br.com.dfe.utils.ConverterUtils;
 import lombok.Getter;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;
+import br.com.dfe.api.PreparaConexaoSegura;
+import br.com.dfe.api.Servico;
+import br.com.dfe.api.XMLConverter;
+import br.com.dfe.utils.ConverterUtils;
 
 @Component
 @Log4j2

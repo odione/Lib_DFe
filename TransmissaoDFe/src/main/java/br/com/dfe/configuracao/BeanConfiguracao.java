@@ -4,8 +4,8 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import br.com.dfe.api.XMLConverter;
 import br.com.dfe.util.LeitorXML;
+import br.com.dfe.api.XMLConverter;
 
 @ComponentScan(basePackages="br.com.dfe")
 @SpringBootConfiguration

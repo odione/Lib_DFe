@@ -5,7 +5,7 @@
 { "uf": "CE", "homologacao": "https://nfeh.sefaz.ce.gov.br/nfe4/services/NFeRecepcaoEvento4?WSDL", "producao": "" },
 { "uf": "PE", "homologacao": "https://nfehomolog.sefaz.pe.gov.br/nfe-service/services/RecepcaoEvento4", "producao": "https://nfe.sefaz.pe.gov.br/nfe-service/services/RecepcaoEvento4" },
 { "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfe/services/NFeRecepcaoEvento4?wsdl", "producao": "https://nfe.sefaz.go.gov.br/nfe/services/NFeRecepcaoEvento4?wsdl" },
-{ "uf": "MG", "homologacao": "https://hnfe.fazenda.mg.gov.br/nfe2/services/RecepcaoEvento4", "producao": "https://nfe.fazenda.mg.gov.br/nfe2/services/RecepcaoEvento4" },
+{ "uf": "MG", "homologacao": "https://hnfe.fazenda.mg.gov.br/nfe2/services/NFeRecepcaoEvento4", "producao": "https://nfe.fazenda.mg.gov.br/nfe2/services/NFeRecepcaoEvento4" },
 { "uf": "MS", "homologacao": "https://homologacao.nfe.ms.gov.br/ws/NFeRecepcaoEvento4", "producao": "https://nfe.fazenda.ms.gov.br/ws/NFeRecepcaoEvento4" },
 { "uf": "MT", "homologacao": "https://homologacao.sefaz.mt.gov.br/nfews/v2/services/RecepcaoEvento4", "producao": "https://nfe.sefaz.mt.gov.br/nfews/v2/services/RecepcaoEvento4?wsdl" },
 { "uf": "PR", "homologacao": "https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeRecepcaoEvento4", "producao": "https://nfe.sefa.pr.gov.br/nfe/NFeRecepcaoEvento4?wsdl" },

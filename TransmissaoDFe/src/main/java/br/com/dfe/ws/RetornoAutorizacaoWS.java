@@ -4,10 +4,10 @@ import org.apache.axiom.om.OMElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.dfe.api.MetodoWS;
 import br.com.dfe.service.URLService;
 import br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeRetAutorizacao4Stub;
 import lombok.val;
+import br.com.dfe.api.MetodoWS;
 
 @Component("retornoAutorizacaoWS")
 public class RetornoAutorizacaoWS implements MetodoWS {

@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<resourcesDir>src/main/resources</resourcesDir>
-		<versao.axis>1.7.7</versao.axis>
+		<versao.axis>1.7.8</versao.axis>
 	</properties>
 
 	<build>
@@ -166,7 +166,7 @@
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
-			<version>1.6.0</version>
+			<version>1.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.ws.commons.axiom</groupId>

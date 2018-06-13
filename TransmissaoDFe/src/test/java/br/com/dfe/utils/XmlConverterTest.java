@@ -1,4 +1,4 @@
-package br.com.dfe.util;
+package br.com.dfe.utils;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -7,9 +7,9 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.dfe.MainTest;
 import br.com.dfe.api.XMLConverter;
 import br.com.dfe.schema.TNFe;
+import br.com.dfe.MainTest;
 
 public class XmlConverterTest extends MainTest {
 

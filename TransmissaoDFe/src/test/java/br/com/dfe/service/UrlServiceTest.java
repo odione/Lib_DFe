@@ -6,8 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.dfe.service.URLService;
 import br.com.dfe.MainTest;
-import br.com.dfe.util.ConfiguraTeste;
+import br.com.dfe.utils.ConfiguraTeste;
 
 public class UrlServiceTest extends MainTest {
 	

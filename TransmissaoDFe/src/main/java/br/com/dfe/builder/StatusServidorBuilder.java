@@ -3,9 +3,9 @@ package br.com.dfe.builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.dfe.api.DadosBuilder;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TConsStatServ;
+import br.com.dfe.api.DadosBuilder;
 
 @Component("statusBuilder")
 public class StatusServidorBuilder implements DadosBuilder<TConsStatServ> {

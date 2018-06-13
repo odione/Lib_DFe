@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import br.com.dfe.builder.StatusServidorBuilder;
 import br.com.dfe.api.MetodoWS;
 import br.com.dfe.api.Servico;
 import br.com.dfe.api.XMLConverter;
-import br.com.dfe.builder.StatusServidorBuilder;
 
 @Service("statusService")
 public class StatusServidorService implements Servico {

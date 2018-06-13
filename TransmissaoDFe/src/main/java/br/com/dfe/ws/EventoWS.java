@@ -4,9 +4,9 @@ import org.apache.axiom.om.OMElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.dfe.api.MetodoWS;
 import br.com.dfe.service.URLService;
 import br.inf.portalfiscal.www.nfe.wsdl.nferecepcaoevento4.RecepcaoEvento4Stub;
+import br.com.dfe.api.MetodoWS;
 
 @Component("eventoWS")
 public class EventoWS implements MetodoWS {

@@ -3,10 +3,10 @@ package br.com.dfe.builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.dfe.api.DadosBuilder;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TConsSitNFe;
 import lombok.Setter;
+import br.com.dfe.api.DadosBuilder;
 
 @Component
 public class ConsultaNFBuilder implements DadosBuilder<TConsSitNFe> {
