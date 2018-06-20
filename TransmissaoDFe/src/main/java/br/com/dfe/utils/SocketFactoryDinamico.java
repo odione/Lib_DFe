@@ -64,7 +64,7 @@ public class SocketFactoryDinamico implements ProtocolSocketFactory {
     	}
 
     	Socket socket = socketfactory.createSocket();
-    	((SSLSocket) socket).setEnabledProtocols(new String[] {TLSv1_2});
+    	((SSLSocket) socket).setEnabledProtocols(new String[] {TLSv1_2, "TLSv1"});
     	SocketAddress localaddr = new InetSocketAddress(localAddress, localPort);  
     	SocketAddress remoteaddr = new InetSocketAddress(host, port);  
     	socket.bind(localaddr);  

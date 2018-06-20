@@ -9,8 +9,8 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     
-    <spring.version>2.0.2.RELEASE</spring.version>
-    <jackson.version>2.9.5</jackson.version>
+    <spring.version>2.0.3.RELEASE</spring.version>
+    <jackson.version>2.9.6</jackson.version>
   </properties>
   
   <build>
@@ -66,7 +66,7 @@
   	<dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.16.22</version>
+      <version>1.18.0</version>
     </dependency>
     <dependency>
 	    <groupId>com.fasterxml.jackson.core</groupId>

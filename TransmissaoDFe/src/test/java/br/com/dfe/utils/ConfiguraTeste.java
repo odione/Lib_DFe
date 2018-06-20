@@ -23,7 +23,7 @@ public class ConfiguraTeste {
 			utils.loadPFX(ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX+"certs/cert_A1.pfx").getAbsolutePath(), "1234");
 			dados.setCertificado(utils.getCertificado());
 			dados.setPrivateKey(utils.getPrivateKey());
-			dados.setUf("PR");
+			dados.setUf("BA");
 			dados.setUfCodigo("41");
 			dados.setIdCSC("000009");
 			dados.setCSC("5fsd1f561ad56f1a6d5f1a56f1a561f56a1");

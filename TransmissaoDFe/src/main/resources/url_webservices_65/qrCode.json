@@ -3,7 +3,7 @@
 { "uf": "AL", "homologacao": "http://nfce.sefaz.al.gov.br/QRCode/consultarNFCe.jsp", "producao": "http://nfce.sefaz.al.gov.br/QRCode/consultarNFCe.jsp" },
 { "uf": "AP", "homologacao": "https://www.sefaz.ap.gov.br/nfcehml/nfce.php", "producao": "https://www.sefaz.ap.gov.br/nfce/nfcep.php" },
 { "uf": "AM", "homologacao": "https://homnfce.sefaz.am.gov.br/nfceweb/consultarNFCe.jsp", "producao": "https://sistemas.sefaz.am.gov.br/nfceweb/consultarNFCe.jsp" },
-{ "uf": "BA", "homologacao": "http://hnfe.sefaz.ba.gov.br/servicos/nfce/modulos/geral/NFCEC_consulta_chave_acesso.aspx", "producao": "http://nfe.sefaz.ba.gov.br/servicos/nfce/modulos/geral/NFCEC_consulta_chave_acesso.aspx" },
+{ "uf": "BA", "homologacao": "http://hinternet.sefaz.ba.gov.br/nfce/consulta", "producao": "http://www.sefaz.ba.gov.br/nfce/consulta" },
 { "uf": "CE", "homologacao": "", "producao": "" },
 { "uf": "DF", "homologacao": "http://dec.fazenda.df.gov.br/ConsultarNFCe.aspx", "producao": "http://dec.fazenda.df.gov.br/ConsultarNFCe.aspx" },
 { "uf": "ES", "homologacao": "", "producao": "" },

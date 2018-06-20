@@ -6,5 +6,5 @@
 { "uf": "MS", "homologacao": "https://homologacao.nfce.fazenda.ms.gov.br/ws/NFeRecepcaoEvento4", "producao": "https://nfce.fazenda.ms.gov.br/ws/NFeRecepcaoEvento4" },
 { "uf": "PR", "homologacao": "https://homologacao.nfce.sefa.pr.gov.br/nfce/NFeRecepcaoEvento4", "producao": "https://nfce.sefa.pr.gov.br/nfce/NFeRecepcaoEvento4" },
 { "uf": "SP", "homologacao": "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeRecepcaoEvento4.asmx", "producao": "https://nfce.fazenda.sp.gov.br/ws/NFeRecepcaoEvento4.asmx" },
-{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SE|TO", "homologacao": "https://nfce-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx", "producao": "https://nfce.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx" }
+{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SE|TO|BA|PE", "homologacao": "https://nfce-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx", "producao": "https://nfce.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx" }
 ]

@@ -1,5 +1,7 @@
 package br.com.dfe.ws;
 
+import java.io.IOException;
+
 import org.apache.axiom.om.OMElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,7 +25,7 @@ public class EventoWS implements MetodoWS {
 	}
 
 	@Override
-	public String getUrl() {
+	public String getUrl() throws IOException {
 		return urlService.getUrlEvento();
 	}
 }
