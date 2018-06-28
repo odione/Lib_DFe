@@ -19,6 +19,11 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
 				<version>2.4</version>
+				<configuration>
+					<clearOutputDir>false</clearOutputDir>
+					<quiet>true</quiet>
+					<outputDirectory>src/main/java</outputDirectory>
+				</configuration>
 				<executions>
 					<execution>
 						<id>sitNfe</id>
@@ -26,8 +31,6 @@
 							<goal>xjc</goal>
 						</goals>
 						<configuration>
-							<clearOutputDir>false</clearOutputDir>
-							<quiet>true</quiet>
 							<packageName>br.com.dfe.schema</packageName>
 							<sources>
 								<source>${resourcesDir}/xsd/nfe/leiauteConsSitNFe_v4.00.xsd</source>
@@ -41,8 +44,6 @@
 						</goals>
 						<configuration>
 							<packageName>br.com.dfe.schema</packageName>
-							<quiet>true</quiet>
-							<clearOutputDir>false</clearOutputDir>
 							<sources>
 								<source>${resourcesDir}/xsd/nfe/procNFe_v4.00.xsd</source>
 								<source>${resourcesDir}/xsd/nfe/leiauteConsStatServ_v4.00.xsd</source>
@@ -57,8 +58,6 @@
 							<goal>xjc</goal>
 						</goals>
 						<configuration>
-							<clearOutputDir>false</clearOutputDir>
-							<quiet>true</quiet>
 							<packageName>br.com.dfe.schema.cce</packageName>
 							<sources>
 								<source>${resourcesDir}/xsd/eventoCCe</source>
@@ -71,8 +70,6 @@
 							<goal>xjc</goal>
 						</goals>
 						<configuration>
-							<quiet>true</quiet>
-							<clearOutputDir>false</clearOutputDir>
 							<packageName>br.com.dfe.schema.canc</packageName>
 							<sources>
 								<source>${resourcesDir}/xsd/eventoCanc</source>
@@ -85,8 +82,6 @@
 							<goal>xjc</goal>
 						</goals>
 						<configuration>
-							<quiet>true</quiet>
-							<clearOutputDir>false</clearOutputDir>
 							<packageName>br.com.dfe.schema.generico</packageName>
 							<sources>
 								<source>${resourcesDir}/xsd/eventoGen</source>
@@ -98,7 +93,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.0.4</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>

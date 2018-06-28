@@ -23,18 +23,20 @@
 				<groupId>org.apache.axis2</groupId>
 				<artifactId>axis2-wsdl2code-maven-plugin</artifactId>
 				<version>${versao.axis}</version>
+				<configuration>
+					<outputDirectory>src/main/java</outputDirectory>
+					<overWrite>true</overWrite>
+					<suppressPrefixes>true</suppressPrefixes>
+					<flattenFiles>true</flattenFiles>
+				</configuration>
 				<executions>
 					<execution>
 						<id>status4</id>
-						<phase>generate-sources</phase>
 						<goals>
 							<goal>wsdl2code</goal>
 						</goals>
 						<configuration>
 							<wsdlFile>${resourcesDir}/WSDL/NfeStatusServico4.wsdl</wsdlFile>
-							<outputDirectory>${sourceDirectory}</outputDirectory>
-							<overWrite>true</overWrite>
-							<suppressPrefixes>true</suppressPrefixes>
 						</configuration>
 					</execution>
 					<execution>
@@ -43,10 +45,7 @@
 							<goal>wsdl2code</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${sourceDirectory}</outputDirectory>
 							<wsdlFile>${resourcesDir}/WSDL/NfeConsulta4.wsdl</wsdlFile>
-							<overWrite>true</overWrite>
-							<suppressPrefixes>true</suppressPrefixes>
 						</configuration>
 					</execution>
 					<execution>
@@ -56,10 +55,7 @@
 						</goals>
 						<phase>generate-sources</phase>
 						<configuration>
-							<outputDirectory>${sourceDirectory}</outputDirectory>
 							<wsdlFile>${resourcesDir}/WSDL/NfeInutilizacao4.wsdl</wsdlFile>
-							<overWrite>true</overWrite>
-							<suppressPrefixes>true</suppressPrefixes>
 						</configuration>
 					</execution>
 					<execution>
@@ -69,10 +65,7 @@
 						</goals>
 						<phase>generate-sources</phase>
 						<configuration>
-							<outputDirectory>${sourceDirectory}</outputDirectory>
 							<wsdlFile>${resourcesDir}/WSDL/RecepcaoEvento4.wsdl</wsdlFile>
-							<overWrite>true</overWrite>
-							<suppressPrefixes>true</suppressPrefixes>
 						</configuration>
 					</execution>
 					<execution>
@@ -82,10 +75,7 @@
 						</goals>
 						<phase>generate-sources</phase>
 						<configuration>
-							<outputDirectory>${sourceDirectory}</outputDirectory>
 							<wsdlFile>${resourcesDir}/WSDL/NFeAutorizacao4.wsdl</wsdlFile>
-							<overWrite>true</overWrite>
-							<suppressPrefixes>true</suppressPrefixes>
 						</configuration>
 					</execution>
 					<execution>
@@ -95,10 +85,7 @@
 						</goals>
 						<phase>generate-sources</phase>
 						<configuration>
-							<outputDirectory>${sourceDirectory}</outputDirectory>
 							<wsdlFile>${resourcesDir}/WSDL/NFeRetAutorizacao4.wsdl</wsdlFile>
-							<overWrite>true</overWrite>
-							<suppressPrefixes>true</suppressPrefixes>
 						</configuration>
 					</execution>
 				</executions>

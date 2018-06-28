@@ -1,3 +1,6 @@
-/target/
 /Resources/
 /NFeCacerts
+target/
+.settings/
+.classpath
+.project
