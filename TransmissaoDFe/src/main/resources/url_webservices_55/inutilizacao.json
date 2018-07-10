@@ -2,7 +2,7 @@
 { "uf": "AM", "homologacao": "https://homnfe.sefaz.am.gov.br/services2/services/NfeInutilizacao4", "producao": "https://nfe.sefaz.am.gov.br/services2/services/NfeInutilizacao4" },
 { "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "https://nfe-homologacao.svrs.rs.gov.br/ws/nfeinutilizacao/nfeinutilizacao4.asmx", "producao": "https://nfe.svrs.rs.gov.br/ws/nfeinutilizacao/nfeinutilizacao4.asmx" },
 { "uf": "BA", "homologacao": "https://hnfe.sefaz.ba.gov.br/webservices/NFeInutilizacao4/NFeInutilizacao4.asmx", "producao": "https://nfe.sefaz.ba.gov.br/webservices/NFeInutilizacao4/NFeInutilizacao4.asmx" },
-{ "uf": "CE", "homologacao": "https://nfeh.sefaz.ce.gov.br/nfe4/services/NFeInutilizacao4?WSDL", "producao": "" },
+{ "uf": "CE", "homologacao": "https://nfeh.sefaz.ce.gov.br/nfe4/services/NFeInutilizacao4?WSDL", "producao": "https://nfe.sefaz.ce.gov.br/nfe4/services/NFeInutilizacao4?wsdl" },
 { "uf": "PE", "homologacao": "https://nfehomolog.sefaz.pe.gov.br/nfe-service/services/NFeInutilizacao4", "producao": "https://nfe.sefaz.pe.gov.br/nfe-service/services/NFeInutilizacao4" },
 { "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfe/services/NFeInutilizacao4?wsdl", "producao": "https://nfe.sefaz.go.gov.br/nfe/services/NFeInutilizacao4?wsdl" },
 { "uf": "MG", "homologacao": "https://hnfe.fazenda.mg.gov.br/nfe2/services/NFeInutilizacao4", "producao": "https://nfe.fazenda.mg.gov.br/nfe2/services/NFeInutilizacao4" },

@@ -16,7 +16,7 @@
 { "uf": "PR", "homologacao": "http://www.fazenda.pr.gov.br", "producao": "http://www.fazenda.pr.gov.br" },
 { "uf": "PE", "homologacao": "http://nfcehomolog.sefaz.pe.gov.br/nfce-web/consultarNFCe", "producao": "http://nfce.sefaz.pe.gov.br/nfce-web/consultarNFCe" },
 { "uf": "PI", "homologacao": "http://webas.sefaz.pi.gov.br/nfceweb-homologacao/consultarNFCe.jsf", "producao": "http://webas.sefaz.pi.gov.br/nfceweb/consultarNFCe.jsf" },
-{ "uf": "RJ", "homologacao": "http://www4.fazenda.rj.gov.br/consultaNFCe/QRCode", "producao": "http://www4.fazenda.rj.gov.br/consultaNFCe/QRCode" },
+{ "uf": "RJ", "homologacao": "http://www.nfce.fazenda.rj.gov.br/consulta", "producao": "http://www.nfce.fazenda.rj.gov.br/consulta" },
 { "uf": "RN", "homologacao": "http://hom.nfce.set.rn.gov.br/consultarNFCe.aspx", "producao": "http://nfce.set.rn.gov.br/consultarNFCe.aspx" },
 { "uf": "RS", "homologacao": "https://www.sefaz.rs.gov.br/NFE/NFE-NFC.aspx", "producao": "https://www.sefaz.rs.gov.br/NFE/NFE-NFC.aspx" },
 { "uf": "RO", "homologacao": "http://www.nfce.sefin.ro.gov.br/consultanfce/consulta.jsp", "producao": "http://www.nfce.sefin.ro.gov.br/consultanfce/consulta.jsp" },

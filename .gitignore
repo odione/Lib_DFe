@@ -1,0 +1,13 @@
+target/
+.classpath
+.project
+.settings/
+
+*/target/
+*/.classpath
+*/.project
+*/.settings/
+*/dist/
+*/bin/
+*/NFeCacerts
+*/Resources/

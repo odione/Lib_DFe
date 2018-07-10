@@ -1,7 +1,7 @@
 [
 { "uf": "AM", "homologacao": "https://homnfce.sefaz.am.gov.br/nfce-services/services/NfeAutorizacao4", "producao": "https://nfce.sefaz.am.gov.br/nfce-services/services/NfeAutorizacao4" },
 { "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfe/services/NFeAutorizacao4?wsdl", "producao": "https://nfe.sefaz.go.gov.br/nfe/services/NFeAutorizacao4?wsdl" },
-{ "uf": "MT", "homologacao": "https://homologacao.sefaz.mt.gov.br/nfcews/v2/services/NfeAutorizacao4", "producao": "https://nfce.sefaz.mt.gov.br/nfcews/v2/services/NfeAutorizacao4" },
+{ "uf": "MT", "homologacao": "https://homologacao.sefaz.mt.gov.br/nfcews/services/NfeAutorizacao4", "producao": "https://nfce.sefaz.mt.gov.br/nfcews/v2/services/NfeAutorizacao4" },
 { "uf": "RS", "homologacao": "https://nfce-homologacao.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx", "producao": "https://nfce.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx" },
 { "uf": "MS", "homologacao": "https://homologacao.nfce.fazenda.ms.gov.br/ws/NFeAutorizacao4", "producao": "https://nfce.fazenda.ms.gov.br/ws/NFeAutorizacao4" },
 { "uf": "PR", "homologacao": "https://homologacao.nfce.sefa.pr.gov.br/nfce/NFeAutorizacao4", "producao": "https://nfce.sefa.pr.gov.br/nfce/NFeAutorizacao4" },
