@@ -1,5 +1,6 @@
 [
 { "uf": "AM", "homologacao": "https://homnfce.sefaz.am.gov.br/nfce-services/services/NfeRetAutorizacao4", "producao": "https://nfce.sefaz.am.gov.br/nfce-services/services/NfeRetAutorizacao4" },
+{ "uf": "CE", "homologacao": "https://nfceh.sefaz.ce.gov.br/nfce4/services/NFeRetAutorizacao4?WSDL", "producao": "" },
 { "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfe/services/NFeRetAutorizacao4?wsdl", "producao": "https://nfe.sefaz.go.gov.br/nfe/services/NFeRetAutorizacao4?wsdl" },
 { "uf": "MT", "homologacao": "https://homologacao.sefaz.mt.gov.br/nfcews/services/NfeRetAutorizacao4", "producao": "https://nfce.sefaz.mt.gov.br/nfcews/services/NfeRetAutorizacao4" },
 { "uf": "MS", "homologacao": "https://hom.nfce.sefaz.ms.gov.br/ws/NFeRetAutorizacao4", "producao": "https://nfce.fazenda.ms.gov.br/ws/NFeRetAutorizacao4" },
