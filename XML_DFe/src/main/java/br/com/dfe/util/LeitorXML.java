@@ -5,6 +5,7 @@ import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
@@ -16,43 +17,35 @@ public class LeitorXML {
 	 * @param StrXML
 	 * @param clazz
 	 * @return Objeto Preenchido
+	 * @throws JAXBException 
 	 */
-	public <T> T toObj(String StrXML, Class<T> clazz){
-		try {
-			Unmarshaller unmarshaller = JAXBContext.newInstance(clazz).createUnmarshaller();
-			return ((JAXBElement<T>) unmarshaller.unmarshal(new StreamSource(new StringReader(StrXML)),clazz)).getValue();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public <T> T toObj(String StrXML, Class<T> clazz) throws JAXBException {
+		Unmarshaller unmarshaller = JAXBContext.newInstance(clazz).createUnmarshaller();
+		return ((JAXBElement<T>) unmarshaller.unmarshal(new StreamSource(new StringReader(StrXML)),clazz)).getValue();
 	}
 			
-	@SuppressWarnings("unchecked")
 	/**
 	 * @param entidade
 	 * @param formatado
-	 * @return
+	 * @return XML em string
+	 * @throws JAXBException 
 	 */
-	public <T> String criaStrXML(T entidade, boolean formatado){
-		try {
-			final StringWriter writer = new StringWriter();
-			Class<T> classe = (Class<T>) entidade.getClass();
-			
-			Marshaller marshaller = JAXBContext.newInstance(classe).createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, formatado);
-			marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-			QName qname = new QName("http://www.portalfiscal.inf.br/nfe", preparaNomeElemento(entidade.getClass().getSimpleName()));
-			JAXBElement<T> elemento = new JAXBElement<T>(qname, classe,entidade); 
-			marshaller.marshal(elemento, writer);
-			
-			return writer.toString().replaceAll(" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\"", "")
-				.replaceAll(":ns2", "")
-				.replaceAll("ns2:", "")
-				.replaceAll("<Signature>", "<Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\">");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	@SuppressWarnings("unchecked")
+	public <T> String criaStrXML(T entidade, boolean formatado) throws JAXBException {
+		final StringWriter writer = new StringWriter();
+		Class<T> classe = (Class<T>) entidade.getClass();
+		
+		Marshaller marshaller = JAXBContext.newInstance(classe).createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, formatado);
+		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+		QName qname = new QName("http://www.portalfiscal.inf.br/nfe", preparaNomeElemento(entidade.getClass().getSimpleName()));
+		JAXBElement<T> elemento = new JAXBElement<T>(qname, classe, entidade); 
+		marshaller.marshal(elemento, writer);
+		
+		return writer.toString().replaceAll(" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\"", "")
+			.replaceAll(":ns2", "")
+			.replaceAll("ns2:", "")
+			.replaceAll("<Signature>", "<Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\">");
 	}
 	
 	private String preparaNomeElemento(String nomeClasse){

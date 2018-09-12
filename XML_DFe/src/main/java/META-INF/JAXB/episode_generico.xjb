@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.3.0 
+Consulte <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
+Gerado em: 2018.06.26 às 01:51:11 PM BRT 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.w3.org/2000/09/xmldsig#">
+    <schemaBindings map="false">
+      <package name="br.com.dfe.schema.generico"/>
+    </schemaBindings>
+    <bindings scd="~tns:ReferenceType">
+      <class ref="br.com.dfe.schema.generico.ReferenceType"/>
+    </bindings>
+    <bindings scd="~tns:SignedInfoType">
+      <class ref="br.com.dfe.schema.generico.SignedInfoType"/>
+    </bindings>
+    <bindings scd="~tns:SignatureType">
+      <class ref="br.com.dfe.schema.generico.SignatureType"/>
+    </bindings>
+    <bindings scd="~tns:SignatureValueType">
+      <class ref="br.com.dfe.schema.generico.SignatureValueType"/>
+    </bindings>
+    <bindings scd="~tns:TransformsType">
+      <class ref="br.com.dfe.schema.generico.TransformsType"/>
+    </bindings>
+    <bindings scd="~tns:TransformType">
+      <class ref="br.com.dfe.schema.generico.TransformType"/>
+    </bindings>
+    <bindings scd="~tns:KeyInfoType">
+      <class ref="br.com.dfe.schema.generico.KeyInfoType"/>
+    </bindings>
+    <bindings scd="~tns:X509DataType">
+      <class ref="br.com.dfe.schema.generico.X509DataType"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.portalfiscal.inf.br/nfe">
+    <schemaBindings map="false">
+      <package name="br.com.dfe.schema.generico"/>
+    </schemaBindings>
+    <bindings scd="~tns:TRetEvento">
+      <class ref="br.com.dfe.schema.generico.TRetEvento"/>
+    </bindings>
+    <bindings scd="~tns:TEvento">
+      <class ref="br.com.dfe.schema.generico.TEvento"/>
+    </bindings>
+    <bindings scd="~tns:TEnvEvento">
+      <class ref="br.com.dfe.schema.generico.TEnvEvento"/>
+    </bindings>
+    <bindings scd="~tns:TProcEvento">
+      <class ref="br.com.dfe.schema.generico.TProcEvento"/>
+    </bindings>
+    <bindings scd="~tns:TRetEnvEvento">
+      <class ref="br.com.dfe.schema.generico.TRetEnvEvento"/>
+    </bindings>
+    <bindings scd="~tns:TUf">
+      <typesafeEnumClass ref="br.com.dfe.schema.generico.TUf"/>
+    </bindings>
+    <bindings scd="~tns:TUfEmi">
+      <typesafeEnumClass ref="br.com.dfe.schema.generico.TUfEmi"/>
+    </bindings>
+  </bindings>
+</bindings>
+
