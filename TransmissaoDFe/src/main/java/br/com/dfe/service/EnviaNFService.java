@@ -4,17 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import br.com.dfe.api.MetodoWS;
+import br.com.dfe.api.Servico;
+import br.com.dfe.api.XMLConverter;
 import br.com.dfe.builder.EnviaNFBuilder;
 import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.schema.TNFe;
 import lombok.val;
-import lombok.extern.log4j.Log4j2;
-import br.com.dfe.api.MetodoWS;
-import br.com.dfe.api.Servico;
-import br.com.dfe.api.XMLConverter;
 
 @Service("enviaNF")
-@Log4j2
 public class EnviaNFService implements Servico {
 	
 	@Autowired
@@ -25,8 +23,8 @@ public class EnviaNFService implements Servico {
 	@Autowired private XMLConverter xmlConverter;
 	@Autowired private EnviaNFBuilder builder;
 	@Autowired private QrCodeService qrCodeService;
-	private String dados;
 	
+	private String dados;
 	private TNFe nfe;
 	
 	public EnviaNFService setNFe(String tNfe) throws Exception {
@@ -56,9 +54,7 @@ public class EnviaNFService implements Servico {
 				.build();
 		
 		qrCodeService.setNfe(envio.getNFe().get(0));
-		
+		qrCodeService.colocaQrCode();
 		dados = xmlConverter.toString(envio, false);
-		dados = builder.colocaQrCodeSeNFCe(dados);
-		log.debug("XML Assinado com QrCode: "+dados);
 	}
 }
