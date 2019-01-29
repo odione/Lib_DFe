@@ -1,11 +1,11 @@
 [
 { "uf": "AM", "homologacao": "https://homnfce.sefaz.am.gov.br/nfce-services/services/NfeStatusServico4", "producao": "https://nfce.sefaz.am.gov.br/nfce-services/services/NfeStatusServico4" },
-{ "uf": "CE", "homologacao": "https://nfceh.sefaz.ce.gov.br/nfce4/services/NFeStatusServico4?WSDL", "producao": "" },
+{ "uf": "CE", "homologacao": "https://nfceh.sefaz.ce.gov.br/nfce4/services/NFeStatusServico4?WSDL", "producao": "https://nfce.sefaz.ce.gov.br/nfce4/services/NFeStatusServico4?WSDL" },
 { "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfe/services/NFeStatusServico4?wsdl", "producao": "https://nfe.sefaz.go.gov.br/nfe/services/NFeStatusServico4?wsdl" },
 { "uf": "MT", "homologacao": "https://homologacao.sefaz.mt.gov.br/nfcews/services/NfeStatusServico4", "producao": "https://nfce.sefaz.mt.gov.br/nfcews/services/NfeStatusServico4" },
 { "uf": "RS", "homologacao": "https://nfce-homologacao.sefazrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico4.asmx", "producao": "https://nfce.sefazrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico4.asmx" },
 { "uf": "MS", "homologacao": "https://hom.nfce.sefaz.ms.gov.br/ws/NFeStatusServico4", "producao": "https://nfce.sefaz.ms.gov.br/ws/NFeStatusServico4" },
 { "uf": "PR", "homologacao": "https://homologacao.nfce.sefa.pr.gov.br/nfce/NFeStatusServico4", "producao": "https://nfce.sefa.pr.gov.br/nfce/NFeStatusServico4" },
 { "uf": "SP", "homologacao": "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeStatusServico4.asmx", "producao": "https://nfce.fazenda.sp.gov.br/ws/NFeStatusServico4.asmx" },
-{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SE|TO|BA|PE|PA", "homologacao": "https://nfce-homologacao.svrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico4.asmx", "producao": "https://nfce.svrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico4.asmx" }
+{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SE|TO|BA|PE|PA|MA", "homologacao": "https://nfce-homologacao.svrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico4.asmx", "producao": "https://nfce.svrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico4.asmx" }
 ]
