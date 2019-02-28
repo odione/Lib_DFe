@@ -98,8 +98,8 @@ public class TransmissorDFeImpl implements TransmissorDFe {
 					retEnviNF.setCStat(retConsulta.getProtNFe().get(0).getInfProt().getCStat());
 					retEnviNF.setXMotivo(retConsulta.getProtNFe().get(0).getInfProt().getXMotivo());
 					retEnviNF.setProtNFe(retConsulta.getProtNFe().get(0));
-					vezes = 10;
 				}
+				vezes = 10;
 			}
 		}
 	}
