@@ -1,4 +1,4 @@
 [
-{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO", "homologacao": "https://hom.svc.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx", "producao": "https://www.svc.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx" },
-{ "uf": "AM|BA|CE|GO|MA|MS|MT|PA|PE|PI|PR", "homologacao": "https://nfe-homologacao.svrs.rs.gov.br/ws/NfeConsulta/NfeConsulta4.asmx", "producao": "https://nfe.svrs.rs.gov.br/ws/NfeConsulta/NfeConsulta4.asmx" }
+{ "uf": "AC|AL|AP|DF|ES|MG|PB|PI|RJ|RN|RO|RR|RS|SC|SE|SP|TO", "homologacao": "https://hom.svc.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx", "producao": "https://www.svc.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx" },
+{ "uf": "AM|BA|CE|GO|MA|MS|MT|PA|PE|PR", "homologacao": "https://nfe-homologacao.svrs.rs.gov.br/ws/NfeConsulta/NfeConsulta4.asmx", "producao": "https://nfe.svrs.rs.gov.br/ws/NfeConsulta/NfeConsulta4.asmx" }
 ]
