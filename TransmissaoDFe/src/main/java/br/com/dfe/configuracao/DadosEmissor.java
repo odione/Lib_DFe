@@ -20,7 +20,6 @@ public class DadosEmissor implements Serializable {
 
 	private String uf;
 	private String ufCodigo;
-	private String modelo;
 	private String versao;
 	private int ambiente;
 	private X509Certificate certificado;
@@ -32,18 +31,13 @@ public class DadosEmissor implements Serializable {
 	
 	@PostConstruct
 	public void postConstruct() {
-		this.modelo = "55";
 		this.versao = "4.00";
-		this.ambiente = 2;
 		this.tipoEmissao = TipoEmissao.NORMAL;
 	}
 	
 	public void setUf(String uf) {
 		this.uf = StringUtils.upperCase(uf);
 		this.ufCodigo = ConverterUtils.UFStrToUFCodigo(uf);
-	}
-	public String getAmbienteStr() {
-		return String.valueOf(ambiente);
 	}
 	public void setTipoEmissao(int tipo) {
 		this.tipoEmissao = TipoEmissao.getFromInt(tipo);

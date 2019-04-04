@@ -1,33 +1,22 @@
 package br.com.dfe.ws;
 
-import java.io.IOException;
-
 import org.apache.axiom.om.OMElement;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import br.com.dfe.service.URLService;
-import br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeRetAutorizacao4Stub;
-import lombok.val;
 import br.com.dfe.api.MetodoWS;
+import br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeRetAutorizacao4Stub;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.val;
 
-@Component("retornoAutorizacaoWS")
+@NoArgsConstructor
 public class RetornoAutorizacaoWS implements MetodoWS {
 	
-	@Autowired
-	private URLService url;
-
 	@Override
-	public String call(OMElement elemento) throws Exception {
+	public String call(OMElement elemento, @NonNull String url) throws Exception {
 		val dados = new NfeRetAutorizacao4Stub.NfeDadosMsg();
 		dados.setExtraElement(elemento);
 		
-		val stub = new NfeRetAutorizacao4Stub(getUrl());
+		val stub = new NfeRetAutorizacao4Stub(url);
 		return stub.nfeRetAutorizacaoLote(dados).getExtraElement().toString();
-	}
-
-	@Override
-	public String getUrl() throws IOException {
-		return url.getUrlRetEnviaNF();
 	}
 }

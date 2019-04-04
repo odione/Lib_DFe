@@ -1,41 +1,46 @@
 package br.com.dfe.service;
 
-import static br.com.dfe.utils.NFUtils.getModeloFromChave;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import br.com.dfe.builder.ConsultaNFBuilder;
-import br.com.dfe.configuracao.DadosEmissor;
 import br.com.dfe.api.MetodoWS;
 import br.com.dfe.api.Servico;
+import br.com.dfe.api.TipoEmissao;
 import br.com.dfe.api.XMLConverter;
+import br.com.dfe.configuracao.DadosEmissor;
+import br.com.dfe.configuracao.DadosRequisicao;
+import br.com.dfe.schema.TConsSitNFe;
+import br.com.dfe.utils.NFUtils;
+import br.com.dfe.ws.ConsultaNFWS;
 
 @Service("consultaNFService")
 public class ConsultaNFService implements Servico {
 	
 	@Autowired private DadosEmissor dadosEmissor;
-	@Autowired private ConsultaNFBuilder builder;
 	@Autowired private XMLConverter xmlConverter;
 	
-	@Autowired
-	@Qualifier("consultaWS")
-	private MetodoWS metodoWS;
-	
-	public ConsultaNFService setChave(String chave) {
-		builder.setChave(chave);
-		this.dadosEmissor.setModelo(getModeloFromChave(chave));
-		return this;
-	}
-
-	@Override
-	public String getDados() throws Exception {
-		return xmlConverter.toString(builder.build(), false);
-	}
-
 	@Override
 	public MetodoWS getMetodo() {
-		return this.metodoWS;
+		return new ConsultaNFWS();
+	}
+
+	@Override
+	public String getDados(DadosRequisicao dadosArquivo) throws Exception {
+		TConsSitNFe consulta = new TConsSitNFe();
+		consulta.setTpAmb(dadosArquivo.getAmbienteStr());
+		consulta.setVersao(dadosEmissor.getVersao());
+		consulta.setChNFe(dadosArquivo.getRawFile());
+		consulta.setXServ("CONSULTAR");
+		return xmlConverter.toString(consulta, false);
+	}
+	
+	@Override
+	public DadosRequisicao createDados(String chave) {
+		return DadosRequisicao.builder()
+				.modelo(NFUtils.getModeloFromChave(chave))
+				.ambiente(dadosEmissor.getAmbiente())
+				.rawFile(chave)
+				.tipoEmissao(TipoEmissao.getFromStr(NFUtils.getTipoEmissaoFromChave(chave)))
+				.build();
 	}
 }

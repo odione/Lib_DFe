@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.dfe.configuracao.DadosEmissor;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import br.com.dfe.api.PreparaConexaoSegura;
 import br.com.dfe.utils.BuildCacerts;
@@ -18,41 +19,35 @@ import br.com.dfe.utils.SocketFactoryDinamico;
 @NoArgsConstructor
 public class PreparaConexaoSeguraImpl implements PreparaConexaoSegura {
 	
-	@Setter private String pathCacerts;
 	private BuildCacerts buildCacerts;
 	private SocketFactoryDinamico socketDinamico;
-	private URL url;
+	
+	@Setter
+	private String pathCacerts;
 	
 	@Autowired
 	private DadosEmissor dados;
 	
 	@Override
-	public void preparaConexaoSegura() throws Exception {
-		gerarCacerts();
+	public void preparaConexaoSegura(@NonNull String url) throws Exception {
+		gerarCacerts(url);
 		registraSocketDinamico();
 	}
 
-	public void gerarCacerts() throws MalformedURLException {
+	private void gerarCacerts(String url) throws MalformedURLException {
 		if (buildCacerts == null) {
 			buildCacerts = new BuildCacerts(pathCacerts);
 		}
 		
-		if (this.url != null) {
-			buildCacerts.geraCacert(url);
-		}
+		buildCacerts.geraCacert(new URL(url));
 	}
 	
-	public void registraSocketDinamico() {
+	private void registraSocketDinamico() {
 		socketDinamico = new SocketFactoryDinamico(dados.getCertificado(), dados.getPrivateKey());
 		socketDinamico.setFileCacerts(pathCacerts);
 		
 		Protocol.unregisterProtocol("https");
 		Protocol protocol = new Protocol("https", socketDinamico, 443);
 		Protocol.registerProtocol("https", protocol);
-	}
-
-	@Override
-	public void setUrl(String url) throws MalformedURLException {
-		this.url = new URL(url);
 	}
 }

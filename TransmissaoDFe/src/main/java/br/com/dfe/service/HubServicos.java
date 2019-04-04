@@ -14,10 +14,24 @@ public class HubServicos {
 	@Autowired
 	@Qualifier("statusService")
 	private Servico status;
-	
-	@Autowired private ConsultaNFService consulta;
-	@Autowired private EventoService evento;
-	@Autowired private InutilizacaoService inutilizacao;
-	@Autowired private EnviaNFService enviaNF;
-	@Autowired private RetornoAutorizacaoService retornoAutorizacao;
+
+	@Autowired
+	@Qualifier("consultaNFService")
+	private Servico consulta;
+
+	@Autowired
+	@Qualifier("evento")
+	private Servico evento;
+
+	@Autowired
+	@Qualifier("inutilizacao")
+	private Servico inutilizacao;
+
+	@Autowired
+	@Qualifier("enviaNF")
+	private Servico enviaNF;
+
+	@Autowired
+	@Qualifier("retornoAutorizacao")
+	private Servico retornoAutorizacao;
 }

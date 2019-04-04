@@ -15,6 +15,10 @@ public enum TipoEmissao {
 		}
 	}
 	
+	public static TipoEmissao getFromStr(String tipoStr) {
+		return getFromInt(Integer.parseInt(tipoStr)); 
+	}
+	
 	public static boolean isContingenciaOnLine(TipoEmissao tipo) {
 		return (tipo.equals(CONTINGENCIA_SV_AN) || tipo.equals(CONTINGENCIA_SV_RS));
 	}

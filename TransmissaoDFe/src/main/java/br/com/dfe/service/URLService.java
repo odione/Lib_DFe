@@ -1,92 +1,84 @@
 package br.com.dfe.service;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.dfe.api.TipoEmissao;
-import br.com.dfe.configuracao.DadosEmissor;
+import br.com.dfe.configuracao.DadosRequisicao;
 import br.com.dfe.ws.UrlWS;
+import lombok.Cleanup;
+import lombok.NonNull;
+import lombok.Setter;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
-@Service
 @Log4j2
 public class URLService {
 
-	@Autowired private DadosEmissor dados;
+	@Setter
+	private String uf;
 	
 	private ObjectMapper mapper;
-	private UrlWS url;
 	
-	@PostConstruct
-	public void init() {
+	public URLService() {
 		mapper = new ObjectMapper();
 	}
 	
-	public String getUrlStatusServico() throws IOException {
-		carregaUrlFromFile("status");
-		return getUrl();
+	public String getUrlStatusServico(@NonNull DadosRequisicao dados) {
+		return carregaUrlFromFileNew(dados, "status");
 	}
 	
-	public String getUrlConsultaNF() throws IOException {
-		carregaUrlFromFile("consultaNF");
-		return getUrl();
+	public String getUrlConsultaNF(@NonNull DadosRequisicao dados) {
+		return carregaUrlFromFileNew(dados, "consultaNF");
 	}
 	
-	public String getUrlEnviaNF() throws IOException {
-		carregaUrlFromFile("enviaNF");
-		return getUrl();
+	public String getUrlEnviaNF(@NonNull DadosRequisicao dados) {
+		return carregaUrlFromFileNew(dados, "enviaNF");
 	}
 	
-	public String getUrlRetEnviaNF() throws IOException {
-		carregaUrlFromFile("retEnviaNF");
-		return getUrl();
+	public String getUrlRetEnviaNF(@NonNull DadosRequisicao dados) {
+		return carregaUrlFromFileNew(dados, "retEnviaNF");
 	}
 	
-	public String getUrlEvento() throws IOException {
+	public String getUrlEvento(@NonNull DadosRequisicao dados) {
 		String evento = dados.getTipoEmissao().equals(TipoEmissao.EPEC) ? "epec" : "evento";
-		carregaUrlFromFile(evento);
-		return getUrl();
+		return carregaUrlFromFileNew(dados, evento);
 	}
 	
-	public String getUrlInutilizacao() throws IOException {
-		carregaUrlFromFile("inutilizacao");
-		return getUrl();
+	public String getUrlInutilizacao(@NonNull DadosRequisicao dados) {
+		return carregaUrlFromFileNew(dados, "inutilizacao");
 	}
 	
-	public String getUrlConsultaNFCe() throws IOException {
-		carregaUrlFromFile("consultaNFCe");
-		return getUrl();
+	public String getUrlConsultaNFCe(@NonNull DadosRequisicao dados) {
+		return carregaUrlFromFileNew(dados, "consultaNFCe");
 	}
 	
-	public String getUrlQrCode() throws IOException {
-		carregaUrlFromFile("qrCode");
-		return getUrl();
+	public String getUrlQrCode(@NonNull DadosRequisicao dados) {
+		return carregaUrlFromFileNew(dados, "qrCode");
 	}
 	
-	private String getUrl() {
-		return dados.getAmbiente() == 2 ? url.getHomologacao() : url.getProducao();
+	private String carregaUrlFromFileNew(DadosRequisicao dados, String fileName) {
+		List<UrlWS> urls = getURLs(dados.getModelo(), dados.getTipoEmissao(), fileName);
+		Optional<String> optionalUrl = urls.stream()
+				.filter(url -> url.getUf().contains(this.uf))
+				.map(url -> dados.getAmbiente() == 2 ? url.getHomologacao() : url.getProducao())
+				.findFirst();
+		
+		optionalUrl.ifPresent(url -> log.info("Url encontrada: "+url));
+		return optionalUrl.orElseThrow(() -> new RuntimeException("URL do WebService não encontrado!"));
 	}
 	
-	public void carregaUrlFromFile(String fileName) throws IOException {
-		String caminhoResource = "url_webservices_"+dados.getModelo()+"/"
-				+ (TipoEmissao.isContingenciaOnLine(dados.getTipoEmissao()) ? "contingencia/":"")
+	@SneakyThrows
+	private List<UrlWS> getURLs(String modelo, TipoEmissao tipoEmissao, String fileName) {
+		String caminhoResource = "url_webservices_"+modelo+"/"
+				+ (TipoEmissao.isContingenciaOnLine(tipoEmissao) ? "contingencia/":"")
 				+fileName+".json";
 		
-		InputStream json = getClass().getClassLoader().getResourceAsStream(caminhoResource);
-		List<UrlWS> urls = mapper.readValue(json, new TypeReference<List<UrlWS>>() {});
-		url = urls.stream()
-			.filter(url -> url.getUf().contains(dados.getUf()))
-			.findFirst()
-			.orElseThrow(() -> new RuntimeException("URL do WebService não encontrado!"));
-		log.info("Url encontrada: "+url.toString());
+		@Cleanup InputStream json = getClass().getClassLoader().getResourceAsStream(caminhoResource);
+		return mapper.readValue(json, new TypeReference<List<UrlWS>>() {});
 	}
 }

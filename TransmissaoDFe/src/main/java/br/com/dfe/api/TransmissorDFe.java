@@ -1,5 +1,6 @@
 package br.com.dfe.api;
 
+import br.com.dfe.configuracao.DadosResposta;
 import br.com.dfe.schema.TRetConsSitNFe;
 import br.com.dfe.schema.TRetConsStatServ;
 import br.com.dfe.schema.TRetEnviNFe;
@@ -7,50 +8,56 @@ import br.com.dfe.schema.TRetInutNFe;
 import br.com.dfe.schema.canc.TRetEnvEvento;
 
 public interface TransmissorDFe {
-
-	TRetConsStatServ statusServico() throws Exception;
+	
+	/**
+	 * 
+	 * @param ambiente
+	 * @param modelo
+	 * @param tipoEmissao
+	 * @return DadosResposta
+	 * @throws Exception
+	 */
+	DadosResposta<TRetConsStatServ> statusServico(int ambiente, String modelo, TipoEmissao tipoEmissao) throws Exception;
 	
 	/**
 	 * @param chave
-	 * @return TRetConsSitNFe
+	 * @return DadosResposta
 	 * @throws Exception
 	 */
-	TRetConsSitNFe consultarNF(String chave) throws Exception;
+	DadosResposta<TRetConsSitNFe> consultarNF(String chave) throws Exception;
 	
 	/**
 	 * @param xmlTNFe
-	 * @return TRetEnviNFe
+	 * @return DadosResposta
 	 * @throws Exception
 	 */
-	TRetEnviNFe enviarNF(String xmlTNFe) throws Exception;
+	DadosResposta<TRetEnviNFe> enviarNF(String xmlTNFe) throws Exception;
 	
 	/**
 	 * @param xmlTEnvEvento
-	 * @return TRetEnvEvento
+	 * @return DadosResposta
 	 * @throws Exception
 	 */
-	TRetEnvEvento cancelarNF(String xmlTEnvEvento) throws Exception;
+	DadosResposta<TRetEnvEvento> cancelarNF(String xmlTEnvEvento) throws Exception;
 	
 	/**
 	 * @param xmlTEnvEvento
-	 * @return TRetEnvEvento
+	 * @return DadosResposta
 	 * @throws Exception
 	 */
-	br.com.dfe.schema.cce.TRetEnvEvento enviarCCe(String xmlTEnvEvento) throws Exception;
+	DadosResposta<br.com.dfe.schema.cce.TRetEnvEvento> enviarCCe(String xmlTEnvEvento) throws Exception;
 	
 	/**
 	 * @param xmlInutNFe
-	 * @return TRetInutNFe
+	 * @return DadosResposta
 	 * @throws Exception
 	 */
-	TRetInutNFe inutilizar(String xmlInutNFe) throws Exception;
+	DadosResposta<TRetInutNFe> inutilizar(String xmlInutNFe) throws Exception;
 	
 	/**
 	 * @param envEvento
-	 * @return br.com.dfe.schema.generico.TRetEnvEvento
+	 * @return DadosResposta
 	 * @throws Exception
 	 */
-	br.com.dfe.schema.generico.TRetEnvEvento enviarEPEC(String envEvento) throws Exception;
-	
-	Servico getServico();
+	DadosResposta<br.com.dfe.schema.generico.TRetEnvEvento> enviarEPEC(String envEvento) throws Exception;
 }

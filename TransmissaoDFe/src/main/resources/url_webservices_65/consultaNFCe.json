@@ -10,7 +10,7 @@
 { "uf": "GO", "homologacao": "http://www.nfce.go.gov.br/post/ver/214413/consulta-nfc-e-homologacao", "producao": "http://www.nfce.go.gov.br/post/ver/214344/consulta-nfce" },
 { "uf": "MA", "homologacao": "http://www.sefaz.ma.gov.br/nfce/consulta", "producao": "http://www.sefaz.ma.gov.br/nfce/consulta" },
 { "uf": "MG", "homologacao": "http://www.fazenda.mg.gov.br/nfce/consulta", "producao": "http://www.fazenda.mg.gov.br/nfce/consulta" },
-{ "uf": "MT", "homologacao": "http://www.sefaz.mt.gov.br/nfce/consulta", "producao": "http://www.sefaz.mt.gov.br/nfce/consulta" },
+{ "uf": "MT", "homologacao": "http://homologacao.sefaz.mt.gov.br/nfce/consultanfce", "producao": "http://www.sefaz.mt.gov.br/nfce/consultanfce " },
 { "uf": "MS", "homologacao": "http://www.dfe.ms.gov.br/nfce", "producao": "http://www.dfe.ms.gov.br/nfce" },
 { "uf": "PA", "homologacao": "http://www.sefa.pa.gov.br/nfce/consulta", "producao": "http://www.sefa.pa.gov.br/nfce/consulta" },
 { "uf": "PB", "homologacao": "http://www.receita.pb.gov.br/nfcehom/consulta", "producao": "http://www.receita.pb.gov.br/nfce/consulta" },

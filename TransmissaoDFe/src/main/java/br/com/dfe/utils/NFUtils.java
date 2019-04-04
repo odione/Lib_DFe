@@ -16,6 +16,9 @@ public class NFUtils {
 	public static String getSerieFromChave(String chave) {
 		return chave.substring(22,25).replaceFirst("^0*", "");
 	}
+	public static String getTipoEmissaoFromChave(String chave) {
+		return chave.substring(25,26);
+	}
 	public static String getChaveFromEvento(String xmlEvento) {
 		int pos = xmlEvento.lastIndexOf("<chNFe>")+7;
 		return xmlEvento.substring(pos, pos+44);
