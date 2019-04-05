@@ -3,7 +3,7 @@
  */
 
 plugins {
-    id 'java'
+    id 'java-library'
     id 'maven-publish'
     id 'com.intershop.gradle.jaxb' version '3.0.0'
 }
@@ -23,20 +23,20 @@ task sourcesJar(type: Jar) {
 }
 
 def xsdPath = "${rootDir}/src/main/resources/xsd"
-def mainPath = "${rootDir}/src/main/java/br/com/dfe/"
+def mainPath = "${rootDir}/src/main/java/"
 
 jaxb {
      javaGen {
          consultaSit {
              outputDir = file(mainPath)
-             packageName = 'schema'
+             packageName = 'br.com.dfe.schema'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
              schema = file("${xsdPath}/nfe/leiauteConsSitNFe_v4.00.xsd")
          }
 
          outros {
              outputDir = file(mainPath)
-             packageName = 'schema'
+             packageName = 'br.com.dfe.schema'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
              schemas = fileTree(dir: "${xsdPath}/nfe", includes: ['procNFe_v4.00.xsd', 'leiauteConsStatServ_v4.00.xsd', 'leiauteInutNFe_v4.00.xsd', 'leiauteNFe_v4.00.xsd'])
          }
@@ -44,7 +44,7 @@ jaxb {
          cce {
              header = false
              outputDir = file(mainPath)
-             packageName = 'schema.cce'
+             packageName = 'br.com.dfe.schema.cce'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
              schemas = fileTree(dir: "${xsdPath}/eventoCCe", include: '**/*.xsd')
          }
@@ -52,7 +52,7 @@ jaxb {
          cancelamento {
              header = false
              outputDir = file(mainPath)
-             packageName = 'schema.canc'
+             packageName = 'br.com.dfe.schema.canc'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
              schemas = fileTree(dir: "${xsdPath}/eventoCanc", include: '**/*.xsd')
          }
@@ -60,7 +60,7 @@ jaxb {
          cancelamentoSubst {
              header = false
              outputDir = file(mainPath)
-             packageName = 'schema.cancsubst'
+             packageName = 'br.com.dfe.schema.cancsubst'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
              schemas = fileTree(dir: "${xsdPath}/eventoCancSubst", include: '**/*.xsd')
          }
@@ -68,7 +68,7 @@ jaxb {
          eventoGenerico {
              header = false
              outputDir = file(mainPath)
-             packageName = 'schema.generico'
+             packageName = 'br.com.dfe.schema.generico'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
              schemas = fileTree(dir: "${xsdPath}/eventoGen", include: '**/*.xsd')
          }
@@ -77,7 +77,7 @@ jaxb {
 
 clean {
     doFirst {
-        delete "${mainPath}/schema"
+        delete "${mainPath}/br/com/dfe/schema"
         delete "${rootDir}/src/main/java/META-INF/"
     }
 }

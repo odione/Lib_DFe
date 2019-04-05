@@ -33,7 +33,7 @@ public class QrCodeService {
 	
 	public void colocaQrCode(TNFe nfe, DadosRequisicao dados) throws Exception {
 		if (!nfe.getInfNFe().getIde().getMod().equals("65")) return;
-		urlService.setUf(ConverterUtils.UFStrToUFCodigo(nfe.getInfNFe().getIde().getCUF()));
+		urlService.setUf(ConverterUtils.UFCodigoToUFStr(nfe.getInfNFe().getIde().getCUF()));
 		
 		String urlQrCode = montaQrCodeUrl(nfe, dados);
 		

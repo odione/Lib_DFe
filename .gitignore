@@ -11,7 +11,10 @@ target/
 */bin/
 */NFeCacerts
 */Resources/
+*/.idea
+*/.gradle/
+*/build/
+*/out/
 
 XML_DFe/src/main/java/br/com/dfe/schema/
-XML_DFe/src/main/java/META-INF/
 WS_DFe/src/main/java/
