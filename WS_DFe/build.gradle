@@ -26,7 +26,7 @@ dependencies {
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from(sourceSets.main.allJava)
 }
 

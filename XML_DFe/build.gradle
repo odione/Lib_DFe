@@ -5,7 +5,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.intershop.gradle.jaxb' version '3.0.0'
+    id 'com.intershop.gradle.jaxb' version '3.0.2'
 }
 
 repositories {
@@ -18,7 +18,7 @@ dependencies {
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from(sourceSets.main.allJava)
 }
 
