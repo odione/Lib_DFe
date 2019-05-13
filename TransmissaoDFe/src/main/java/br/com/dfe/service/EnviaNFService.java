@@ -60,7 +60,7 @@ public class EnviaNFService implements Servico {
 				.ambiente(Integer.parseInt(nfe.getInfNFe().getIde().getTpAmb()))
 				.modelo(nfe.getInfNFe().getIde().getMod())
 				.versao(nfe.getInfNFe().getVersao())
-				.tipoEmissao(TipoEmissao.getFromStr(nfe.getInfNFe().getIde().getTpImp()))
+				.tipoEmissao(TipoEmissao.getFromStr(nfe.getInfNFe().getIde().getTpEmis()))
 				.build();
 	}
 }
