@@ -9,7 +9,7 @@
 { "uf": "ES", "homologacao": "http://homologacao.sefaz.es.gov.br/ConsultaNFCe/qrcode.aspx", "producao": "http://app.sefaz.es.gov.br/ConsultaNFCe/qrcode.aspx" },
 { "uf": "GO", "homologacao": "https://homolog.sefaz.go.gov.br/nfeweb/sites/nfce/danfeNFCe", "producao": "https://nfe.sefaz.go.gov.br/nfeweb/sites/nfce/danfeNFCe" },
 { "uf": "MA", "homologacao": "http://www.hom.nfce.sefaz.ma.gov.br/portal/consultarNFCe.jsp", "producao": "http://www.nfce.sefaz.ma.gov.br/portal/consultarNFCe.jsp" },
-{ "uf": "MG", "homologacao": "http://www.fazenda.mg.gov.br/nfce/consulta", "producao": "http://www.fazenda.mg.gov.br/nfce/consulta" },
+{ "uf": "MG", "homologacao": "https://nfce.fazenda.mg.gov.br/portalnfce/sistema/qrcode.xhtml", "producao": "https://nfce.fazenda.mg.gov.br/portalnfce/sistema/qrcode.xhtml" },
 { "uf": "MT", "homologacao": "http://homologacao.sefaz.mt.gov.br/nfce/consultanfce", "producao": "http://www.sefaz.mt.gov.br/nfce/consultanfce" },
 { "uf": "MS", "homologacao": "http://www.dfe.ms.gov.br/nfce/qrcode", "producao": "http://www.dfe.ms.gov.br/nfce/qrcode" },
 { "uf": "PA", "homologacao": "https://appnfc.sefa.pa.gov.br/portal-homologacao/view/consultas/nfce/nfceForm.seam", "producao": "https://appnfc.sefa.pa.gov.br/portal/view/consultas/nfce/nfceForm.seam" },
