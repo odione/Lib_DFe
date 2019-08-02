@@ -102,10 +102,9 @@ public class AssinaXML implements AssinaDocumento {
             
     private String assinaXML(String xml, String tag, String strID) throws SAXException, IOException, ParserConfigurationException, 
     	NoSuchAlgorithmException, InvalidAlgorithmParameterException, MarshalException, XMLSignatureException, TransformerException {
-    	Document documento;
 		log.info("Iniciou assinatura documento...");
 		xml = addXmlEncoding(xml);
-		documento = documentFactory(xml);
+		Document documento = documentFactory(xml);
 		NodeList elementos = documento.getElementsByTagName(tag);
 		Node elementoAssinar = elementos.item(0);
 		
@@ -150,11 +149,9 @@ public class AssinaXML implements AssinaDocumento {
 			transformList.add(c14NTransform);  
 			return transformList;  
 		} catch (NoSuchAlgorithmException e) {
-			log.error("", e);
-			e.printStackTrace();
+			log.catching(e);
 		} catch (InvalidAlgorithmParameterException e) {
-			log.error("", e);
-			e.printStackTrace();
+			log.catching(e);
 		}
 		return null;
     }
