@@ -13,7 +13,7 @@ version = '2.10'
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
-def springVersion = '2.1.6.RELEASE'
+def springVersion = '2.1.7.RELEASE'
 def lombokVersion = '1.18.8'
 
 configurations {
