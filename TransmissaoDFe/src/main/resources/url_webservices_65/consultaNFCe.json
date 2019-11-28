@@ -15,7 +15,7 @@
 { "uf": "PA", "homologacao": "http://www.sefa.pa.gov.br/nfce/consulta", "producao": "http://www.sefa.pa.gov.br/nfce/consulta" },
 { "uf": "PB", "homologacao": "http://www.receita.pb.gov.br/nfcehom/consulta", "producao": "http://www.receita.pb.gov.br/nfce/consulta" },
 { "uf": "PR", "homologacao": "http://www.fazenda.pr.gov.br/nfce/consulta", "producao": "http://www.fazenda.pr.gov.br/nfce/consulta" },
-{ "uf": "PE", "homologacao": "http://nfce.sefaz.pe.gov.br/nfce/consulta", "producao": "http://nfce.sefaz.pe.gov.br/nfce/consulta" },
+{ "uf": "PE", "homologacao": "nfce.sefaz.pe.gov.br/nfce/consulta", "producao": "nfce.sefaz.pe.gov.br/nfce/consulta" },
 { "uf": "PI", "homologacao": "http://www.sefaz.pi.gov.br/nfce/consulta", "producao": "http://www.sefaz.pi.gov.br/nfce/consulta" },
 { "uf": "RJ", "homologacao": "http://www.fazenda.rj.gov.br/nfce/consulta", "producao": "http://www.fazenda.rj.gov.br/nfce/consulta" },
 { "uf": "RN", "homologacao": "http://www.set.rn.gov.br/nfce/consulta", "producao": "http://www.set.rn.gov.br/nfce/consulta" },

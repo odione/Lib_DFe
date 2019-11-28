@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.intershop.gradle.wsdl' version '2.1.0'
+    id 'com.intershop.gradle.wsdl' version '2.3.0'
 }
 
 repositories {
@@ -29,8 +29,8 @@ task sourcesJar(type: Jar) {
 group = 'br.com.dfe'
 version = '1.01'
 description = 'WS_DFe'
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 publishing {
     publications {

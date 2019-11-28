@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.intershop.gradle.jaxb' version '3.0.4'
+    id 'com.intershop.gradle.jaxb' version '4.0.0'
 }
 
 repositories {
@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
 }
 
 task sourcesJar(type: Jar) {
@@ -38,7 +38,6 @@ jaxb {
          }
 
          cce {
-             header = false
              outputDir = file(mainPath)
              packageName = 'br.com.dfe.schema.cce'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
@@ -46,7 +45,6 @@ jaxb {
          }
 
          cancelamento {
-             header = false
              outputDir = file(mainPath)
              packageName = 'br.com.dfe.schema.canc'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
@@ -54,7 +52,6 @@ jaxb {
          }
 
          cancelamentoSubst {
-             header = false
              outputDir = file(mainPath)
              packageName = 'br.com.dfe.schema.cancsubst'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
@@ -62,7 +59,6 @@ jaxb {
          }
 
          eventoGenerico {
-             header = false
              outputDir = file(mainPath)
              packageName = 'br.com.dfe.schema.generico'
              binding = file("${rootDir}/src/main/xjb/bindings.xjb")
@@ -78,8 +74,8 @@ clean {
 
 group = 'br.com.dfe'
 version = '1.01'
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 publishing {
     publications {

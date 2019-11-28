@@ -10,11 +10,11 @@ repositories {
 
 group = 'br.com.dfe'
 version = '2.10'
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 def springVersion = '2.1.7.RELEASE'
-def lombokVersion = '1.18.8'
+def lombokVersion = '1.18.10'
 
 configurations {
     all {
