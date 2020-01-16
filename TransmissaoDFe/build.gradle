@@ -13,7 +13,7 @@ version = '2.10'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-def springVersion = '2.1.7.RELEASE'
+def springVersion = '2.1.11.RELEASE'
 def lombokVersion = '1.18.10'
 
 configurations {

@@ -35,6 +35,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -161,11 +162,12 @@ public class AssinaXML implements AssinaDocumento {
         TransformerFactory tf = TransformerFactory.newInstance();  
         Transformer trans = tf.newTransformer();  
         trans.transform(new DOMSource(doc), new StreamResult(os));  
-        String xml = os.toString();  
-        if ((xml != null) && (!"".equals(xml))) {  
-            xml = xml.replaceAll("\\r\\n", "");  
-            xml = xml.replaceAll(" standalone=\"no\"", "");  
-        }  
+        String xml = os.toString();
+        if (StringUtils.isNotBlank(xml)) {
+        	return xml.replaceAll("\\r|\\n", "")
+				.replaceAll(" standalone=\"no\"", "")
+				.replaceAll("&#13;", "");
+		}
         return xml;  
     }
     
