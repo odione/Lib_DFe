@@ -1,7 +1,5 @@
 package br.com.dfe.api;
 
-public interface PreparaConexaoSegura {
-
+public interface ConexaoSegura {
 	void preparaConexaoSegura(String url) throws Exception;
-	void setPathCacerts(String pathCacerts);
 }

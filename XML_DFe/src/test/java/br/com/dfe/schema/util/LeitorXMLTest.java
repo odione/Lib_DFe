@@ -1,15 +1,15 @@
 package br.com.dfe.schema.util;
 
+import br.com.dfe.schema.TNFe;
+import br.com.dfe.schema.TNFe.InfNFe.Det.Imposto.ICMS;
+import br.com.dfe.util.XMLUtils;
+import org.junit.jupiter.api.Test;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-
-import br.com.dfe.schema.TNFe;
-import br.com.dfe.schema.TNFe.InfNFe.Det.Imposto.ICMS;
-import br.com.dfe.util.LeitorXML;
 
 public class LeitorXMLTest {
 
@@ -19,7 +19,7 @@ public class LeitorXMLTest {
 		assertNotNull(caminhoXML);
 		assertTrue(caminhoXML.toFile().exists());
 		
-		LeitorXML parser = new LeitorXML();
+		XMLUtils parser = new XMLUtils();
 		String xml = Files.readAllLines(caminhoXML).get(0);
 		
 		TNFe nfe = parser.toObj(xml, TNFe.class);
@@ -32,5 +32,9 @@ public class LeitorXMLTest {
 				assertNotNull(icms);
 				assertFalse(icms.getICMS60().getVBCEfet().isEmpty());
 			});
+
+		xml = parser.criaStrXML(nfe);
+		System.out.println(xml);
+		assertFalse(xml.contains(":ns2"));
 	}
 }

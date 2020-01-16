@@ -9,30 +9,26 @@ repositories {
 }
 
 group = 'br.com.dfe'
-version = '2.10'
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+version = '3.00'
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
-def springVersion = '2.1.7.RELEASE'
 def lombokVersion = '1.18.10'
-
-configurations {
-    all {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-}
+def log4jVersion = '2.12.1'
 
 dependencies {
-    implementation ("org.springframework.boot:spring-boot-starter:$springVersion")
-    implementation "org.springframework.boot:spring-boot-starter-log4j2:$springVersion"
-    api 'br.com.dfe:XML_DFe:1.01'
-    implementation 'br.com.dfe:WS_DFe:1.01'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.9'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.9'
+    api 'br.com.dfe:XML_DFe:1.02'
     api 'org.apache.commons:commons-lang3:3.9'
-    testImplementation ("org.springframework.boot:spring-boot-starter-test:$springVersion")
+    compileOnly "org.apache.logging.log4j:log4j-api:$log4jVersion"
+    compileOnly "org.apache.logging.log4j:log4j-core:$log4jVersion"
+
+    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+    implementation 'org.json:json:20190722'
+    implementation 'br.com.dfe:WS_DFe:1.02'
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testImplementation 'org.junit.platform:junit-platform-engine:1.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
 }
 
 task sourcesJar(type: Jar) {
@@ -51,4 +47,8 @@ publishing {
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
 }

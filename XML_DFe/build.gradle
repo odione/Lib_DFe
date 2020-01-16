@@ -73,7 +73,7 @@ clean {
 }
 
 group = 'br.com.dfe'
-version = '1.01'
+version = '1.02'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -88,4 +88,8 @@ publishing {
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
 }

@@ -10,6 +10,6 @@
 { "uf": "MT", "homologacao": "https://homologacao.sefaz.mt.gov.br/nfews/v2/services/NfeConsulta4", "producao": "https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeConsulta4?wsdl" },
 { "uf": "PR", "homologacao": "https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeConsultaProtocolo4", "producao": "https://nfe.sefa.pr.gov.br/nfe/NFeConsultaProtocolo4?wsdl" },
 { "uf": "RS", "homologacao": "https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeConsulta/NfeConsulta4.asmx", "producao": "https://nfe.sefazrs.rs.gov.br/ws/NfeConsulta/NfeConsulta4.asmx" },
-{ "uf": "SP", "homologacao": "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeconsulta4.asmx", "producao": "https://nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx" },
+{ "uf": "SP", "homologacao": "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx", "producao": "https://nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx" },
 { "uf": "MA", "homologacao": "https://hom.sefazvirtual.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx", "producao": "https://www.sefazvirtual.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx" }
 ]

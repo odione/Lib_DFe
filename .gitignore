@@ -15,6 +15,7 @@ target/
 */.gradle/
 */build/
 */out/
+*/cacerts
 
 XML_DFe/src/main/java/br/com/dfe/schema/
 WS_DFe/src/main/java/
