@@ -79,5 +79,9 @@ public class EnvioNFWS implements OperacaoWS {
         modelo = tnFe.getInfNFe().getIde().getMod();
         ambiente = Integer.parseInt(tnFe.getInfNFe().getIde().getTpAmb());
         tipoEmissao = TipoEmissao.of(tnFe.getInfNFe().getIde().getTpEmis());
+
+        if (modelo.equals("65") && tipoEmissao.equals(TipoEmissao.CONTINGENCIA_OFFLINE)) {
+            tipoEmissao = TipoEmissao.NORMAL;
+        }
     }
 }

@@ -10,8 +10,8 @@ repositories {
 
 group = 'br.com.dfe'
 version = '3.00'
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 def lombokVersion = '1.18.10'
 def log4jVersion = '2.12.1'
@@ -22,7 +22,6 @@ dependencies {
     compileOnly "org.apache.logging.log4j:log4j-api:$log4jVersion"
     compileOnly "org.apache.logging.log4j:log4j-core:$log4jVersion"
 
-    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
     implementation 'org.json:json:20190722'
     implementation 'br.com.dfe:WS_DFe:1.02'
     compileOnly "org.projectlombok:lombok:$lombokVersion"

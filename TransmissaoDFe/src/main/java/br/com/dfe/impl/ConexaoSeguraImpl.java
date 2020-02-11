@@ -18,9 +18,8 @@ public class ConexaoSeguraImpl implements ConexaoSegura {
     private final Set<String> urlRegistrada = new HashSet<>();
 
     public ConexaoSeguraImpl(Configuracao configuracao) {
-        this.buildCacerts = new BuildCacerts(configuracao.getPathCacerts());
+        this.buildCacerts = new BuildCacerts();
         this.socketDinamico = new SocketFactoryDinamico(configuracao.getCertificado(), configuracao.getPrivateKey());
-        this.socketDinamico.setFileCacerts(configuracao.getPathCacerts());
         registraSocketDinamico();
     }
 

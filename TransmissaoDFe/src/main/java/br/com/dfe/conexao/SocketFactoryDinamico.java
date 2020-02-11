@@ -1,6 +1,7 @@
 package br.com.dfe.conexao;
 
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.httpclient.ConnectTimeoutException;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
@@ -10,25 +11,22 @@ import javax.net.SocketFactory;
 import javax.net.ssl.*;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.security.*;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
 @Log4j2
+@RequiredArgsConstructor
 public class SocketFactoryDinamico implements ProtocolSocketFactory {
     private SSLContext ssl = null;
-    private X509Certificate certificate;
-    private PrivateKey privateKey;
-    @Setter
-    private String fileCacerts;
+    private final X509Certificate certificate;
+    private final PrivateKey privateKey;
 
     public static final String TLSv1_2 = "TLSv1.2";
-
-    public SocketFactoryDinamico(X509Certificate certificate, PrivateKey privateKey) {
-        this.certificate = certificate;
-        this.privateKey = privateKey;
-    }
 
     @Override
     public Socket createSocket(String host, int port, InetAddress localAddress, int localPort)
@@ -73,8 +71,8 @@ public class SocketFactoryDinamico implements ProtocolSocketFactory {
             KeyManager[] keyManagers = createKeyManagers();
             TrustManager[] trustManagers = createTrustManagers();
             SSLContext sslContext = SSLContext.getInstance(TLSv1_2);
-            log.info("PROTOCOLO SSL CRIADO: " + sslContext.getProtocol());
             sslContext.init(keyManagers, trustManagers, null);
+            log.info("PROTOCOLO SSL CRIADO: " + sslContext.getProtocol());
 
             return sslContext;
         } catch (KeyManagementException e) {
@@ -105,36 +103,28 @@ public class SocketFactoryDinamico implements ProtocolSocketFactory {
 
     public KeyManager[] createKeyManagers() {
         HSKeyManager keyManager = new HSKeyManager(certificate, privateKey);
-
         return new KeyManager[]{keyManager};
     }
 
-    public TrustManager[] createTrustManagers() throws KeyStoreException,
-        NoSuchAlgorithmException, CertificateException, IOException {
+    public TrustManager[] createTrustManagers() throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException {
         KeyStore trustStore = KeyStore.getInstance("JKS");
 
-        trustStore.load(new FileInputStream(fileCacerts), "changeit".toCharArray());
+        trustStore.load(new FileInputStream(BuildCacerts.CACERTS_FILE_NAME), "changeit".toCharArray());
         TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
         trustManagerFactory.init(trustStore);
         return trustManagerFactory.getTrustManagers();
     }
 
+    @Value
     class HSKeyManager implements X509KeyManager {
         private X509Certificate certificate;
         private PrivateKey privateKey;
 
-        public HSKeyManager(X509Certificate certificate, PrivateKey privateKey) {
-            this.certificate = certificate;
-            this.privateKey = privateKey;
-        }
-
-        public String chooseClientAlias(String[] arg0, Principal[] arg1,
-                                        Socket arg2) {
+        public String chooseClientAlias(String[] arg0, Principal[] arg1, Socket arg2) {
             return certificate.getIssuerDN().getName();
         }
 
-        public String chooseServerAlias(String arg0, Principal[] arg1,
-                                        Socket arg2) {
+        public String chooseServerAlias(String arg0, Principal[] arg1, Socket arg2) {
             return null;
         }
 

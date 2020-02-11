@@ -1,6 +1,8 @@
 package br.com.dfe.conexao;
 
-import lombok.Getter;
+import lombok.Cleanup;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 import javax.net.ssl.*;
@@ -18,40 +20,35 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
 @Log4j2
+@NoArgsConstructor
 public class BuildCacerts {
 
-    @Getter
-    private Path pathCacerts;
-    private final int TIMEOUT_WS = 30;
+    public static final String CACERTS_FILE_NAME = "cacerts";
 
-    public BuildCacerts(String pathCacerts) {
-        this.pathCacerts = Paths.get(pathCacerts);
-    }
+    private final Path cacertLocal = Paths.get(CACERTS_FILE_NAME);
+    private final int TIMEOUT_WS = 30;
 
     public void geraCacert(URL url) {
         char[] passphrase = "changeit".toCharArray();
         log.info("Gerando Arquivo Cacerts...");
         try {
-            if (Files.notExists(pathCacerts)) {
-                Files.createDirectories(pathCacerts.getParent());
-                Files.createFile(pathCacerts);
+            if (Files.notExists(cacertLocal)) {
+                Path cacertOrigem = Paths.get(System.getProperty("java.home"), "lib", "security", "cacerts");
+                log.info("Cacert Java Home: "+cacertOrigem);
+                Files.copy(cacertOrigem, cacertLocal);
             }
 
-            Path cacertJRE = Paths.get(System.getProperty("java.home"), "lib", "security", "cacerts");
-
-            log.info("| Loading KeyStore " + pathCacerts + "...");
-            InputStream in = new FileInputStream(cacertJRE.toFile());
-
+            log.info("| Loading KeyStore " + cacertLocal + "...");
             KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
             log.debug("KEY STORE: " + KeyStore.getDefaultType());
+
+            @Cleanup InputStream in = new FileInputStream(cacertLocal.toFile());
             ks.load(in, passphrase);
-            in.close();
 
             get(url.getHost(), 443, ks);
 
-            OutputStream out = new FileOutputStream(pathCacerts.toFile());
+            @Cleanup OutputStream out = new FileOutputStream(cacertLocal.toFile());
             ks.store(out, passphrase);
-            out.close();
 
             log.info("Arquivo Cacert Gerado!");
         } catch (Exception e) {
@@ -98,17 +95,14 @@ public class BuildCacerts {
 
             String alias = host + "-" + (i);
             ks.setCertificateEntry(alias, cert);
-            log.info("| Added certificate to keystore '" + pathCacerts + "' using alias '" + alias + "'");
+            log.info("| Added certificate to keystore '" + cacertLocal + "' using alias '" + alias + "'");
         }
     }
 
+    @RequiredArgsConstructor
     private static class SavingTrustManager implements X509TrustManager {
         private final X509TrustManager tm;
         private X509Certificate[] chain;
-
-        SavingTrustManager(X509TrustManager tm) {
-            this.tm = tm;
-        }
 
         public X509Certificate[] getAcceptedIssuers() {
             return new X509Certificate[0];

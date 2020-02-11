@@ -17,7 +17,6 @@ public class Configuracao {
     private int ambiente;
     private X509Certificate certificado;
     private PrivateKey privateKey;
-    private String pathCacerts;
     private String idCSC;
     private String CSC;
 

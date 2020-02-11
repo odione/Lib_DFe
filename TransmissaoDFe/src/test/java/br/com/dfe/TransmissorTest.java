@@ -11,13 +11,15 @@ import br.com.dfe.util.XMLUtils;
 import br.com.dfe.utils.CertificadoHelper;
 import br.com.dfe.utils.ConverterUtils;
 import br.com.dfe.utils.NFUtils;
-import org.apache.commons.io.FilenameUtils;
+import org.apache.axiom.om.OMElement;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
+import java.security.cert.X509Certificate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -96,15 +98,15 @@ public class TransmissorTest {
     public void assinaEvento() throws Exception {
         Configuracao configuracao = getConfiguracao();
         AssinaDocumento assinaDocumento = new AssinaXML(configuracao.getCertificado(), configuracao.getPrivateKey());
-        var xmlEvento = "<envEvento xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.00\"><idLote>1</idLote><evento versao=\"1.00\"><infEvento Id=\"ID1101105020012777464800017155001000000002100450482301\"><cOrgao>50</cOrgao><tpAmb>2</tpAmb><CNPJ>27774648000171</CNPJ><chNFe>50200127774648000171550010000000021004504823</chNFe><dhEvento>2020-01-14T10:31:23-03:00</dhEvento><tpEvento>110110</tpEvento><nSeqEvento>1</nSeqEvento><verEvento>1.00</verEvento><detEvento versao=\"1.00\"><descEvento>Carta de Correcao</descEvento><xCorrecao>testandoooooooooooooooooooooooooooooooo</xCorrecao><xCondUso>A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de documento fiscal, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente ou do destinatario; III - a data de emissao ou de saida.</xCondUso></detEvento></infEvento></evento></envEvento>";
-        var assinado = assinaDocumento.assinarEvento(xmlEvento);
+        String xmlEvento = "<envEvento xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.00\"><idLote>1</idLote><evento versao=\"1.00\"><infEvento Id=\"ID1101105020012777464800017155001000000002100450482301\"><cOrgao>50</cOrgao><tpAmb>2</tpAmb><CNPJ>27774648000171</CNPJ><chNFe>50200127774648000171550010000000021004504823</chNFe><dhEvento>2020-01-14T10:31:23-03:00</dhEvento><tpEvento>110110</tpEvento><nSeqEvento>1</nSeqEvento><verEvento>1.00</verEvento><detEvento versao=\"1.00\"><descEvento>Carta de Correcao</descEvento><xCorrecao>testandoooooooooooooooooooooooooooooooo</xCorrecao><xCondUso>A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de documento fiscal, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente ou do destinatario; III - a data de emissao ou de saida.</xCondUso></detEvento></infEvento></evento></envEvento>";
+        String assinado = assinaDocumento.assinarEvento(xmlEvento);
 
         System.out.println("Assinado: "+assinado);
 
         assertFalse(assinado.contains("&#xd;"));
         assertFalse(assinado.contains("&#13;"));
 
-        var element = ConverterUtils.toOMElement(assinado);
+        OMElement element = ConverterUtils.toOMElement(assinado);
         System.out.println("element: "+element.toString());
     }
 
@@ -118,14 +120,13 @@ public class TransmissorTest {
     public Configuracao getConfiguracao() throws Exception {
         CertificadoHelper certificadoLoader = new CertificadoHelper();
         certificadoLoader.loadPFX(Paths.get("/home/odione/dsv/apps/sender/certs/lui260248_SP.pfx"),"lui260248");
-        var certificados = certificadoLoader.getCertificados();
+        List<X509Certificate> certificados = certificadoLoader.getCertificados();
 
-        var certificate = certificados.get(0);
-        var alias = certificadoLoader.getAlias(certificate);
+        X509Certificate certificate = certificados.get(0);
+        String alias = certificadoLoader.getAlias(certificate);
 
         return Configuracao.builder()
             .ambiente(2)
-            .pathCacerts(System.getProperty("user.dir")+"/cacerts")
             .uf("SP")
             .certificado(certificate)
             .privateKey(certificadoLoader.getPrivateKey(alias, "lui260248"))
@@ -136,7 +137,7 @@ public class TransmissorTest {
 
     @Test
     void removeCharFromXML() {
-        var xml = "<envEvento xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.00\"><idLote>1</idLote><evento versao=\"1.00\"><infEvento Id=\"ID1101105020012777464800017155001000000002100450482301\"><cOrgao>50</cOrgao><tpAmb>2</tpAmb><CNPJ>27774648000171</CNPJ><chNFe>50200127774648000171550010000000021004504823</chNFe><dhEvento>2020-01-14T10:31:23-03:00</dhEvento><tpEvento>110110</tpEvento><nSeqEvento>1</nSeqEvento><verEvento>1.00</verEvento><detEvento versao=\"1.00\"><descEvento>Carta de Correcao</descEvento><xCorrecao>testandoooooooooooooooooooooooooooooooo</xCorrecao><xCondUso>A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de documento fiscal, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente ou do destinatario; III - a data de emissao ou de saida.</xCondUso></detEvento></infEvento><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/><SignatureMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#rsa-sha1\"/><Reference URI=\"#ID1101105020012777464800017155001000000002100450482301\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/><Transform Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#sha1\"/><DigestValue>H1hfMrDCRxwdt1e7PFPPxS8L2Zs=</DigestValue></Reference></SignedInfo><SignatureValue>m+SUPBragPh0PjnIzTSVxmOWf/5IjepMDBkH0qJi5HMMWgPOwudxQEWxTQAnt391/EyPWSZ/gqOM&#xd;" +
+        String xml = "<envEvento xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.00\"><idLote>1</idLote><evento versao=\"1.00\"><infEvento Id=\"ID1101105020012777464800017155001000000002100450482301\"><cOrgao>50</cOrgao><tpAmb>2</tpAmb><CNPJ>27774648000171</CNPJ><chNFe>50200127774648000171550010000000021004504823</chNFe><dhEvento>2020-01-14T10:31:23-03:00</dhEvento><tpEvento>110110</tpEvento><nSeqEvento>1</nSeqEvento><verEvento>1.00</verEvento><detEvento versao=\"1.00\"><descEvento>Carta de Correcao</descEvento><xCorrecao>testandoooooooooooooooooooooooooooooooo</xCorrecao><xCondUso>A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de documento fiscal, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente ou do destinatario; III - a data de emissao ou de saida.</xCondUso></detEvento></infEvento><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/><SignatureMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#rsa-sha1\"/><Reference URI=\"#ID1101105020012777464800017155001000000002100450482301\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/><Transform Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#sha1\"/><DigestValue>H1hfMrDCRxwdt1e7PFPPxS8L2Zs=</DigestValue></Reference></SignedInfo><SignatureValue>m+SUPBragPh0PjnIzTSVxmOWf/5IjepMDBkH0qJi5HMMWgPOwudxQEWxTQAnt391/EyPWSZ/gqOM&#xd;" +
             "1tJh0U5flLSi1b+qrjar7F33sJ/GYQ8gtmL5cDxRJoDPhbaRGlrcOguodO2Q3p3pVQXQzCGdY/ID&#xd;" +
             "6BXxrY/1siEBePB4LUq5wCKfhhuZUNNxJr7qU9sLnyTL7wj0Zd2STDFVjw1tHX08KovUAT6PtXw3&#xd;" +
             "aFVAIT5LGvES6Mdoak/o101UgE/WDHkvFwamBOMUGTSCG/Sz//is/nb7lCkQfV51Npt6YoL5FUzN&#xd;" +
@@ -179,7 +180,7 @@ public class TransmissorTest {
 
         System.out.println("XML:          |"+xml);
 
-        var xmlAlterado = xml.replaceAll("&#xd;", "");
+        String xmlAlterado = xml.replaceAll("&#xd;", "");
 
         System.out.println("XML Alterado: |"+xmlAlterado);
 

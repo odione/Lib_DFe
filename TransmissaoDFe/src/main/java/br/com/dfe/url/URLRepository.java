@@ -8,9 +8,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,10 +39,10 @@ public class URLRepository {
     }
 
     private void carregaURL(String modelo, TipoEmissao tipoEmissao) {
-        var folderUrl = "/url_webservices_"+modelo +
+        String folderUrl = "/url_webservices_"+modelo +
             (TipoEmissao.isContingenciaOnLine(tipoEmissao) ? "/contingencia/" : "/");
 
-        var arquivos = new ArrayList<String>();
+        List<String> arquivos = new ArrayList<>();
         Collections.addAll(arquivos, "consulta_nf.json", "envio_nf.json", "evento.json", "ret_envio_nf.json", "status.json");
 
         if (TipoEmissao.NORMAL.equals(tipoEmissao)) {
@@ -65,7 +63,7 @@ public class URLRepository {
 
     @SneakyThrows
     private void add(String pathJson, String modelo, TipoEmissao tipoEmissao) {
-        @Cleanup var inputStream = getClass().getResourceAsStream(pathJson);
+        @Cleanup InputStream inputStream = getClass().getResourceAsStream(pathJson);
 
         IOUtils.readLines(inputStream, "UTF8").stream()
             .filter(l -> l.startsWith("{"))
