@@ -10,12 +10,10 @@ import java.io.FileInputStream;
 import java.nio.file.Path;
 import java.security.KeyStore;
 import java.security.PrivateKey;
-import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Log4j2
 @NoArgsConstructor
@@ -35,12 +33,11 @@ public class CertificadoHelper {
 		ks.load(new FileInputStream(pathFile.toFile()), password.toCharArray());
 	}
 
-	@SneakyThrows
-	public List<X509Certificate> getCertificados() {
-		return Collections.list(ks.aliases()).stream()
-			.map(this::getCertificate)
-			.collect(Collectors.toList());
-	}
+    @SneakyThrows
+    public Map<String, X509Certificate> getCertificados() {
+        return Collections.list(ks.aliases()).stream()
+            .collect(Collectors.toMap(alias -> alias, alias -> getCertificate(alias)));
+    }
 
 	@SneakyThrows
 	public X509Certificate getCertificate(String alias) {
@@ -49,18 +46,18 @@ public class CertificadoHelper {
 
 	@SneakyThrows
 	public PrivateKey getPrivateKey(X509Certificate certificate) {
-		String alias = getAlias(certificate);
-		return (PrivateKey) ks.getKey(alias, null);
+        Map<String, X509Certificate> certificados = getCertificados();
+
+	    return certificados.keySet().stream()
+            .filter(alias -> certificados.get(alias).getSerialNumber().compareTo(certificate.getSerialNumber()) == 0)
+            .map(alias -> getPrivateKey(alias, null))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Problema ao extrair a chave privada"));
 	}
 
 	@SneakyThrows
-	public PrivateKey getPrivateKey(@NonNull String alias, @NonNull String password) {
-		return (PrivateKey) ks.getKey(alias, password.toCharArray());
-	}
-
-	@SneakyThrows
-	public String getAlias(Certificate certificate) {
-		return ks.getCertificateAlias(certificate);
+	public PrivateKey getPrivateKey(@NonNull String alias, String password) {
+		return (PrivateKey) ks.getKey(alias, (password != null) ? password.toCharArray() : null);
 	}
 
 	@SneakyThrows
