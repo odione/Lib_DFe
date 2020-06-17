@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.intershop.gradle.jaxb' version '4.0.0'
+    id 'com.intershop.gradle.jaxb' version '4.3.1'
 }
 
 repositories {
@@ -9,8 +9,16 @@ repositories {
     mavenCentral()
 }
 
+def lombokVersion = '1.18.12'
+def log4jVersion = '2.13.3'
+
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+    implementation "org.apache.logging.log4j:log4j-api:$log4jVersion"
+    implementation "org.apache.logging.log4j:log4j-core:$log4jVersion"
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
 }
 
 task sourcesJar(type: Jar) {
@@ -80,7 +88,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 publishing {
     publications {
         maven(MavenPublication) {
-            from(components.java)
+            from components.java
             artifact(sourcesJar)
         }
     }

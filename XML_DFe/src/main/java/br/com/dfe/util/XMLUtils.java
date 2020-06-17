@@ -1,11 +1,22 @@
 package br.com.dfe.util;
 
-import javax.xml.bind.*;
+import br.com.dfe.integrador.Integrador;
+import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j2;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
+import javax.xml.transform.stream.StreamSource;
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 
+@Log4j2
+@UtilityClass
 public class XMLUtils {
 
     /**
@@ -14,8 +25,11 @@ public class XMLUtils {
      * @return Objeto Preenchido
      * @throws JAXBException
      */
-    public static <T> T toObj(String xml, Class<T> clazz) {
-        return JAXB.unmarshal(new StringReader(xml), clazz);
+    public <T> T toObj(String xml, Class<T> clazz) throws JAXBException {
+        log.debug("Unmarshaller criando...");
+        Unmarshaller unmarshaller = XMLContextFactory.getInstance().getUnmarshaller(clazz);
+        log.debug("Unmarshaller criado!");
+        return unmarshaller.unmarshal(new StreamSource(new StringReader(xml)), clazz).getValue();
     }
 
     /**
@@ -23,27 +37,34 @@ public class XMLUtils {
      * @return XML em string
      * @throws JAXBException
      */
-	@SuppressWarnings("unchecked")
-    public static <T> String criaStrXML(T entidade) throws JAXBException {
+    @SuppressWarnings("unchecked")
+    public <T> String criaStrXML(T entidade) throws JAXBException, IOException {
         Class<T> classe = (Class<T>) entidade.getClass();
 
         QName qname = new QName("http://www.portalfiscal.inf.br/nfe", preparaNomeElemento(entidade.getClass().getSimpleName()));
         JAXBElement<T> elemento = new JAXBElement<T>(qname, classe, entidade);
 
-        Writer writer = new StringWriter();
+        try (Writer writer = new StringWriter()) {
+            log.debug("Marshaller criando...");
+            Marshaller marshaller = XMLContextFactory.getInstance().getMarshaller(classe);
+            log.debug("Marshaller criado!");
+            marshaller.marshal(elemento, writer);
 
-        Marshaller marshaller = JAXBContext.newInstance(classe).createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);
-        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-        marshaller.marshal(elemento, writer);
-
-        return writer.toString().replaceAll(" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\"", "")
-            .replaceAll(":ns2", "")
-            .replaceAll("ns2:", "")
-            .replaceAll("<Signature>", "<Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\">");
+            return writer.toString().replaceAll(" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\"", "")
+                .replaceAll(":ns2", "")
+                .replaceAll("ns2:", "")
+                .replaceAll("<Signature>", "<Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\">");
+        }
     }
 
-    private static String preparaNomeElemento(String nomeClasse) {
+    public String criaStrXML(Integrador integrador) throws JAXBException {
+        Marshaller marshaller = XMLContextFactory.getInstance().getMarshaller(Integrador.class);
+        Writer writer = new StringWriter();
+        marshaller.marshal(integrador, writer);
+        return writer.toString();
+    }
+
+    private String preparaNomeElemento(String nomeClasse) {
         nomeClasse = nomeClasse.substring(1);
         if (nomeClasse.toUpperCase().equals("NFE")) {
             return "NFe";
