@@ -1,3 +1,3 @@
 [
-{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO|AM|BA|CE|GO|MA|MS|MT|PA|PE|PI|PR", "homologacao": "https://hom.nfe.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx", "producao": "" }
+{ "uf": "AC|AL|AP|DF|ES|PB|PI|RJ|RN|RO|RR|SC|SE|TO|AM|BA|CE|GO|MA|MS|MT|PA|PE|PI|PR", "homologacao": "https://hom.nfe.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx", "producao": "https://www.nfe.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx" }
 ]
