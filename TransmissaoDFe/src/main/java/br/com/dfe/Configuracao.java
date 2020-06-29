@@ -23,4 +23,8 @@ public class Configuracao {
     public boolean isAsync() {
         return "BA|SP".contains(uf.toUpperCase());
     }
+
+    public boolean usaIntegrador() {
+        return "CE".equalsIgnoreCase(uf);
+    }
 }

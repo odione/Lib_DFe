@@ -31,6 +31,11 @@ public class NFUtils {
 		return xmlInut.substring(pos, pos+2);
 	}
 
+	public static String getChaveFromInutilizacao(String xmlInut) {
+		int pos = xmlInut.indexOf("<Id>")+4;
+		return xmlInut.substring(pos, pos+43);
+	}
+
 	public static void validaRetEnvNFe(TRetEnviNFe retorno) throws NaoAutorizadoException {
 		String stat = retorno.getProtNFe() != null ? retorno.getProtNFe().getInfProt().getCStat() : retorno.getCStat();
 

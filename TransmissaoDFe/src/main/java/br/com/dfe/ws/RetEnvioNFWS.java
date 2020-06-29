@@ -10,6 +10,7 @@ import br.com.dfe.url.Operacao;
 import br.com.dfe.url.URLRepository;
 import br.com.dfe.util.XMLUtils;
 import br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeRetAutorizacao4Stub;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.apache.axiom.om.OMElement;
@@ -29,6 +30,7 @@ public class RetEnvioNFWS implements OperacaoWS {
     private TRetEnviNFe retEnviNFe;
 
     @Setter
+    @Getter
     private String modelo;
 
     @Setter
@@ -59,6 +61,11 @@ public class RetEnvioNFWS implements OperacaoWS {
 
         NfeRetAutorizacao4Stub stub = new NfeRetAutorizacao4Stub(getURL());
         return stub.nfeRetAutorizacaoLote(dados).getExtraElement().toString();
+    }
+
+    @Override
+    public String enviaParaIntegrador(OMElement omElement) throws Exception {
+        throw new RuntimeException("enviaParaIntegrador | Função não implementada");
     }
 
     public boolean processada(TRetConsReciNFe retConsReciNFe) {

@@ -114,9 +114,15 @@ public class TransmissorDFe {
     private String executa(OperacaoWS operacaoWS) throws Exception {
         OMElement omElement = ConverterUtils.toOMElement(operacaoWS.montaEnvio());
 
+        log.info("OMElement: " + omElement.toString());
+        if (configuracao.usaIntegrador() && operacaoWS.getModelo().equals("65")) {
+            log.info("Enviando para integrador...");
+            String retorno = operacaoWS.enviaParaIntegrador(omElement);
+            log.info("Retorno Integrador: " + retorno);
+            return retorno;
+        }
         conexaoSegura.preparaConexaoSegura(operacaoWS.getURL());
 
-        log.info("OMElement: " + omElement.toString());
         log.info(String.format("Chamando WebService %s ...", operacaoWS.getURL()));
         String retorno = operacaoWS.callWS(omElement);
         log.info("Retorno no WebService: " + retorno);

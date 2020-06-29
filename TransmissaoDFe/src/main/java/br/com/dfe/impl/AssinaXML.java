@@ -1,6 +1,7 @@
 package br.com.dfe.impl;
 
 import br.com.dfe.api.AssinaDocumento;
+import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
@@ -48,6 +49,7 @@ public class AssinaXML implements AssinaDocumento {
     private PrivateKey privateKey;
     private KeyInfo keyInfo;
     private XMLSignatureFactory signFactory;
+    private DocumentBuilderFactory documentBuilderFactory;
 
     public AssinaXML(X509Certificate certificado, PrivateKey privateKey) {
         this.certificado = certificado;
@@ -84,6 +86,9 @@ public class AssinaXML implements AssinaDocumento {
 
         X509Data data509 = keyInfoFactory.newX509Data(x509Content);
         keyInfo = keyInfoFactory.newKeyInfo(Arrays.asList(data509));
+
+        documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        documentBuilderFactory.setNamespaceAware(true);
     }
 
     private String assinaXML(String xml, String tag, String strID) throws SAXException, IOException, ParserConfigurationException,
@@ -113,14 +118,11 @@ public class AssinaXML implements AssinaDocumento {
         XMLSignature signature = signFactory.newXMLSignature(signInfo, keyInfo);
 
         signature.sign(domSignContext);
-        log.info("Assinou Documento!");
         return outputXML(documento);
     }
 
     private Document documentFactory(String xml) throws SAXException, IOException, ParserConfigurationException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-		return factory.newDocumentBuilder().parse(new InputSource(new StringReader(xml)));
+		return documentBuilderFactory.newDocumentBuilder().parse(new InputSource(new StringReader(xml)));
     }
 
     private List<Transform> signatureFactory(XMLSignatureFactory signatureFactory) throws InvalidAlgorithmParameterException, NoSuchAlgorithmException {
@@ -129,19 +131,19 @@ public class AssinaXML implements AssinaDocumento {
         return Arrays.asList(envelopedTransform, c14NTransform);
     }
 
-    private String outputXML(Document doc) throws TransformerException {
-        OutputStream os = new ByteArrayOutputStream();
-        TransformerFactory tf = TransformerFactory.newInstance();
-        Transformer trans = tf.newTransformer();
-        trans.transform(new DOMSource(doc), new StreamResult(os));
-        String xml = os.toString();
-        if (StringUtils.isNotBlank(xml)) {
-            return xml
+    private String outputXML(Document doc) throws TransformerException, IOException {
+        try(OutputStream os = new ByteArrayOutputStream()) {
+            TransformerFactory tf = TransformerFactory.newInstance();
+            Transformer trans = tf.newTransformer();
+            trans.transform(new DOMSource(doc), new StreamResult(os));
+            String xml = os.toString();
+            log.info("Assinou Documento!");
+
+            return (StringUtils.isBlank(xml)) ? xml : xml
                 .replaceAll("\\r|\\n", "")
                 .replaceAll("&#13;", "")
                 .replaceAll(" standalone=\"no\"", "");
         }
-        return xml;
     }
 
     public static String addXmlEncoding(String strXml) {

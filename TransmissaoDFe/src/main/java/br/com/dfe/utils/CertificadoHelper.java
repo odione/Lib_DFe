@@ -12,6 +12,7 @@ import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -25,17 +26,22 @@ public class CertificadoHelper {
 	public void loadRepositorioWindows()  {
 		ks = KeyStore.getInstance("Windows-MY", "SunMSCAPI");
 		ks.load(null, null);
+
+		Collections.list(ks.aliases()).forEach(alias -> log.info("Load repositorio windows | Alias: "+alias));
 	}
 
 	@SneakyThrows
 	public void loadPFX(Path pathFile, String password) {
 		ks = KeyStore.getInstance("PKCS12");
 		ks.load(new FileInputStream(pathFile.toFile()), password.toCharArray());
+
+		Collections.list(ks.aliases()).forEach(alias -> log.info("Load PFX | Alias: "+alias));
 	}
 
     @SneakyThrows
     public Map<String, X509Certificate> getCertificados() {
         return Collections.list(ks.aliases()).stream()
+			.distinct()
             .collect(Collectors.toMap(alias -> alias, alias -> getCertificate(alias)));
     }
 
@@ -48,15 +54,18 @@ public class CertificadoHelper {
 	public PrivateKey getPrivateKey(X509Certificate certificate) {
         Map<String, X509Certificate> certificados = getCertificados();
 
-	    return certificados.keySet().stream()
-            .filter(alias -> certificados.get(alias).getSerialNumber().compareTo(certificate.getSerialNumber()) == 0)
-            .map(alias -> getPrivateKey(alias, null))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("Problema ao extrair a chave privada"));
+        for (String alias : certificados.keySet()) {
+        	if (certificados.get(alias).getSerialNumber().compareTo(certificate.getSerialNumber()) == 0) {
+        		return getPrivateKey(alias, null);
+			}
+		}
+
+        throw new RuntimeException("Problema ao extrair a chave privada");
 	}
 
 	@SneakyThrows
 	public PrivateKey getPrivateKey(@NonNull String alias, String password) {
+		log.info("Tentando pegar private key | alias: "+alias);
 		return (PrivateKey) ks.getKey(alias, (password != null) ? password.toCharArray() : null);
 	}
 

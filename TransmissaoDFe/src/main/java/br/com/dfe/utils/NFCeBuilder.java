@@ -36,7 +36,7 @@ public class NFCeBuilder {
     }
 
     private String montaQrCodeUrl(TNFe nfe) {
-        StringBuffer qrCode = new StringBuffer()
+        StringBuilder qrCode = new StringBuilder()
             .append(nfe.getInfNFe().getId().substring(3))             //chave
             .append("|").append("2")                                  //versao qrcode
             .append("|").append(nfe.getInfNFe().getIde().getTpAmb()); //ambiente
