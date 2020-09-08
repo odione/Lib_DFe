@@ -2,6 +2,7 @@ package br.com.dfe;
 
 import br.com.dfe.api.ConexaoSegura;
 import br.com.dfe.api.TipoEmissao;
+import br.com.dfe.contingencia.NFCeOffline;
 import br.com.dfe.impl.ConexaoSeguraImpl;
 import br.com.dfe.schema.*;
 import br.com.dfe.schema.canc.TRetEnvEvento;
@@ -93,6 +94,11 @@ public class TransmissorDFe {
         InutilizacaoWS inutilizacaoWS = new InutilizacaoWS(urlRepository, configuracao);
         inutilizacaoWS.setXmlInutNFe(xmlTInut);
         return XMLUtils.toObj(executa(inutilizacaoWS), TRetInutNFe.class);
+    }
+
+    public String geraXMLContingenciaOffline(String xmlTNFe) throws Exception {
+        NFCeOffline offline = new NFCeOffline(urlRepository, configuracao);
+        return offline.geraXML(xmlTNFe);
     }
 
     private TRetConsReciNFe aguardaRetornoRecibo(RetEnvioNFWS operacao) throws Exception {

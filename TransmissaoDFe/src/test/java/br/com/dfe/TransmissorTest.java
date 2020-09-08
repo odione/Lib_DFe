@@ -59,6 +59,14 @@ public class TransmissorTest {
     }
 
     @Test
+    public void nfceOffline() throws Exception {
+        TransmissorDFe transmissorDFe = new TransmissorDFe(configuracao);
+        String xmlTNFe = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><NFe xmlns=\"http://www.portalfiscal.inf.br/nfe\"><infNFe versao=\"4.00\" Id=\"NFe35191230590972000144650010000000451007509148\"><ide><cUF>35</cUF><cNF>00750914</cNF><natOp>VENDA</natOp><mod>65</mod><serie>1</serie><nNF>45</nNF><dhEmi>2019-12-05T11:48:00-03:00</dhEmi><tpNF>1</tpNF><idDest>1</idDest><cMunFG>3551603</cMunFG><tpImp>4</tpImp><tpEmis>9</tpEmis><cDV>8</cDV><tpAmb>2</tpAmb><finNFe>1</finNFe><indFinal>1</indFinal><indPres>1</indPres><procEmi>0</procEmi><verProc>1.7.0.85</verProc></ide><emit><CNPJ>30590972000144</CNPJ><xNome>LUI COMERCIO DE GAS LTDA</xNome><xFant>LUI COMERCIO DE GAS LTDA</xFant><enderEmit><xLgr>RUA ANTONIO NOVAES</xLgr><nro>3238</nro><xBairro>CENTRO</xBairro><cMun>3551603</cMun><xMun>SERRA NEGRA</xMun><UF>SP</UF><CEP>13930000</CEP><cPais>1058</cPais><xPais>BRASIL</xPais></enderEmit><IE>662054651111</IE><CRT>1</CRT></emit><det nItem=\"1\"><prod><cProd>000013</cProd><cEAN>SEM GTIN</cEAN><xProd>NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xProd><NCM>27111910</NCM><CEST>0601100</CEST><EXTIPI>00</EXTIPI><CFOP>5656</CFOP><uCom>UN</uCom><qCom>4.0000</qCom><vUnCom>1.0000000000</vUnCom><vProd>4.00</vProd><cEANTrib>SEM GTIN</cEANTrib><uTrib>KG</uTrib><qTrib>52.0000</qTrib><vUnTrib>0.0769230769</vUnTrib><indTot>1</indTot><comb><cProdANP>210203001</cProdANP><descANP>GLP</descANP><pGLP>90.0000</pGLP><pGNn>8.0000</pGNn><pGNi>2.0000</pGNi><vPart>1.00</vPart><UFCons>SP</UFCons></comb></prod><imposto><vTotTrib>0.88</vTotTrib><ICMS><ICMSSN500><orig>0</orig><CSOSN>500</CSOSN></ICMSSN500></ICMS><PIS><PISNT><CST>04</CST></PISNT></PIS><COFINS><COFINSNT><CST>04</CST></COFINSNT></COFINS></imposto></det><total><ICMSTot><vBC>0.00</vBC><vICMS>0.00</vICMS><vICMSDeson>0.00</vICMSDeson><vFCP>0.00</vFCP><vBCST>0.00</vBCST><vST>0.00</vST><vFCPST>0.00</vFCPST><vFCPSTRet>0.00</vFCPSTRet><vProd>4.00</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vIPIDevol>0.00</vIPIDevol><vPIS>0.00</vPIS><vCOFINS>0.00</vCOFINS><vOutro>0.00</vOutro><vNF>4.00</vNF><vTotTrib>0.88</vTotTrib></ICMSTot></total><transp><modFrete>9</modFrete></transp><pag><detPag><indPag>0</indPag><tPag>01</tPag><vPag>4.00</vPag></detPag></pag><infAdic><infCpl>Valor aprox. dos Tributos Federal: 0,88 Estadual: 0,00 Municipal: 0,00 Fonte: IBPT</infCpl></infAdic><infRespTec><CNPJ>13628140000150</CNPJ><xContato>HUDSON BORGES NESI</xContato><email>hudson@brazilsistem.com.br</email><fone>4836290077</fone></infRespTec></infNFe></NFe>";
+        String retorno = transmissorDFe.geraXMLContingenciaOffline(xmlTNFe);
+        assertTrue(retorno.contains("tpEmis>9</tpEmis"));
+    }
+
+    @Test
     public void envioNFCe() throws Exception {
         TransmissorDFe transmissorDFe = new TransmissorDFe(configuracao);
         String xmlTNFe = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><NFe xmlns=\"http://www.portalfiscal.inf.br/nfe\"><infNFe versao=\"4.00\" Id=\"NFe35191230590972000144650010000000451007509148\"><ide><cUF>35</cUF><cNF>00750914</cNF><natOp>VENDA</natOp><mod>65</mod><serie>1</serie><nNF>45</nNF><dhEmi>2019-12-05T11:48:00-03:00</dhEmi><tpNF>1</tpNF><idDest>1</idDest><cMunFG>3551603</cMunFG><tpImp>4</tpImp><tpEmis>1</tpEmis><cDV>8</cDV><tpAmb>2</tpAmb><finNFe>1</finNFe><indFinal>1</indFinal><indPres>1</indPres><procEmi>0</procEmi><verProc>1.7.0.85</verProc></ide><emit><CNPJ>30590972000144</CNPJ><xNome>LUI COMERCIO DE GAS LTDA</xNome><xFant>LUI COMERCIO DE GAS LTDA</xFant><enderEmit><xLgr>RUA ANTONIO NOVAES</xLgr><nro>3238</nro><xBairro>CENTRO</xBairro><cMun>3551603</cMun><xMun>SERRA NEGRA</xMun><UF>SP</UF><CEP>13930000</CEP><cPais>1058</cPais><xPais>BRASIL</xPais></enderEmit><IE>662054651111</IE><CRT>1</CRT></emit><det nItem=\"1\"><prod><cProd>000013</cProd><cEAN>SEM GTIN</cEAN><xProd>NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xProd><NCM>27111910</NCM><CEST>0601100</CEST><EXTIPI>00</EXTIPI><CFOP>5656</CFOP><uCom>UN</uCom><qCom>4.0000</qCom><vUnCom>1.0000000000</vUnCom><vProd>4.00</vProd><cEANTrib>SEM GTIN</cEANTrib><uTrib>KG</uTrib><qTrib>52.0000</qTrib><vUnTrib>0.0769230769</vUnTrib><indTot>1</indTot><comb><cProdANP>210203001</cProdANP><descANP>GLP</descANP><pGLP>90.0000</pGLP><pGNn>8.0000</pGNn><pGNi>2.0000</pGNi><vPart>1.00</vPart><UFCons>SP</UFCons></comb></prod><imposto><vTotTrib>0.88</vTotTrib><ICMS><ICMSSN500><orig>0</orig><CSOSN>500</CSOSN></ICMSSN500></ICMS><PIS><PISNT><CST>04</CST></PISNT></PIS><COFINS><COFINSNT><CST>04</CST></COFINSNT></COFINS></imposto></det><total><ICMSTot><vBC>0.00</vBC><vICMS>0.00</vICMS><vICMSDeson>0.00</vICMSDeson><vFCP>0.00</vFCP><vBCST>0.00</vBCST><vST>0.00</vST><vFCPST>0.00</vFCPST><vFCPSTRet>0.00</vFCPSTRet><vProd>4.00</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vIPIDevol>0.00</vIPIDevol><vPIS>0.00</vPIS><vCOFINS>0.00</vCOFINS><vOutro>0.00</vOutro><vNF>4.00</vNF><vTotTrib>0.88</vTotTrib></ICMSTot></total><transp><modFrete>9</modFrete></transp><pag><detPag><indPag>0</indPag><tPag>01</tPag><vPag>4.00</vPag></detPag></pag><infAdic><infCpl>Valor aprox. dos Tributos Federal: 0,88 Estadual: 0,00 Municipal: 0,00 Fonte: IBPT</infCpl></infAdic><infRespTec><CNPJ>13628140000150</CNPJ><xContato>HUDSON BORGES NESI</xContato><email>hudson@brazilsistem.com.br</email><fone>4836290077</fone></infRespTec></infNFe></NFe>";
@@ -106,13 +114,6 @@ public class TransmissorTest {
 
         OMElement element = ConverterUtils.toOMElement(assinado);
         System.out.println("element: "+element.toString());
-    }
-
-    @Test
-    public void getModeloFromInut() {
-        String xml = "<inutNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"4.00\"><infInut Id=\"ID42191362814000015055001000000001000000005\"><tpAmb>2</tpAmb><xServ>INUTILIZAR</xServ><cUF>42</cUF><ano>19</ano><CNPJ>13628140000150</CNPJ><mod>55</mod><serie>1</serie><nNFIni>1</nNFIni><nNFFin>5</nNFFin><xJust>testandooo inutt</xJust></infInut></inutNFe>";
-        String modelo = NFUtils.getModeloFromInutilizacao(xml);
-        assertEquals("55", modelo);
     }
 
     public Configuracao getConfiguracao() throws Exception {
@@ -176,11 +177,8 @@ public class TransmissorTest {
             "gpUCwz1B2XoV23yqAm+Pd81Lk9BCvdhlDQ==</X509Certificate></X509Data></KeyInfo></Signature></evento></envEvento>";
 
         System.out.println("XML:          |"+xml);
-
         String xmlAlterado = xml.replaceAll("&#xd;", "");
-
         System.out.println("XML Alterado: |"+xmlAlterado);
-
         Assertions.assertNotEquals(xmlAlterado, xml);
     }
 }

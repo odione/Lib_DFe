@@ -5,6 +5,7 @@ import br.com.dfe.schema.TRetConsSitNFe;
 import br.com.dfe.schema.TRetEnviNFe;
 import br.com.dfe.schema.TRetInutNFe;
 import br.com.dfe.schema.cce.TRetEnvEvento;
+import org.apache.commons.lang3.StringUtils;
 
 public class NFUtils {
 
@@ -19,13 +20,23 @@ public class NFUtils {
 		return chave.substring(20,22);
 	}
 
+	public static String getSerieFromChave(String chave) {
+		return StringUtils.stripStart(chave.substring(22,25), "0");
+	}
+
+	public static String getNumeroFromChave(String chave) {
+		return StringUtils.right(chave.substring(25,34), 6);
+	}
+
 	public static String getTipoEmissaoFromChave(String chave) {
 		return chave.substring(25,26);
 	}
+
 	public static String getChaveFromEvento(String xmlEvento) {
 		int pos = xmlEvento.lastIndexOf("<chNFe>")+7;
 		return xmlEvento.substring(pos, pos+44);
 	}
+
 	public static String getModeloFromInutilizacao(String xmlInut) {
 		int pos = xmlInut.lastIndexOf("<mod>")+5;
 		return xmlInut.substring(pos, pos+2);
@@ -34,6 +45,11 @@ public class NFUtils {
 	public static String getChaveFromInutilizacao(String xmlInut) {
 		int pos = xmlInut.indexOf("<Id>")+4;
 		return xmlInut.substring(pos, pos+43);
+	}
+
+	public static String getChaveFromNFe(String xmlTNFe) {
+		int pos = xmlTNFe.indexOf("Id=\"NFe")+7;
+		return xmlTNFe.substring(pos, pos+44);
 	}
 
 	public static void validaRetEnvNFe(TRetEnviNFe retorno) throws NaoAutorizadoException {
