@@ -1,15 +1,14 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.intershop.gradle.jaxb' version '4.3.1'
+    id 'com.intershop.gradle.jaxb' version '4.4.1'
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
-def lombokVersion = '1.18.12'
+def lombokVersion = '1.18.16'
 def log4jVersion = '2.13.3'
 
 dependencies {

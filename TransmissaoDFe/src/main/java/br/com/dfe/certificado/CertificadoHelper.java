@@ -1,5 +1,6 @@
 package br.com.dfe.utils;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.SneakyThrows;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class CertificadoHelper {
 
+	@Getter
 	private KeyStore ks;
 
 	@SneakyThrows
