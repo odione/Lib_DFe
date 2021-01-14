@@ -1,6 +1,7 @@
 package br.com.dfe.impl;
 
 import br.com.dfe.api.AssinaDocumento;
+import br.com.dfe.certificado.Certificado;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
@@ -50,9 +51,9 @@ public class AssinaXML implements AssinaDocumento {
     private XMLSignatureFactory signFactory;
     private DocumentBuilderFactory documentBuilderFactory;
 
-    public AssinaXML(X509Certificate certificado, PrivateKey privateKey) {
-        this.certificado = certificado;
-        this.privateKey = privateKey;
+    public AssinaXML(Certificado certificado) {
+        this.certificado = certificado.getCertificate();
+        this.privateKey = certificado.getPrivateKey();
         configura();
     }
 

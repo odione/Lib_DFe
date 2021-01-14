@@ -1,4 +1,4 @@
-package br.com.dfe.utils;
+package br.com.dfe.certificado;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +13,7 @@ import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -40,29 +39,26 @@ public class CertificadoHelper {
 		Collections.list(ks.aliases()).forEach(alias -> log.info("Load PFX | Alias: "+alias));
 	}
 
-    @SneakyThrows
-    public Map<String, X509Certificate> getCertificados() {
-        return Collections.list(ks.aliases()).stream()
-			.distinct()
-            .collect(Collectors.toMap(alias -> alias, alias -> getCertificate(alias)));
-    }
-
 	@SneakyThrows
 	public X509Certificate getCertificate(String alias) {
 		return (X509Certificate) ks.getCertificate(alias);
 	}
 
 	@SneakyThrows
-	public PrivateKey getPrivateKey(X509Certificate certificate) {
-        Map<String, X509Certificate> certificados = getCertificados();
+	public List<Certificado> getCertificados() {
+		return Collections.list(ks.aliases()).stream()
+			.distinct()
+			.map(this::getCertificado)
+			.collect(Collectors.toList());
+	}
 
-        for (String alias : certificados.keySet()) {
-        	if (certificados.get(alias).getSerialNumber().compareTo(certificate.getSerialNumber()) == 0) {
-        		return getPrivateKey(alias, null);
-			}
-		}
-
-        throw new RuntimeException("Problema ao extrair a chave privada");
+	@SneakyThrows
+	public Certificado getCertificado(String alias) {
+		return Certificado.builder()
+			.alias(alias)
+			.keyStore(ks)
+			.certificate((X509Certificate)ks.getCertificate(alias))
+			.build();
 	}
 
 	@SneakyThrows

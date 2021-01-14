@@ -2,23 +2,24 @@ package br.com.dfe;
 
 import br.com.dfe.api.AssinaDocumento;
 import br.com.dfe.api.TipoEmissao;
+import br.com.dfe.certificado.Certificado;
+import br.com.dfe.certificado.CertificadoHelper;
 import br.com.dfe.impl.AssinaXML;
 import br.com.dfe.schema.TNFe;
 import br.com.dfe.schema.TRetConsSitNFe;
 import br.com.dfe.schema.TRetConsStatServ;
 import br.com.dfe.schema.TRetEnviNFe;
 import br.com.dfe.util.XMLUtils;
-import br.com.dfe.utils.CertificadoHelper;
 import br.com.dfe.utils.ConverterUtils;
-import br.com.dfe.utils.NFUtils;
 import org.apache.axiom.om.OMElement;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
-import java.security.cert.X509Certificate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -95,7 +96,7 @@ public class TransmissorTest {
 
     @Test
     public void assinaNFe() throws Exception {
-        AssinaDocumento assinaDocumento = new AssinaXML(configuracao.getCertificado(), configuracao.getPrivateKey());
+        AssinaDocumento assinaDocumento = new AssinaXML(configuracao.getCertificado());
         String xmlTNFe = "<NFe xmlns=\"http://www.portalfiscal.inf.br/nfe\"><infNFe versao=\"4.00\" Id=\"NFe42191113628140000150550010000028491009605747\"><ide><cUF>42</cUF><cNF>00960574</cNF><natOp>VENDA</natOp><mod>55</mod><serie>1</serie><nNF>2849</nNF><dhEmi>2019-11-13T11:41:00-03:00</dhEmi><dhSaiEnt>2019-11-13T11:41:00-03:00</dhSaiEnt><tpNF>1</tpNF><idDest>1</idDest><cMunFG>4202800</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>7</cDV><tpAmb>2</tpAmb><finNFe>1</finNFe><indFinal>0</indFinal><indPres>1</indPres><procEmi>0</procEmi><verProc>1.7.0.84</verProc></ide><emit><CNPJ>13628140000150</CNPJ><xNome>BRAZIL SISTEM SITEMAS DE INFORMAT. LTDA</xNome><xFant>BRAZIL SISTEM SITEMAS DE INFORMAT. LTDA</xFant><enderEmit><xLgr>RUA FELIPE SCHMIDT</xLgr><nro>894</nro><xBairro>CENTRO</xBairro><cMun>4202800</cMun><xMun>BRACO DO NORTE</xMun><UF>SC</UF><CEP>88750000</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>4836290077</fone></enderEmit><IE>256497150</IE><CRT>3</CRT></emit><dest><CNPJ>13628140000150</CNPJ><xNome>NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xNome><enderDest><xLgr>RUA JOSE SPECK</xLgr><nro>00515</nro><xBairro>NOSSA SENHORA DE FATIMA</xBairro><cMun>4202800</cMun><xMun>BRACO DO NORTE</xMun><UF>SC</UF><CEP>88750000</CEP><cPais>1058</cPais><xPais>BRASIL</xPais></enderDest><indIEDest>1</indIEDest><IE>256497150</IE></dest><autXML><CNPJ>06538909000427</CNPJ></autXML><det nItem=\"1\"><prod><cProd>000013</cProd><cEAN>SEM GTIN</cEAN><xProd>GLP EM BOTIJAO P13</xProd><NCM>27111910</NCM><CEST>0600800</CEST><EXTIPI>00</EXTIPI><CFOP>5656</CFOP><uCom>UN</uCom><qCom>1.0000</qCom><vUnCom>80.0000000000</vUnCom><vProd>80.00</vProd><cEANTrib>SEM GTIN</cEANTrib><uTrib>KG</uTrib><qTrib>13.0000</qTrib><vUnTrib>6.1538461538</vUnTrib><indTot>1</indTot><comb><cProdANP>210203001</cProdANP><descANP>GLP</descANP><pGLP>90.0000</pGLP><pGNn>8.0000</pGNn><pGNi>2.0000</pGNi><vPart>80.00</vPart><UFCons>SC</UFCons></comb></prod><imposto><vTotTrib>17.54</vTotTrib><ICMS><ICMSST><orig>0</orig><CST>60</CST><vBCSTRet>580.00</vBCSTRet><pST>0.0000</pST><vICMSSubstituto>0.00</vICMSSubstituto><vICMSSTRet>180.00</vICMSSTRet><vBCSTDest>0.00</vBCSTDest><vICMSSTDest>0.00</vICMSSTDest></ICMSST></ICMS><IPI><cEnq>999</cEnq><IPINT><CST>53</CST></IPINT></IPI><PIS><PISNT><CST>04</CST></PISNT></PIS><COFINS><COFINSNT><CST>04</CST></COFINSNT></COFINS></imposto></det><total><ICMSTot><vBC>0.00</vBC><vICMS>0.00</vICMS><vICMSDeson>0.00</vICMSDeson><vFCP>0.00</vFCP><vBCST>0.00</vBCST><vST>0.00</vST><vFCPST>0.00</vFCPST><vFCPSTRet>0.00</vFCPSTRet><vProd>80.00</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vIPIDevol>0.00</vIPIDevol><vPIS>0.00</vPIS><vCOFINS>0.00</vCOFINS><vOutro>0.00</vOutro><vNF>80.00</vNF><vTotTrib>17.54</vTotTrib></ICMSTot></total><transp><modFrete>9</modFrete></transp><pag><detPag><tPag>99</tPag><vPag>80.00</vPag></detPag></pag><infAdic><infCpl>PRODUTO ESTA ADEQUADAMENTE ACONDICIONADO PARA SUPORTAR OS RISCOS NORMAIS DE;CARREGAMENTO, DESCARREGAMENTO, TRANSBORDO E TRANSPORTE. DECRETO 96.044/88,;ART. 22, II. ISENTO ICMS CONF. ART. 2 , INSISO VII, ANEXO 2, DECRETO 3017/89.;ACOMPANHA BLOCO DE NOTAS MODELO 02 SERIE D1;DO 1 AO 100 .;</infCpl></infAdic><infRespTec><CNPJ>13628140000150</CNPJ><xContato>HUDSON BORGES NESI</xContato><email>hudson@brazilsistem.com.br</email><fone>4836290077</fone></infRespTec></infNFe></NFe>";
         String assinado = assinaDocumento.assinarTNFe(xmlTNFe);
         System.out.println("Assinado: "+assinado);
@@ -103,7 +104,7 @@ public class TransmissorTest {
 
     @Test
     public void assinaEvento() throws Exception {
-        AssinaDocumento assinaDocumento = new AssinaXML(configuracao.getCertificado(), configuracao.getPrivateKey());
+        AssinaDocumento assinaDocumento = new AssinaXML(configuracao.getCertificado());
         String xmlEvento = "<envEvento xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.00\"><idLote>1</idLote><evento versao=\"1.00\"><infEvento Id=\"ID1101105020012777464800017155001000000002100450482301\"><cOrgao>50</cOrgao><tpAmb>2</tpAmb><CNPJ>27774648000171</CNPJ><chNFe>50200127774648000171550010000000021004504823</chNFe><dhEvento>2020-01-14T10:31:23-03:00</dhEvento><tpEvento>110110</tpEvento><nSeqEvento>1</nSeqEvento><verEvento>1.00</verEvento><detEvento versao=\"1.00\"><descEvento>Carta de Correcao</descEvento><xCorrecao>testandoooooooooooooooooooooooooooooooo</xCorrecao><xCondUso>A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de documento fiscal, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente ou do destinatario; III - a data de emissao ou de saida.</xCondUso></detEvento></infEvento></evento></envEvento>";
         String assinado = assinaDocumento.assinarEvento(xmlEvento);
 
@@ -117,17 +118,15 @@ public class TransmissorTest {
     }
 
     public Configuracao getConfiguracao() throws Exception {
-        CertificadoHelper certificadoLoader = new CertificadoHelper();
-        certificadoLoader.loadPFX(Paths.get("/home/odione/dsv/apps/sender/certs/lui260248_SP.pfx"),"lui260248");
-        Collection<X509Certificate> certificados = certificadoLoader.getCertificados().values();
-
-        X509Certificate certificate = certificados.iterator().next();
+        CertificadoHelper certificadoHelper = new CertificadoHelper();
+        certificadoHelper.loadPFX(Paths.get("/home/odione/dsv/apps/sender/certs/rs_23456789.pfx"),"23456789");
+        Certificado certificado = certificadoHelper.getCertificados().get(0);
+        certificado.loadPrivateKey("23456789");
 
         return Configuracao.builder()
             .ambiente(2)
-            .uf("SP")
-            .certificado(certificate)
-            .privateKey(certificadoLoader.getPrivateKey("1", "lui260248"))
+            .uf("RS")
+            .certificado(certificado)
             .idCSC("1")
             .CSC("6f53f3f2-4702-41bb-9b61-55a70618be72")
             .build();

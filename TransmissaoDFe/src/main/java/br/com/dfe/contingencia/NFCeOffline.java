@@ -18,7 +18,7 @@ public class NFCeOffline {
     public NFCeOffline(URLRepository urlRepository, Configuracao configuracao) {
         this.configuracao = configuracao;
         this.urlRepository = urlRepository;
-        this.assinaDocumento = new AssinaXML(configuracao.getCertificado(), configuracao.getPrivateKey());
+        this.assinaDocumento = new AssinaXML(configuracao.getCertificado());
         this.nfCeBuilder = new NFCeBuilder(urlRepository, configuracao);
     }
 

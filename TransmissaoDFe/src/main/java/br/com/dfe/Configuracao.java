@@ -1,5 +1,6 @@
 package br.com.dfe;
 
+import br.com.dfe.certificado.Certificado;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +16,7 @@ import java.security.cert.X509Certificate;
 public class Configuracao {
     private String uf;
     private int ambiente;
-    private X509Certificate certificado;
-    private PrivateKey privateKey;
+    private Certificado certificado;
     private String idCSC;
     private String CSC;
 

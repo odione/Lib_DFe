@@ -8,31 +8,34 @@ import lombok.NonNull;
 import org.apache.commons.httpclient.protocol.Protocol;
 
 import java.net.URL;
+import java.security.Security;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ConexaoSeguraImpl implements ConexaoSegura {
 
+    private final Configuracao configuracao;
     private final BuildCacerts buildCacerts;
-    private final SocketFactoryDinamico socketDinamico;
     private final Set<String> urlRegistrada = new HashSet<>();
+    private SocketFactoryDinamico socketDinamico;
 
     public ConexaoSeguraImpl(Configuracao configuracao) {
+        this.configuracao = configuracao;
         this.buildCacerts = new BuildCacerts();
-        this.socketDinamico = new SocketFactoryDinamico(configuracao.getCertificado(), configuracao.getPrivateKey());
-        registraSocketDinamico();
+        System.setProperty("jdk.tls.client.protocols", SocketFactoryDinamico.TLSv1_2);
+        System.setProperty("sun.security.ssl.allowUnsafeRenegotiation", "true");
+        System.setProperty("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
+        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
     }
 
     @Override
     public void preparaConexaoSegura(@NonNull String urlStr) throws Exception {
         URL url = new URL(urlStr);
         if (urlRegistrada.add(url.getHost())) {
-            gerarCacerts(url);
+            buildCacerts.geraCacert(url);
         }
-    }
-
-    private void gerarCacerts(URL url) {
-        buildCacerts.geraCacert(url);
+        socketDinamico = new SocketFactoryDinamico(configuracao);
+        registraSocketDinamico();
     }
 
     private void registraSocketDinamico() {

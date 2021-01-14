@@ -2,6 +2,7 @@ package br.com.dfe;
 
 import br.com.dfe.api.ConexaoSegura;
 import br.com.dfe.api.TipoEmissao;
+import br.com.dfe.certificado.Certificado;
 import br.com.dfe.contingencia.NFCeOffline;
 import br.com.dfe.impl.ConexaoSeguraImpl;
 import br.com.dfe.schema.*;
@@ -15,8 +16,6 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.axiom.om.OMElement;
 import org.apache.commons.lang3.StringUtils;
 
-import java.security.PrivateKey;
-import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
@@ -145,15 +144,8 @@ public class TransmissorDFe {
         this.configuracao.setAmbiente(configuracao.getAmbiente());
     }
 
-    public void setCertificateAndPrivateKey(X509Certificate certificate, PrivateKey privateKey) {
-        if (certificate != null &&
-            configuracao.getCertificado() != null &&
-            certificate.getSerialNumber().compareTo(configuracao.getCertificado().getSerialNumber()) == 0) {
-            return;
-        }
-
-        configuracao.setCertificado(certificate);
-        configuracao.setPrivateKey(privateKey);
+    public void mudaCertificado(Certificado certificado) {
+        configuracao.setCertificado(certificado);
         conexaoSegura = new ConexaoSeguraImpl(configuracao);
     }
 }

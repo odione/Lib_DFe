@@ -33,7 +33,7 @@ public class InutilizacaoWS implements OperacaoWS {
     public InutilizacaoWS(URLRepository urlRepository, Configuracao configuracao) {
         this.urlRepository = urlRepository;
         this.configuracao = configuracao;
-        this.assinaDocumento = new AssinaXML(configuracao.getCertificado(), configuracao.getPrivateKey());
+        this.assinaDocumento = new AssinaXML(configuracao.getCertificado());
     }
 
     @Override
